@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/logo_wapi_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityMain">
+
+        <activity android:name=".ActivityMain"></activity>
+
+        <activity android:name=".ActivitySplashscreen">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
