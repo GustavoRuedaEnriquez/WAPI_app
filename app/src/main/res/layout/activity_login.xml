@@ -5,28 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ActivityLogin"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginLeft="@dimen/margin"
+    android:layout_marginRight="@dimen/margin">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin"
         android:text="Iniciar Sesión"
         android:textSize="@dimen/title_font_size"
-        android:textColor="@color/colorPrimary"/>
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/activity_login_user_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint=""
-        android:layout_marginLeft="@dimen/margin"
-        android:layout_marginRight="@dimen/margin"/>
+        android:layout_marginTop="90dp"
+
+        style="@style/EditText_style"
+
+        android:hint="@string/activity_login_username"
+        android:inputType="textEmailAddress"/>
+
     <EditText
         android:id="@+id/activity_login_password_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin"
-        android:layout_marginRight="@dimen/margin"/>
+
+        style="@style/EditText_style"
+
+        android:hint="@string/activity_login_password"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/activity_login_access_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        style="@style/custom_light_Button"
+
+        android:text="@string/activity_login_access_btn"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_marginTop="100dp"
+    />
+
+
+
 
 </LinearLayout>
