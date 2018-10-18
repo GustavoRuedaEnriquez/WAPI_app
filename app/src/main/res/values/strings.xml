@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">WAPI</string>
+
+    <string name="section1">Usuarios</string>
+    <string name="section2">Horario</string>
+    <string name="section3">Calificacion</string>
+    <string name="section4">Pago</string>
+    <string name="section5">Tarea</string>
+    <string name="section6">Configuracion</string>
 </resources>

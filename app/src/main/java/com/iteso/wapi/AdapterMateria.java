@@ -41,6 +41,8 @@ public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder,int position){
         Materia materia = materiaList.get(position);
+        //myViewHolder.nombre.setText(materiaList.get(myViewHolder.getAdapterPosition()).getNombreMateria());
+        //myViewHolder.promedio.setText(Float.toString(materiaList.get(myViewHolder.getAdapterPosition()).getPromedio()));
         myViewHolder.nombre.setText(materia.getNombreMateria());
         myViewHolder.promedio.setText(Float.toString(materia.getPromedio()));
     }

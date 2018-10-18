@@ -84,7 +84,7 @@ public class Materia implements Parcelable {
         this.fk_periodo = (Integer) in.readValue(Integer.class.getClassLoader());
         this.nombreMateria = in.readString();
         this.diaHoras = in.readParcelable(DiaHoras.class.getClassLoader());
-        this.promedio = (Float) in.readValue(Float.class.getClassLoader());
+        this.promedio = in.readFloat();
     }
 
     public static final Creator<Materia> CREATOR = new Creator<Materia>() {

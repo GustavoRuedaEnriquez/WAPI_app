@@ -24,6 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/item_materia_nombre"
         android:text="promedio:"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
+
 
 </RelativeLayout>
