@@ -11,16 +11,18 @@ public class Materia implements Parcelable {
     private Integer fk_periodo;
     private String nombreMateria;
     private DiaHoras diaHoras;
+    private float promedio;
 
     public Materia() {
 
     }
 
-    public Materia(Integer idMateria, Integer fk_periodo, String nombreMateria, DiaHoras diaHoras) {
+    public Materia(Integer idMateria, Integer fk_periodo, String nombreMateria, DiaHoras diaHoras, float promedio) {
         this.idMateria = idMateria;
         this.fk_periodo = fk_periodo;
         this.nombreMateria = nombreMateria;
         this.diaHoras = diaHoras;
+        this.promedio = promedio;
     }
 
     public Integer getIdMateria() {
@@ -55,6 +57,13 @@ public class Materia implements Parcelable {
         this.diaHoras = diaHoras;
     }
 
+    public float getPromedio() {
+        return promedio;
+    }
+
+    public void setPromedio(float promedio) {
+        this.promedio = promedio;
+    }
 
     @Override
     public int describeContents() {
@@ -67,6 +76,7 @@ public class Materia implements Parcelable {
         dest.writeValue(this.fk_periodo);
         dest.writeString(this.nombreMateria);
         dest.writeParcelable(this.diaHoras, flags);
+        dest.writeFloat(this.promedio);
     }
 
     protected Materia(Parcel in) {
@@ -74,6 +84,7 @@ public class Materia implements Parcelable {
         this.fk_periodo = (Integer) in.readValue(Integer.class.getClassLoader());
         this.nombreMateria = in.readString();
         this.diaHoras = in.readParcelable(DiaHoras.class.getClassLoader());
+        this.promedio = (Float) in.readValue(Float.class.getClassLoader());
     }
 
     public static final Creator<Materia> CREATOR = new Creator<Materia>() {

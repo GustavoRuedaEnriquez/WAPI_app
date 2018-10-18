@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
@@ -17,14 +16,12 @@ public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHo
     public List<Materia> materiaList;
 
     class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView fullname,email;
-        ImageView avatar;
+        TextView nombre, promedio;
 
         MyViewHolder(View view){
             super(view);
-            fullname = view.findViewById(R.id.item_fullname);
-            email = view.findViewById(R.id.item_user_mail);
-            avatar = view.findViewById(R.id.item_avatar);
+            nombre = view.findViewById(R.id.item_materia_nombre);
+            promedio = view.findViewById(R.id.item_materia_promedio);
         }
     }
 
@@ -36,7 +33,7 @@ public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHo
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user, parent, false);
+        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_materia, parent, false);
         return new MyViewHolder(item);
 
     }
@@ -44,11 +41,13 @@ public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder,int position){
         Materia materia = materiaList.get(position);
+        myViewHolder.nombre.setText(materia.getNombreMateria());
+        myViewHolder.promedio.setText(Float.toString(materia.getPromedio()));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return materiaList.size();
     }
 
 

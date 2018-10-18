@@ -19,7 +19,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     <TextView
-        android:id="@+id/item_user_mail"
+        android:id="@+id/item_materia_promedio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/item_materia_nombre"
