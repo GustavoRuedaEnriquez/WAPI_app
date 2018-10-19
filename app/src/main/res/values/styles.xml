@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="EditText_style" parent="@android:style/Widget.EditText">
+        <item name="android:textColorHint">@color/colorPrimaryDark</item>
+        <item name="android:backgroundTint">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="custom_light_Button" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/custom_blue_light_btn</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
 </resources>
