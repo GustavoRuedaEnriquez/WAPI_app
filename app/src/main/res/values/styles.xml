@@ -18,7 +18,4 @@
         <item name="android:background">@drawable/custom_blue_light_btn</item>
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
-
-
-
 </resources>
