@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">WAPI</string>
+
     <string name="activity_login_username">Usuario</string>
+    <string name="activity_login_password">Contraseña</string>
+    <string name="activity_login_access_btn">Ingresar</string>
 </resources>
