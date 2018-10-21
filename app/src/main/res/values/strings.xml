@@ -1,5 +1,24 @@
 <resources>
     <string name="app_name">WAPI</string>
+
+    <string name="section1">Usuarios</string>
+    <string name="section2">Horario</string>
+    <string name="section3">Calificacion</string>
+    <string name="section4">Pago</string>
+    <string name="section5">Tarea</string>
+    <string name="section6">Configuracion</string>
+
+    <string-array name="periodo">
+        <item>Semestre 1</item>
+        <item>Semestre 2</item>
+        <item>Semestre 3</item>
+        <item>Semestre 4</item>
+        <item>Semestre 5</item>
+    </string-array>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="activity_login_username">Usuario</string>
     <string name="activity_login_password">Contraseña</string>
     <string name="activity_login_access_btn">Ingresar</string>

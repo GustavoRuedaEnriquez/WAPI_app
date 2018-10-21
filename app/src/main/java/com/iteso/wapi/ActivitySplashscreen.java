@@ -25,7 +25,7 @@ public class ActivitySplashscreen extends AppCompatActivity {
             public void run() {
                 Student student = loadPreferences();
                 if(student.isLogged()){
-                    Intent intent = new Intent(ActivitySplashscreen.this,ActivityMain.class);
+                    Intent intent = new Intent(ActivitySplashscreen.this,ActivityHome.class);
                     startActivity(intent);
                     finish();
                 }else{

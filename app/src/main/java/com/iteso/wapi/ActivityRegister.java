@@ -43,7 +43,7 @@ public class ActivityRegister extends AppCompatActivity {
             public void onClick(View v) {
                 register.setBackground(getDrawable(R.drawable.custom_selected_blue_light_btn));
                 register.setTextColor(Color.WHITE);
-                Intent intent = new Intent(ActivityRegister.this, ActivityMain.class);
+                Intent intent = new Intent(ActivityRegister.this, ActivityHome.class);
                 startActivity(intent);
                 finish();
             }

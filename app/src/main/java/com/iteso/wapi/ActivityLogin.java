@@ -32,7 +32,7 @@ public class ActivityLogin extends AppCompatActivity {
                 login.setBackground(getDrawable(R.drawable.custom_selected_blue_light_btn));
                 login.setTextColor(Color.WHITE);
                 savePreferences();
-                Intent intent = new Intent(ActivityLogin.this,ActivityMain.class);
+                Intent intent = new Intent(ActivityLogin.this,ActivityHome.class);
                 startActivity(intent);
                 finish();
             }
