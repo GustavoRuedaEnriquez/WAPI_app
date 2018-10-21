@@ -13,6 +13,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class ActivityHome extends AppCompatActivity {
 
+    private FragmentUsuario fragmentUsuario;
+    private FragmentHorario fragmentHorario;
+    private FragmentCalificacion fragmentCalificacion;
+    private FragmentPago fragmentPago;
+    private FragmentTarea fragmentTarea;
+    private FragmentConfiguracion fragmentConfiguracion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,23 +58,23 @@ public class ActivityHome extends AppCompatActivity {
                 case 1:
                     if (fragmentHorario == null)
                         fragmentHorario = new FragmentHorario();
-                    return FragmentHorario;
+                    return fragmentHorario;
                 case 2:
                     if (fragmentCalificacion == null)
                         fragmentCalificacion = new FragmentCalificacion();
-                    return FragmentCalificacion;
+                    return fragmentCalificacion;
                 case 3:
                     if (fragmentPago == null)
                         fragmentPago = new FragmentPago();
-                    return FragmentPago;
+                    return fragmentPago;
                 case 4:
                     if (fragmentTarea == null)
                         fragmentTarea = new FragmentTarea();
-                    return FragmentTarea;
+                    return fragmentTarea;
                 case 5:
                     if (fragmentConfiguracion == null)
                         fragmentConfiguracion = new FragmentConfiguracion ();
-                    return FragmentConfiguracion ;
+                    return fragmentConfiguracion ;
                 default:
                     return new FragmentUsuario();
             }

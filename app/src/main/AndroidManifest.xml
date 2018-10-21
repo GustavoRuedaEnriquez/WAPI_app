@@ -12,13 +12,15 @@
         <activity android:name=".ActivityMain" />
         <activity android:name=".ActivitySplashscreen"></activity>
         <activity android:name=".ActivityMateria">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".ActivityHome"></activity>
+        <activity android:name=".ActivityHome">
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
     </application>
 
 </manifest>
