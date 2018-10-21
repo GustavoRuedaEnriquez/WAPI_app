@@ -27,6 +27,15 @@ public class ActivityHome extends AppCompatActivity {
     private FragmentHomework fragmentTarea;
     private FragmentConfiguration fragmentConfiguration;
 
+    final int[] ICONS = new int[]{
+            R.drawable.user,
+            R.drawable.calendar,
+            R.drawable.grades,
+            R.drawable.payment,
+            R.drawable.homework,
+            R.drawable.configuration
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +43,8 @@ public class ActivityHome extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.activity_home_toolbar);
         TabLayout tabLayout = findViewById(R.id.activity_home_tabs);
+
+
 
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -44,6 +55,15 @@ public class ActivityHome extends AppCompatActivity {
         ViewPager mViewPager = findViewById(R.id.activity_home_container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
+
+        tabLayout.getTabAt(0).setIcon(ICONS[0]);
+        tabLayout.getTabAt(1).setIcon(ICONS[1]);
+        tabLayout.getTabAt(2).setIcon(ICONS[2]);
+        tabLayout.getTabAt(3).setIcon(ICONS[3]);
+        tabLayout.getTabAt(4).setIcon(ICONS[4]);
+        tabLayout.getTabAt(5).setIcon(ICONS[5]);
+
+
 
     }
 
@@ -96,17 +116,17 @@ public class ActivityHome extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return getString(R.string.section1);
+                    return "";//getString(R.string.section1);
                 case 1:
-                    return getString(R.string.section2);
+                    return "";//getString(R.string.section2);
                 case 2:
-                    return getString(R.string.section3);
+                    return "";//getString(R.string.section3);
                 case 3:
-                    return getString(R.string.section4);
+                    return "";//getString(R.string.section4);
                 case 4:
-                    return getString(R.string.section5);
+                    return "";//getString(R.string.section5);
                 case 5:
-                    return getString(R.string.section6);
+                    return "";//getString(R.string.section6);
             }
             return null;
         }

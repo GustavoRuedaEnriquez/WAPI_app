@@ -65,7 +65,7 @@ public class FragmentPayment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pago, container, false);
+        return inflater.inflate(R.layout.fragment_payment, container, false);
     }
 
     @Override
