@@ -53,6 +53,16 @@
         android:layout_marginTop="100dp"
     />
 
+    <TextView
+        android:id="@+id/activity_login_register_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¿No tienes cuenta aún? Regístrate aquí."
+        android:textColor="@color/colorPrimary"
+        android:textSize="15dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"/>
+
 
 
 

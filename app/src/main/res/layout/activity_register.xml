@@ -42,7 +42,7 @@
         android:id="@+id/activity_register_terms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Acepto los terminos y condiciones"
+        android:text="Acepto los términos y condiciones"
         android:textColor="@color/colorPrimary"
         android:shadowColor="@color/colorPrimary"
         android:buttonTint="@color/colorPrimary"
@@ -57,6 +57,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Registrarse"
+            android:textStyle="bold"
+            android:textSize="30dp"
             style="@style/custom_light_Button"
             android:layout_alignParentBottom="true"
             />

@@ -1,6 +1,7 @@
 package com.iteso.wapi;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -40,6 +41,8 @@ public class ActivityRegister extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                register.setBackground(getDrawable(R.drawable.custom_selected_blue_light_btn));
+                register.setTextColor(Color.WHITE);
                 Intent intent = new Intent(ActivityRegister.this, ActivityMain.class);
                 startActivity(intent);
                 finish();
