@@ -34,7 +34,7 @@ public class ActivityHome extends AppCompatActivity {
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        ViewPager mViewPager = findViewById(R.id.container);
+        ViewPager mViewPager = findViewById(R.id.activity_home_container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
 
@@ -95,11 +95,11 @@ public class ActivityHome extends AppCompatActivity {
                 case 2:
                     return getString(R.string.section3);
                 case 3:
-                    return getString(R.string.section1);
+                    return getString(R.string.section4);
                 case 4:
-                    return getString(R.string.section2);
+                    return getString(R.string.section5);
                 case 5:
-                    return getString(R.string.section3);
+                    return getString(R.string.section6);
             }
             return null;
         }

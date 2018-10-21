@@ -14,7 +14,8 @@
         <activity android:name=".ActivityMateria">
 
         </activity>
-        <activity android:name=".ActivityHome">
+        <activity android:name=".ActivityHome"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
