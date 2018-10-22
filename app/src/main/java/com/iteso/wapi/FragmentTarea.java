@@ -1,14 +1,20 @@
 package com.iteso.wapi;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.iteso.wapi.beans.Tarea;
+
+import java.util.ArrayList;
 
 
 /**
@@ -28,6 +34,14 @@ public class FragmentTarea extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    ArrayList<Tarea> tareas = new ArrayList<>();
+    RecyclerView recyclerView;
+    RecyclerView recyclerViewProximas;
+    AdapterTarea adapterTarea;
+    Button agregar;
+    View rootView;
+
 
     public FragmentTarea() {
         // Required empty public constructor
@@ -64,12 +78,50 @@ public class FragmentTarea extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_tarea, container, false);
+        rootView = inflater.inflate(R.layout.fragment_tarea, container, false);
+        recyclerView = rootView.findViewById(R.id.fragment_tarea_recyclerView_semana_actual);
+        recyclerViewProximas = rootView.findViewById(R.id.fragment_tarea_recyclerView_proximas_semanas);
+        agregar = rootView.findViewById(R.id.fragment_tarea_agregar);
+        return rootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLayoutManager);
+
+        recyclerViewProximas.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
+        recyclerViewProximas.setLayoutManager(mLayoutManager2);
+
+        tareas = new ArrayList<>();
+        tareas.add(new Tarea(1, 1, "Leer sobre Teclado Matricial", "Micros", "Mañana", "9:00"));
+        tareas.add(new Tarea(2, 1, "Realizar reporte de practica 4", "Micros", "Mañana", "11:55"));
+
+        adapterTarea = new AdapterTarea(4, getActivity(), tareas);
+        recyclerView.setAdapter(adapterTarea);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), mLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+        tareas = new ArrayList<>();
+        tareas.add(new Tarea(3, 2, "Informe de finanzas", "ADSI", "29/10", "7:00"));
+        tareas.add(new Tarea(4, 2, "Practica de laboratorio 9", "GBD", "30/10", "13:00"));
+
+        adapterTarea = new AdapterTarea(4, getActivity(), tareas);
+        recyclerViewProximas.setAdapter(adapterTarea);
+
+        agregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(rootView.getContext(), ActivityEditarTarea.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override

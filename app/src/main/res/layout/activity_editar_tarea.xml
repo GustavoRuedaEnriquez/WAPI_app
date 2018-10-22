@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityEditarTarea"
+    android:orientation="vertical"
+    android:padding="30dp">
+
+    <ImageButton
+        android:id="@+id/activity_editar_tarea_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/EditText_dark_style"
+        android:src="@android:drawable/ic_media_rew"
+        android:tint="@color/colorPrimaryDark"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="Editar Tarea"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="Materia"
+        />
+
+    <Spinner
+        android:id="@+id/activity_editar_tarea_materias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="Fecha de entrega"
+            />
+
+        <EditText
+            android:id="@+id/activity_editar_tarea_fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingresa porcentaje"
+            android:textSize="15dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="Hora"
+            />
+        <EditText
+            android:id="@+id/activity_editar_tarea_hora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingresa la hora"
+            android:textSize="15dp"
+            />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="Descripcion"
+        />
+    <EditText
+        android:id="@+id/activity_editar_tarea_descr"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Ingresa descripcion de tarea"
+        android:textSize="15dp"
+        />
+
+    <Button
+        android:id="@+id/activity_editar_tarea_agregar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Agregar"
+        android:layout_marginBottom="15dp"/>
+
+</LinearLayout>

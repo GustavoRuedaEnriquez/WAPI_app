@@ -10,18 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ActivityMain" />
-        <activity android:name=".ActivitySplashscreen"></activity>
-        <activity android:name=".ActivityMateria">
-
-        </activity>
-        <activity android:name=".ActivityHome"
+        <activity android:name=".ActivitySplashscreen" />
+        <activity android:name=".ActivityMateria" />
+        <activity
+            android:name=".ActivityHome"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".ActivityEditarCalificacion" />
+        <activity android:name=".ActivityEditarTarea"></activity>
     </application>
 
 </manifest>

@@ -1,11 +1,14 @@
 package com.iteso.wapi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iteso.wapi.beans.Materia;
@@ -20,11 +23,13 @@ public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHo
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView nombre, promedio;
+        ImageView editar;
 
         MyViewHolder(View view){
             super(view);
             nombre = view.findViewById(R.id.item_materia_nombre);
             promedio = view.findViewById(R.id.item_materia_promedio);
+            editar = view.findViewById(R.id.item_materia_editar);
         }
     }
 
@@ -71,12 +76,22 @@ public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder,int position){
+    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int position){
         Materia materia = materiaList.get(position);
         //myViewHolder.nombre.setText(materiaList.get(myViewHolder.getAdapterPosition()).getNombreMateria());
         //myViewHolder.promedio.setText(Float.toString(materiaList.get(myViewHolder.getAdapterPosition()).getPromedio()));
         myViewHolder.nombre.setText(materia.getNombreMateria());
         myViewHolder.promedio.setText(Float.toString(materia.getPromedio()));
+
+        myViewHolder.editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ActivityEditarCalificacion.class);
+                intent.putExtra("Materia", materiaList.get(myViewHolder.getAdapterPosition()));
+                intent.putExtra("Fragment", fragment);
+                ((ActivityHome) context).startActivityForResult(intent, 999);
+            }
+        });
     }
 
     @Override

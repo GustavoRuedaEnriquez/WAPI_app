@@ -1,6 +1,7 @@
 package com.iteso.wapi;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.design.widget.TabLayout;
@@ -10,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.View;
+import android.widget.Toast;
 
 public class ActivityHome extends AppCompatActivity {
 
@@ -19,6 +22,7 @@ public class ActivityHome extends AppCompatActivity {
     private FragmentPago fragmentPago;
     private FragmentTarea fragmentTarea;
     private FragmentConfiguracion fragmentConfiguracion;
+    FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,17 @@ public class ActivityHome extends AppCompatActivity {
         ViewPager mViewPager = findViewById(R.id.activity_home_container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
+
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle the click.
+                Intent intent = new Intent(ActivityHome.this, ActivityEditarTarea.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
