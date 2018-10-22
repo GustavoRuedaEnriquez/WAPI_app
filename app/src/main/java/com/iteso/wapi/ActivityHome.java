@@ -6,11 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.design.widget.TabLayout;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-
 import com.iteso.wapi.fragments.FragmentConfiguration;
 import com.iteso.wapi.fragments.FragmentGrades;
 import com.iteso.wapi.fragments.FragmentHomework;
