@@ -25,7 +25,7 @@
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="Calificacion">
+            app:title="WAPI">
 
 
         </android.support.v7.widget.Toolbar>
@@ -35,7 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabGravity="fill"
-            app:tabMode="fixed"/>
+            app:tabMode="fixed"
+            app:tabIndicatorColor="#FFFFFF"/>
 
     </android.support.design.widget.AppBarLayout>
 

@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
 
-        style="@style/EditText_style"
+        style="@style/EditText_dark_style"
 
         android:hint="@string/activity_login_username"
         android:inputType="textEmailAddress"/>
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        style="@style/EditText_style"
+        style="@style/EditText_dark_style"
 
         android:hint="@string/activity_login_password"
         android:inputType="textPassword"/>
@@ -48,7 +48,6 @@
         style="@style/custom_light_Button"
 
         android:text="@string/activity_login_access_btn"
-        android:textStyle="bold"
         android:textSize="30dp"
         android:layout_marginTop="100dp"
     />

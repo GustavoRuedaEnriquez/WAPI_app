@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ActivityLogin extends AppCompatActivity {
 
@@ -27,14 +28,22 @@ public class ActivityLogin extends AppCompatActivity {
         register_link = findViewById(R.id.activity_login_register_link);
 
         login.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 login.setBackground(getDrawable(R.drawable.custom_selected_blue_light_btn));
                 login.setTextColor(Color.WHITE);
-                savePreferences();
-                Intent intent = new Intent(ActivityLogin.this,ActivityHome.class);
-                startActivity(intent);
-                finish();
+
+                if(username.getText().toString().trim().equalsIgnoreCase("") || password.getText().toString().trim().equalsIgnoreCase("")){
+                    Toast.makeText(ActivityLogin.this, "Se tienen que llenar todos los campos.", Toast.LENGTH_LONG).show();
+                    login.setBackground(getDrawable(R.drawable.custom_blue_light_btn));
+                    login.setTextColor(getColor(R.color.colorPrimary));
+                }else{
+                    savePreferences();
+                    Intent intent = new Intent(ActivityLogin.this,ActivityHome.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
