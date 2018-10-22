@@ -1,25 +1,25 @@
 package com.iteso.wapi.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.iteso.wapi.ActivitySplashscreen;
 import com.iteso.wapi.R;
 
+import static android.content.Context.MODE_PRIVATE;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentUsers.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentUsers#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class FragmentUsers extends Fragment {
+
+   TextView greeting;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,8 +64,11 @@ public class FragmentUsers extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_users, container, false);
+        View v = inflater.inflate(R.layout.fragment_users, container, false);
+        greeting = v.findViewById(R.id.fragment_users_greeting);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
+        greeting.setText("Bienvenido " + sharedPreferences.getString("NAME","Default name"));
+        return v;
     }
 
     @Override

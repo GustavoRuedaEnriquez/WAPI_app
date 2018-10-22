@@ -5,10 +5,39 @@
     android:layout_height="match_parent"
     tools:context=".fragments.FragmentUsers">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin">
+
+            <ImageView
+                android:id="@+id/fragment_users_profile_pic"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@mipmap/ic_launcher_round"
+                />
+
+            <TextView
+                android:id="@+id/fragment_users_greeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cambiar Nombre"
+                android:textSize="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@id/fragment_users_profile_pic"
+                android:textColor="@color/colorPrimaryDark"
+                />
+
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
 
 </FrameLayout>

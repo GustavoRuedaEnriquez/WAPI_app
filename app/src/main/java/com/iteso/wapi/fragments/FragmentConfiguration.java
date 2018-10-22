@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+
 import com.iteso.wapi.ActivityLogin;
 import com.iteso.wapi.ActivitySplashscreen;
 import com.iteso.wapi.R;
@@ -25,7 +27,7 @@ public class FragmentConfiguration extends Fragment {
 
 
     Button logout;
-
+    EditText name_et, password_et;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -60,6 +62,12 @@ public class FragmentConfiguration extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_configuration, container, false);
         logout = v.findViewById(R.id.fragment_configuration_log_out_btn);
+        name_et = v.findViewById(R.id.fragment_configuration_change_name_et);
+        password_et = v.findViewById(R.id.fragment_configuration_change_password_et);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
+        name_et.setText(sharedPreferences.getString("NAME","Default name"));
+        password_et.setText(sharedPreferences.getString("PWD","Default password"));
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

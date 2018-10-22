@@ -44,10 +44,10 @@
         />
 
         <TextView
-            android:id="@+id/fragment_configuration_change_email_tv"
+            android:id="@+id/fragment_configuration_change_password_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cambiar Email"
+            android:text="Cambiar Contraseña"
             android:textSize="15dp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="40dp"
@@ -57,17 +57,17 @@
         />
 
         <EditText
-            android:id="@+id/fragment_configuration_change_email_et"
+            android:id="@+id/fragment_configuration_change_password_et"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
 
             style="@style/EditText__light_style"
 
-            android:hint="Email"
+            android:hint="Password"
             android:textSize="15dp"
             android:layout_marginLeft="40dp"
             android:layout_toRightOf="@id/fragment_configuration_profile_pic"
-            android:layout_below="@id/fragment_configuration_change_email_tv"
+            android:layout_below="@id/fragment_configuration_change_password_tv"
             />
 
 
@@ -78,7 +78,7 @@
 
             style="@style/custom_light_Button"
 
-            android:layout_below="@id/fragment_configuration_change_email_et"
+            android:layout_below="@id/fragment_configuration_change_password_et"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="150dp"
 
