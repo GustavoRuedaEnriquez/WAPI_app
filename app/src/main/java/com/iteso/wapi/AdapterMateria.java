@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
-
 import com.iteso.wapi.beans.Materia;
-
 import java.util.List;
 
 public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHolder>{

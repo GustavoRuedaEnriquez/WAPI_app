@@ -18,7 +18,7 @@
 
             <EditText
                 android:id="@+id/fragment_payment_name"
-                style="@style/EditText_style"
+                style="@style/EditText__light_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/fragment_payment_name_hint"
@@ -27,7 +27,7 @@
 
             <EditText
                 android:id="@+id/fragment_payment_card_number"
-                style="@style/EditText_style"
+                style="@style/EditText__light_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/fragment_payment_card_hint"
@@ -36,7 +36,7 @@
 
             <EditText
                 android:id="@+id/fragment_payment_email"
-                style="@style/EditText_style"
+                style="@style/EditText__light_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/fragment_payment_email_hint"
@@ -45,7 +45,7 @@
 
             <EditText
                 android:id="@+id/fragment_payment_pay"
-                style="@style/EditText_style"
+                style="@style/EditText__light_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/fragment_payment_pay_hint"
