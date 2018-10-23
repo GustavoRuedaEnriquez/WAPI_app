@@ -4,11 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Button;
+import com.iteso.wapi.ActivityEditHomework;
+import com.iteso.wapi.AdapterHomework;
 import com.iteso.wapi.R;
+import com.iteso.wapi.beans.Grade;
+import java.util.ArrayList;
 
 
 /**
@@ -28,6 +35,14 @@ public class FragmentHomework extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    ArrayList<Grade> grades = new ArrayList<>();
+    RecyclerView recyclerView;
+    RecyclerView recyclerViewProximas;
+    AdapterHomework adapterHomework;
+    Button agregar;
+    View rootView;
+
 
     public FragmentHomework() {
         // Required empty public constructor
@@ -64,12 +79,50 @@ public class FragmentHomework extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_homework, container, false);
+        rootView = inflater.inflate(R.layout.fragment_homework, container, false);
+        recyclerView = rootView.findViewById(R.id.fragment_tarea_recyclerView_semana_actual);
+        recyclerViewProximas = rootView.findViewById(R.id.fragment_tarea_recyclerView_proximas_semanas);
+        agregar = rootView.findViewById(R.id.fragment_tarea_agregar);
+        return rootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLayoutManager);
+
+        recyclerViewProximas.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
+        recyclerViewProximas.setLayoutManager(mLayoutManager2);
+
+        grades = new ArrayList<>();
+        grades.add(new Grade(1, 1, "Leer sobre Teclado Matricial", "Micros", "Mañana", "9:00"));
+        grades.add(new Grade(2, 1, "Realizar reporte de practica 4", "Micros", "Mañana", "11:55"));
+
+        adapterHomework = new AdapterHomework(4, getActivity(), grades);
+        recyclerView.setAdapter(adapterHomework);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), mLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+        grades = new ArrayList<>();
+        grades.add(new Grade(3, 2, "Informe de finanzas", "ADSI", "29/10", "7:00"));
+        grades.add(new Grade(4, 2, "Practica de laboratorio 9", "GBD", "30/10", "13:00"));
+
+        adapterHomework = new AdapterHomework(4, getActivity(), grades);
+        recyclerViewProximas.setAdapter(adapterHomework);
+
+        agregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(rootView.getContext(), ActivityEditHomework.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
