@@ -7,35 +7,44 @@
     android:paddingBottom="@dimen/row_padding_vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/row_padding_vertical">
+    android:paddingTop="@dimen/row_padding_vertical"
+    >
 
-    <TextView
-        android:id="@+id/item_materia_nombre"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/item_calificacion_nombre"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
         android:layout_centerVertical="true"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-    <TextView
-        android:id="@+id/item_materia_promedio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/item_materia_nombre"
-        android:layout_alignBottom="@id/item_materia_nombre"
-        android:layout_marginLeft="10dp"
-        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
+    <EditText
+        android:id="@+id/item_calificacion_porcentaje"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/item_calificacion_nombre"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <EditText
+        android:id="@+id/item_calificacion_calif"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/item_calificacion_porcentaje"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+
     <ImageView
-        android:id="@+id/item_materia_editar"
+        android:id="@+id/item_calificacion_borrar"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/edit"
-        android:text="Editar"
+        android:src="@drawable/trash"
         />
 
 </RelativeLayout>

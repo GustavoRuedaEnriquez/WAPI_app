@@ -1,6 +1,7 @@
 package com.iteso.wapi;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.design.widget.TabLayout;
@@ -77,25 +78,25 @@ public class ActivityHome extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    if (fragmentUsuario == null)
-                        fragmentUsuario= new FragmentUsers();
-                    return fragmentUsuario;
+                    if (fragmentUsers == null)
+                        fragmentUsers = new FragmentUsers();
+                    return fragmentUsers;
                 case 1:
                     if (fragmentSchedule == null)
                         fragmentSchedule = new FragmentSchedule();
                     return fragmentSchedule;
                 case 2:
-                    if (fragmentCalificacion == null)
-                        fragmentCalificacion = new FragmentGrades();
-                    return fragmentCalificacion;
+                    if (fragmentGrades == null)
+                        fragmentGrades = new FragmentGrades();
+                    return fragmentGrades;
                 case 3:
                     if (fragmentPayment == null)
                         fragmentPayment = new FragmentPayment();
                     return fragmentPayment;
                 case 4:
-                    if (fragmentTarea == null)
-                        fragmentTarea = new FragmentHomework();
-                    return fragmentTarea;
+                    if (fragmentHomework == null)
+                        fragmentHomework = new FragmentHomework();
+                    return fragmentHomework;
                 case 5:
                     if (fragmentConfiguration == null)
                         fragmentConfiguration = new FragmentConfiguration();
@@ -141,19 +142,19 @@ public class ActivityHome extends AppCompatActivity {
                         int fragment = data.getExtras().getInt("Fragment");
                         switch (fragment) {
                             case 0:
-                                fragmentUsuario.onActivityResult(requestCode, resultCode, data);
+                                fragmentUsers.onActivityResult(requestCode, resultCode, data);
                                 break;
                             case 1:
                                 fragmentSchedule.onActivityResult(requestCode, resultCode, data);
                                 break;
                             case 2:
-                                fragmentCalificacion.onActivityResult(requestCode, resultCode, data);
+                                fragmentGrades.onActivityResult(requestCode, resultCode, data);
                                 break;
                             case 3:
                                 fragmentPayment.onActivityResult(requestCode, resultCode, data);
                                 break;
                             case 4:
-                                fragmentTarea.onActivityResult(requestCode, resultCode, data);
+                                fragmentHomework.onActivityResult(requestCode, resultCode, data);
                                 break;
                             case 5:
                                 fragmentConfiguration.onActivityResult(requestCode, resultCode, data);
