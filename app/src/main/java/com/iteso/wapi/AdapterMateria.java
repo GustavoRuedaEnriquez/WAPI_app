@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -86,7 +85,7 @@ public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHo
         myViewHolder.editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ActivityEditarCalificacion.class);
+                Intent intent = new Intent(context, ActivityEditGrade.class);
                 intent.putExtra("Materia", materiaList.get(myViewHolder.getAdapterPosition()));
                 intent.putExtra("Fragment", fragment);
                 ((ActivityHome) context).startActivityForResult(intent, 999);

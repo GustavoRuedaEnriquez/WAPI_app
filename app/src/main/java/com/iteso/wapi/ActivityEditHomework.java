@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
-public class ActivityEditarTarea extends AppCompatActivity {
+public class ActivityEditHomework extends AppCompatActivity {
 
     Spinner spinner;
     EditText descripcion, fecha, hora;
@@ -18,12 +18,12 @@ public class ActivityEditarTarea extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editar_tarea);
-        spinner = findViewById(R.id.activity_editar_tarea_materias);
-        descripcion = findViewById(R.id.activity_editar_tarea_descr);
-        fecha = findViewById(R.id.activity_editar_tarea_fecha);
+        setContentView(R.layout.activity_edit_homework);
+        spinner = findViewById(R.id.activity_edit_homework_materias);
+        descripcion = findViewById(R.id.activity_edit_homework_descr);
+        fecha = findViewById(R.id.activity_edit_homework_fecha);
         hora = findViewById(R.id.activity_editar_tarea_hora);
-        back = findViewById(R.id.activity_editar_tarea_back);
+        back = findViewById(R.id.activity_edit_homework_back);
 
         ArrayAdapter<CharSequence> adapterPeriodo = ArrayAdapter.createFromResource(this,
                 R.array.periodo, android.R.layout.simple_spinner_item);
@@ -33,7 +33,7 @@ public class ActivityEditarTarea extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityEditarTarea.this, ActivityHome.class);
+                Intent intent = new Intent(ActivityEditHomework.this, ActivityHome.class);
                 startActivity(intent);
                 finish();
             }

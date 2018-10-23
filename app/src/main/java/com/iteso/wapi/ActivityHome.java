@@ -11,17 +11,22 @@ import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.View;
-import android.widget.Toast;
+
+import com.iteso.wapi.fragments.FragmentGrades;
+import com.iteso.wapi.fragments.FragmentConfiguration;
+import com.iteso.wapi.fragments.FragmentHomework;
+import com.iteso.wapi.fragments.FragmentPayment;
+import com.iteso.wapi.fragments.FragmentSchedule;
+import com.iteso.wapi.fragments.FragmentUsers;
 
 public class ActivityHome extends AppCompatActivity {
 
-    private FragmentUsuario fragmentUsuario;
-    private FragmentHorario fragmentHorario;
-    private FragmentCalificacion fragmentCalificacion;
-    private FragmentPago fragmentPago;
-    private FragmentTarea fragmentTarea;
-    private FragmentConfiguracion fragmentConfiguracion;
+    private FragmentUsers fragmentUsers;
+    private FragmentSchedule fragmentSchedule;
+    private FragmentGrades fragmentGrades;
+    private FragmentPayment fragmentPayment;
+    private FragmentHomework fragmentHomework;
+    private FragmentConfiguration fragmentConfiguration;
     FloatingActionButton floatingActionButton;
 
     @Override
@@ -42,17 +47,6 @@ public class ActivityHome extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
 
-        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Handle the click.
-                Intent intent = new Intent(ActivityHome.this, ActivityEditarTarea.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -67,31 +61,31 @@ public class ActivityHome extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    if (fragmentUsuario == null)
-                        fragmentUsuario= new FragmentUsuario();
-                    return fragmentUsuario;
+                    if (fragmentUsers == null)
+                        fragmentUsers = new FragmentUsers();
+                    return fragmentUsers;
                 case 1:
-                    if (fragmentHorario == null)
-                        fragmentHorario = new FragmentHorario();
-                    return fragmentHorario;
+                    if (fragmentSchedule == null)
+                        fragmentSchedule = new FragmentSchedule();
+                    return fragmentSchedule;
                 case 2:
-                    if (fragmentCalificacion == null)
-                        fragmentCalificacion = new FragmentCalificacion();
-                    return fragmentCalificacion;
+                    if (fragmentGrades == null)
+                        fragmentGrades = new FragmentGrades();
+                    return fragmentGrades;
                 case 3:
-                    if (fragmentPago == null)
-                        fragmentPago = new FragmentPago();
-                    return fragmentPago;
+                    if (fragmentPayment == null)
+                        fragmentPayment = new FragmentPayment();
+                    return fragmentPayment;
                 case 4:
-                    if (fragmentTarea == null)
-                        fragmentTarea = new FragmentTarea();
-                    return fragmentTarea;
+                    if (fragmentHomework == null)
+                        fragmentHomework = new FragmentHomework();
+                    return fragmentHomework;
                 case 5:
-                    if (fragmentConfiguracion == null)
-                        fragmentConfiguracion = new FragmentConfiguracion ();
-                    return fragmentConfiguracion ;
+                    if (fragmentConfiguration == null)
+                        fragmentConfiguration = new FragmentConfiguration();
+                    return fragmentConfiguration;
                 default:
-                    return new FragmentUsuario();
+                    return new FragmentUsers();
             }
         }
 
@@ -131,22 +125,22 @@ public class ActivityHome extends AppCompatActivity {
                         int fragment = data.getExtras().getInt("Fragment");
                         switch (fragment) {
                             case 0:
-                                fragmentUsuario.onActivityResult(requestCode, resultCode, data);
+                                fragmentUsers.onActivityResult(requestCode, resultCode, data);
                                 break;
                             case 1:
-                                fragmentHorario.onActivityResult(requestCode, resultCode, data);
+                                fragmentSchedule.onActivityResult(requestCode, resultCode, data);
                                 break;
                             case 2:
-                                fragmentCalificacion.onActivityResult(requestCode, resultCode, data);
+                                fragmentGrades.onActivityResult(requestCode, resultCode, data);
                                 break;
                             case 3:
-                                fragmentPago.onActivityResult(requestCode, resultCode, data);
+                                fragmentPayment.onActivityResult(requestCode, resultCode, data);
                                 break;
                             case 4:
-                                fragmentTarea.onActivityResult(requestCode, resultCode, data);
+                                fragmentHomework.onActivityResult(requestCode, resultCode, data);
                                 break;
                             case 5:
-                                fragmentConfiguracion.onActivityResult(requestCode, resultCode, data);
+                                fragmentConfiguration.onActivityResult(requestCode, resultCode, data);
                                 break;
                         }
                     }

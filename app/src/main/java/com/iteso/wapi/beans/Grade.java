@@ -3,9 +3,7 @@ package com.iteso.wapi.beans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Date;
-
-public class Tarea implements Parcelable {
+public class Grade implements Parcelable {
 
     private Integer idTarea;
     private Integer fk_materia;
@@ -14,7 +12,7 @@ public class Tarea implements Parcelable {
     private String fecha;
     private String hora;
 
-    public Tarea(Integer idTarea, Integer fk_materia, String descripcionTarea, String nombreMateria, String fecha, String hora) {
+    public Grade(Integer idTarea, Integer fk_materia, String descripcionTarea, String nombreMateria, String fecha, String hora) {
         this.idTarea = idTarea;
         this.fk_materia = fk_materia;
         this.descripcionTarea = descripcionTarea;
@@ -23,12 +21,12 @@ public class Tarea implements Parcelable {
         this.hora = hora;
     }
 
-    public Tarea() {
+    public Grade() {
     }
 
     @Override
     public String toString() {
-        return "Tarea{" +
+        return "Grade{" +
                 "idTarea=" + idTarea +
                 ", fk_materia=" + fk_materia +
                 ", descripcionTarea='" + descripcionTarea + '\'' +
@@ -102,7 +100,7 @@ public class Tarea implements Parcelable {
         dest.writeString(this.hora);
     }
 
-    protected Tarea(Parcel in) {
+    protected Grade(Parcel in) {
         this.idTarea = (Integer) in.readValue(Integer.class.getClassLoader());
         this.fk_materia = (Integer) in.readValue(Integer.class.getClassLoader());
         this.descripcionTarea = in.readString();
@@ -111,15 +109,15 @@ public class Tarea implements Parcelable {
         this.hora = in.readString();
     }
 
-    public static final Creator<Tarea> CREATOR = new Creator<Tarea>() {
+    public static final Creator<Grade> CREATOR = new Creator<Grade>() {
         @Override
-        public Tarea createFromParcel(Parcel source) {
-            return new Tarea(source);
+        public Grade createFromParcel(Parcel source) {
+            return new Grade(source);
         }
 
         @Override
-        public Tarea[] newArray(int size) {
-            return new Tarea[size];
+        public Grade[] newArray(int size) {
+            return new Grade[size];
         }
     };
 }

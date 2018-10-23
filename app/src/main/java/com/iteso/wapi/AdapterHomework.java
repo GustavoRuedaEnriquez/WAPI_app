@@ -6,16 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.iteso.wapi.beans.Tarea;
+import com.iteso.wapi.beans.Grade;
 
 import java.util.List;
 
-public class AdapterTarea extends RecyclerView.Adapter<AdapterTarea.MyViewHolder>{
+public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyViewHolder>{
 
-    public List<Tarea> tareaList;
+    public List<Grade> gradeList;
     private Context context;
     private int fragment;
 
@@ -31,22 +30,22 @@ public class AdapterTarea extends RecyclerView.Adapter<AdapterTarea.MyViewHolder
         }
     }
 
-    public AdapterTarea(List<Tarea> tareas){
-        this.tareaList = tareas;
+    public AdapterHomework(List<Grade> grades){
+        this.gradeList = grades;
     }
 
-    public AdapterTarea(int fragment, Context context, List<Tarea> tareas){
+    public AdapterHomework(int fragment, Context context, List<Grade> grades){
         this.fragment = fragment;
         this.context = context;
-        this.tareaList = tareas;
+        this.gradeList = grades;
     }
 
-    public List<Tarea> getTareaList() {
-        return tareaList;
+    public List<Grade> getGradeList() {
+        return gradeList;
     }
 
-    public void setTareaList(List<Tarea> tareas) {
-        this.tareaList = tareas;
+    public void setGradeList(List<Grade> grades) {
+        this.gradeList = grades;
     }
 
     public Context getContext() {
@@ -67,26 +66,26 @@ public class AdapterTarea extends RecyclerView.Adapter<AdapterTarea.MyViewHolder
 
     @NonNull
     @Override
-    public AdapterTarea.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tarea, parent, false);
-        return new AdapterTarea.MyViewHolder(item);
+    public AdapterHomework.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_homework, parent, false);
+        return new AdapterHomework.MyViewHolder(item);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final AdapterTarea.MyViewHolder myViewHolder, int position){
-        final Tarea tarea = tareaList.get(position);
+    public void onBindViewHolder(@NonNull final AdapterHomework.MyViewHolder myViewHolder, int position){
+        final Grade grade = gradeList.get(position);
         //myViewHolder.nombre.setText(materiaList.get(myViewHolder.getAdapterPosition()).getNombreMateria());
         //myViewHolder.promedio.setText(Float.toString(materiaList.get(myViewHolder.getAdapterPosition()).getPromedio()));
-        myViewHolder.descripcion.setText(tarea.getDescripcionTarea());
-        myViewHolder.materia.setText(tarea.getNombreMateria());
-        myViewHolder.fecha.setText(tarea.getFecha());
-        myViewHolder.hora.setText(tarea.getHora());
+        myViewHolder.descripcion.setText(grade.getDescripcionTarea());
+        myViewHolder.materia.setText(grade.getNombreMateria());
+        myViewHolder.fecha.setText(grade.getFecha());
+        myViewHolder.hora.setText(grade.getHora());
 
     }
 
     @Override
     public int getItemCount() {
-        return tareaList.size();
+        return gradeList.size();
     }
 }

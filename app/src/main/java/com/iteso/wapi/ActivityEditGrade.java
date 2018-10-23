@@ -14,21 +14,21 @@ import com.iteso.wapi.beans.Materia;
 
 import java.util.ArrayList;
 
-public class ActivityEditarCalificacion extends AppCompatActivity {
+public class ActivityEditGrade extends AppCompatActivity {
 
     Materia materia;
     TextView nomMateria;
     ArrayList<Calificacion> calificaciones;
     RecyclerView recyclerView;
-    AdapterCalificacion adapterCalificacion;
+    AdapterGrade adapterGrade;
     ImageButton back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editar_calificacion);
-        nomMateria = findViewById(R.id.activity_editar_calificacion_materia);
-        back = findViewById(R.id.activity_editar_calificacion_back);
+        setContentView(R.layout.activity_edit_grade);
+        nomMateria = findViewById(R.id.activity_edit_grade_materia);
+        back = findViewById(R.id.activity_edit_grade_back);
 
         calificaciones = new ArrayList<>();
         calificaciones.add(new Calificacion(1, 1, "Examen 1", (float) 20, (float) 100));
@@ -37,14 +37,14 @@ public class ActivityEditarCalificacion extends AppCompatActivity {
         calificaciones.add(new Calificacion(4, 1, "Tareas", (float) 10, (float) 70));
         calificaciones.add(new Calificacion(5, 1, "Proyecto", (float) 30, (float) 90));
 
-        recyclerView = findViewById(R.id.activity_editar_calificacion_recyclerView);
+        recyclerView = findViewById(R.id.activity_edit_grade_recyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
 
-        adapterCalificacion = new AdapterCalificacion(2, this, calificaciones);
+        adapterGrade = new AdapterGrade(2, this, calificaciones);
 
-        recyclerView.setAdapter(adapterCalificacion);
+        recyclerView.setAdapter(adapterGrade);
 
         if (getIntent().getExtras() != null) {
             materia = getIntent().getParcelableExtra("Materia");
@@ -55,7 +55,7 @@ public class ActivityEditarCalificacion extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityEditarCalificacion.this, ActivityHome.class);
+                Intent intent = new Intent(ActivityEditGrade.this, ActivityHome.class);
                 startActivity(intent);
                 finish();
             }

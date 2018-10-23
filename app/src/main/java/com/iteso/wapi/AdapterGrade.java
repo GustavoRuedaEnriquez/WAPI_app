@@ -1,22 +1,19 @@
 package com.iteso.wapi;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iteso.wapi.beans.Calificacion;
-import com.iteso.wapi.beans.Materia;
 
 import java.util.List;
 
-public class AdapterCalificacion extends RecyclerView.Adapter<AdapterCalificacion.MyViewHolder>{
+public class AdapterGrade extends RecyclerView.Adapter<AdapterGrade.MyViewHolder>{
 
 public List<Calificacion> calificacionList;
 private Context context;
@@ -35,11 +32,11 @@ class MyViewHolder extends RecyclerView.ViewHolder{
     }
 }
 
-    public AdapterCalificacion(List<Calificacion> calificacions){
+    public AdapterGrade(List<Calificacion> calificacions){
         this.calificacionList = calificacions;
     }
 
-    public AdapterCalificacion(int fragment, Context context, List<Calificacion> calificacions){
+    public AdapterGrade(int fragment, Context context, List<Calificacion> calificacions){
         this.fragment = fragment;
         this.context = context;
         this.calificacionList = calificacions;
@@ -71,14 +68,14 @@ class MyViewHolder extends RecyclerView.ViewHolder{
 
     @NonNull
     @Override
-    public AdapterCalificacion.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_calificacion, parent, false);
-        return new AdapterCalificacion.MyViewHolder(item);
+    public AdapterGrade.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grade, parent, false);
+        return new AdapterGrade.MyViewHolder(item);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final AdapterCalificacion.MyViewHolder myViewHolder, int position){
+    public void onBindViewHolder(@NonNull final AdapterGrade.MyViewHolder myViewHolder, int position){
         final Calificacion calificacion = calificacionList.get(position);
         //myViewHolder.nombre.setText(materiaList.get(myViewHolder.getAdapterPosition()).getNombreMateria());
         //myViewHolder.promedio.setText(Float.toString(materiaList.get(myViewHolder.getAdapterPosition()).getPromedio()));

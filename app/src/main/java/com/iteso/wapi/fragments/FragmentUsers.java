@@ -1,8 +1,6 @@
-package com.iteso.wapi;
+package com.iteso.wapi.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,16 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.iteso.wapi.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FragmentUsuario.OnFragmentInteractionListener} interface
+ * {@link FragmentUsers.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FragmentUsuario#newInstance} factory method to
+ * Use the {@link FragmentUsers#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentUsuario extends Fragment {
+public class FragmentUsers extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +30,7 @@ public class FragmentUsuario extends Fragment {
     private String mParam2;
 
 
-    public FragmentUsuario() {
+    public FragmentUsers() {
         // Required empty public constructor
     }
 
@@ -40,11 +40,11 @@ public class FragmentUsuario extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentUsuario.
+     * @return A new instance of fragment FragmentUsers.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentUsuario newInstance(String param1, String param2) {
-        FragmentUsuario fragment = new FragmentUsuario();
+    public static FragmentUsers newInstance(String param1, String param2) {
+        FragmentUsers fragment = new FragmentUsers();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,7 +65,7 @@ public class FragmentUsuario extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_usuario, container, false);
+        return inflater.inflate(R.layout.fragment_users, container, false);
     }
 
     @Override
