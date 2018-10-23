@@ -22,6 +22,8 @@
         <activity android:name=".ActivityMateria"/>
         <activity android:name=".ActivityLogin" />
         <activity android:name=".ActivityRegister"/>
+        <activity android:name=".ActivityEditHomework"/>
+        <activity android:name=".ActivityEditGrade"/>
         <activity android:name=".ActivityHome"
             android:theme="@style/AppTheme.NoActionBar"/>
 
