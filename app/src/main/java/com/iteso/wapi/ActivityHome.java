@@ -19,11 +19,11 @@ import com.iteso.wapi.fragments.FragmentUsers;
 
 public class ActivityHome extends AppCompatActivity {
 
-    private FragmentUsers fragmentUsuario;
+    private FragmentUsers fragmentUsers;
     private FragmentSchedule fragmentSchedule;
-    private FragmentGrades fragmentCalificacion;
+    private FragmentGrades fragmentGrades;
     private FragmentPayment fragmentPayment;
-    private FragmentHomework fragmentTarea;
+    private FragmentHomework fragmentHomework;
     private FragmentConfiguration fragmentConfiguration;
 
     final int[] ICONS = new int[]{

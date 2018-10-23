@@ -1,28 +1,33 @@
 package com.iteso.wapi.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.iteso.wapi.ActivityLogin;
+import com.iteso.wapi.ActivitySplashscreen;
 import com.iteso.wapi.R;
 
+import static android.content.Context.MODE_PRIVATE;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentConfiguration.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentConfiguration#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class FragmentConfiguration extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+
+    Button logout;
+    EditText name_et, password_et;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -32,15 +37,6 @@ public class FragmentConfiguration extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentConfiguration.
-     */
-    // TODO: Rename and change types and number of parameters
     public static FragmentConfiguration newInstance(String param1, String param2) {
         FragmentConfiguration fragment = new FragmentConfiguration();
         Bundle args = new Bundle();
@@ -57,18 +53,47 @@ public class FragmentConfiguration extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_configuration, container, false);
+
+        View v = inflater.inflate(R.layout.fragment_configuration, container, false);
+        logout = v.findViewById(R.id.fragment_configuration_log_out_btn);
+        name_et = v.findViewById(R.id.fragment_configuration_change_name_et);
+        password_et = v.findViewById(R.id.fragment_configuration_change_password_et);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
+        name_et.setText(sharedPreferences.getString("NAME","Default name"));
+        password_et.setText(sharedPreferences.getString("PWD","Default password"));
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout.setBackground(getResources().getDrawable(R.drawable.custom_selected_blue_light_btn));
+                logout.setTextColor(Color.WHITE);
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("NAME", "");
+                editor.putString("PWD", "");
+                editor.putBoolean("LOGGED", false);
+                editor.apply();
+
+                Intent logOutIntent = new Intent(getActivity(), ActivityLogin.class);
+                startActivity(logOutIntent);
+                getActivity().finish();
+            }
+        });
+
+        return v;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
     }
 
     @Override

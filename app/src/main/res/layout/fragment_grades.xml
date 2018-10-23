@@ -3,30 +3,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.FragmentGrades">
+    tools:context=".fragments.FragmentGrades"
+    android:padding="10dp">
 
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="Calificaciones"
-        android:layout_margin="5dp"
-        />
+        android:layout_height="match_parent">
 
-    <Spinner
-        android:id="@+id/fragment_calificacion_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_margin="5dp"
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="35dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:text="Calificaciones"
+            android:layout_margin="5dp"
+            />
+
+        <Spinner
+            android:id="@+id/fragment_calificacion_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:text="Materias"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:layout_margin="5dp"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/fragment_calificacion_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/fragment_calificacion_promedio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Promedio: 5.8"/>
 
 
-    <android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/fragment_calificacion_recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    </LinearLayout>
 
 
 </FrameLayout>
