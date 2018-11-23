@@ -4,44 +4,34 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Student implements Parcelable {
-    private String name;
-    private String email;
+    private String userName;
     private String password;
     private boolean isLogged;
 
     public Student(){
-        this.name = "";
-        this.email = "";
+        this.userName = "";
         this.password = "";
         this.isLogged = false;
     }
 
-    public Student(String name, String email, String password, boolean isLogged) {
-        this.name = name;
-        this.email = email;
+    public Student(String userName, String password, boolean isLogged) {
+        this.userName = userName;
         this.password = password;
         this.isLogged = isLogged;
     }
 
     protected Student(Parcel in) {
-        this.name = in.readString();
-        this.email = in.readString();
+        this.userName = in.readString();
         this.password = in.readString();
         this.isLogged = in.readByte() != 0;
     }
 
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     public String getPassword() {
         return password;
@@ -59,8 +49,7 @@ public class Student implements Parcelable {
     @Override
     public String toString() {
         return "Student{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
+                "userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", isLogged=" + isLogged +
                 '}';
@@ -73,8 +62,7 @@ public class Student implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.name);
-        dest.writeString(this.email);
+        dest.writeString(this.userName);
         dest.writeString(this.password);
         dest.writeByte(this.isLogged ? (byte) 1 : (byte) 0);
     }

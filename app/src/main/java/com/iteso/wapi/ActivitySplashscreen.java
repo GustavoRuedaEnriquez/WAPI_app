@@ -40,7 +40,7 @@ public class ActivitySplashscreen extends AppCompatActivity {
     public Student loadPreferences(){
         SharedPreferences sharedPreferences = getSharedPreferences(MY_PREFERENCES,MODE_PRIVATE);
         Student student = new Student();
-        student.setName(sharedPreferences.getString("NAME","UNKNOWN"));
+        student.setUserName(sharedPreferences.getString("NAME","UNKNOWN"));
         student.setPassword(sharedPreferences.getString("PWD","1234"));
         student.setLogged(sharedPreferences.getBoolean("LOGGED",false));
         return student;

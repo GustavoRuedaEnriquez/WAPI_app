@@ -9,16 +9,16 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.iteso.wapi.beans.Calificacion;
-import com.iteso.wapi.beans.Materia;
+import com.iteso.wapi.beans.Grade;
+import com.iteso.wapi.beans.Subject;
 
 import java.util.ArrayList;
 
 public class ActivityEditGrade extends AppCompatActivity {
 
-    Materia materia;
+    Subject subject;
     TextView nomMateria;
-    ArrayList<Calificacion> calificaciones;
+    ArrayList<Grade> calificaciones;
     RecyclerView recyclerView;
     AdapterGrade adapterGrade;
     ImageButton back;
@@ -31,11 +31,11 @@ public class ActivityEditGrade extends AppCompatActivity {
         back = findViewById(R.id.activity_edit_grade_back);
 
         calificaciones = new ArrayList<>();
-        calificaciones.add(new Calificacion(1, 1, "Examen 1", (float) 20, (float) 100));
-        calificaciones.add(new Calificacion(2, 1, "Examen 2", (float) 20, (float) 90));
-        calificaciones.add(new Calificacion(3, 1, "Examen 3", (float) 20, (float) 90));
-        calificaciones.add(new Calificacion(4, 1, "Tareas", (float) 10, (float) 70));
-        calificaciones.add(new Calificacion(5, 1, "Proyecto", (float) 30, (float) 90));
+        calificaciones.add(new Grade(1, 1, "Examen 1", (float) 20, (float) 100));
+        calificaciones.add(new Grade(2, 1, "Examen 2", (float) 20, (float) 90));
+        calificaciones.add(new Grade(3, 1, "Examen 3", (float) 20, (float) 90));
+        calificaciones.add(new Grade(4, 1, "Tareas", (float) 10, (float) 70));
+        calificaciones.add(new Grade(5, 1, "Proyecto", (float) 30, (float) 90));
 
         recyclerView = findViewById(R.id.activity_edit_grade_recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -47,9 +47,9 @@ public class ActivityEditGrade extends AppCompatActivity {
         recyclerView.setAdapter(adapterGrade);
 
         if (getIntent().getExtras() != null) {
-            materia = getIntent().getParcelableExtra("Materia");
-            if (materia != null) {
-                nomMateria.setText(materia.getNombreMateria());
+            subject = getIntent().getParcelableExtra("Subject");
+            if (subject != null) {
+                nomMateria.setText(subject.getNameSubject());
             }
         }
         back.setOnClickListener(new View.OnClickListener() {

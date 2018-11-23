@@ -15,8 +15,8 @@ import android.widget.Spinner;
 
 import com.iteso.wapi.AdapterMateria;
 import com.iteso.wapi.R;
-import com.iteso.wapi.beans.DiaHoras;
-import com.iteso.wapi.beans.Materia;
+import com.iteso.wapi.beans.Schedule;
+import com.iteso.wapi.beans.Subject;
 
 import java.util.ArrayList;
 
@@ -39,7 +39,7 @@ public class FragmentGrades extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    ArrayList<Materia> materias = new ArrayList<>();
+    ArrayList<Subject> subjects = new ArrayList<>();
     RecyclerView recyclerView;
     AdapterMateria adapterMateria;
     Spinner spinner;
@@ -101,14 +101,14 @@ public class FragmentGrades extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
 
-        DiaHoras dias = new DiaHoras();
+        Schedule dias = new Schedule();
 
-        materias = new ArrayList<>();
-        materias.add(new Materia(1,1, "Micros", dias, (float) 5.3));
-        materias.add(new Materia(2, 1, "Moviles", dias, (float)3.3));
-        materias.add(new Materia(3, 1, "GBD", dias, (float)9.0));
+        subjects = new ArrayList<>();
+        subjects.add(new Subject(1,1, "Micros", (float) 5.3));
+        subjects.add(new Subject(2, 1, "Moviles", (float)3.3));
+        subjects.add(new Subject(3, 1, "GBD", (float)9.0));
 
-        adapterMateria = new AdapterMateria(2, getActivity(), materias);
+        adapterMateria = new AdapterMateria(2, getActivity(), subjects);
         recyclerView.setAdapter(adapterMateria);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), mLayoutManager.getOrientation());
@@ -119,13 +119,13 @@ public class FragmentGrades extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Materia materia = data.getParcelableExtra("Materia");
-        Iterator<Materia> iterator = materias.iterator();
+        Subject materia = data.getParcelableExtra("Subject");
+        Iterator<Subject> iterator = subjects.iterator();
         int position = 0;
         while(iterator.hasNext()){
-            Materia item = iterator.next();
-            if(item.getIdMateria() == materia.getIdMateria()){
-                materias.set(position, materia);
+            Subject item = iterator.next();
+            if(item.getIdSubject() == materia.getIdSubject()){
+                subjects.set(position, materia);
                 break;
             }
             position++;

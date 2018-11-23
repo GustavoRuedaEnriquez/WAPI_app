@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.iteso.wapi.beans.Calificacion;
+import com.iteso.wapi.beans.Grade;
 
 import java.util.List;
 
 public class AdapterGrade extends RecyclerView.Adapter<AdapterGrade.MyViewHolder>{
 
-public List<Calificacion> calificacionList;
+public List<Grade> gradeList;
 private Context context;
 private int fragment;
 
@@ -32,22 +32,22 @@ class MyViewHolder extends RecyclerView.ViewHolder{
     }
 }
 
-    public AdapterGrade(List<Calificacion> calificacions){
-        this.calificacionList = calificacions;
+    public AdapterGrade(List<Grade> grades){
+        this.gradeList = grades;
     }
 
-    public AdapterGrade(int fragment, Context context, List<Calificacion> calificacions){
+    public AdapterGrade(int fragment, Context context, List<Grade> grades){
         this.fragment = fragment;
         this.context = context;
-        this.calificacionList = calificacions;
+        this.gradeList = grades;
     }
 
-    public List<Calificacion> getCalificacionList() {
-        return calificacionList;
+    public List<Grade> getGradeList() {
+        return gradeList;
     }
 
-    public void setMateriaList(List<Calificacion> calificacions) {
-        this.calificacionList = calificacions;
+    public void setMateriaList(List<Grade> grades) {
+        this.gradeList = grades;
     }
 
     public Context getContext() {
@@ -76,24 +76,24 @@ class MyViewHolder extends RecyclerView.ViewHolder{
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterGrade.MyViewHolder myViewHolder, int position){
-        final Calificacion calificacion = calificacionList.get(position);
-        //myViewHolder.nombre.setText(materiaList.get(myViewHolder.getAdapterPosition()).getNombreMateria());
-        //myViewHolder.promedio.setText(Float.toString(materiaList.get(myViewHolder.getAdapterPosition()).getPromedio()));
-        myViewHolder.nombre.setText(calificacion.getDescripcionCalificacion());
-        myViewHolder.porcentaje.setText(Float.toString(calificacion.getPorcentaje()));
-        myViewHolder.calificacion.setText(Float.toString(calificacion.getCalificacion()));
+        final Grade grade = gradeList.get(position);
+        //myViewHolder.nombre.setText(subjectList.get(myViewHolder.getAdapterPosition()).getNameSubject());
+        //myViewHolder.promedio.setText(Float.toString(subjectList.get(myViewHolder.getAdapterPosition()).getPromedio()));
+        myViewHolder.nombre.setText(grade.getDescriptionGrade());
+        myViewHolder.porcentaje.setText(Float.toString(grade.getPercentage()));
+        myViewHolder.calificacion.setText(Float.toString(grade.getGrade()));
 
         myViewHolder.borrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //calificacionList.remove(myViewHolder.getAdapterPosition());
+                //gradeList.remove(myViewHolder.getAdapterPosition());
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return calificacionList.size();
+        return gradeList.size();
     }
 
 }

@@ -49,7 +49,7 @@
             android:id="@+id/activity_edit_homework_fecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingresa porcentaje"
+            android:hint="Ingresa percentage"
             android:textSize="15dp"
             />
 
@@ -63,7 +63,7 @@
             android:id="@+id/activity_editar_tarea_hora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingresa la hora"
+            android:hint="Ingresa la deliveryTime"
             android:textSize="15dp"
             />
 
@@ -76,7 +76,7 @@
         android:id="@+id/activity_edit_homework_descr"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Ingresa descripcion de grade"
+        android:hint="Ingresa descripcion de homework"
         android:textSize="15dp"
         />
 

@@ -9,12 +9,13 @@ import android.view.ViewGroup;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.iteso.wapi.beans.Materia;
+import com.iteso.wapi.beans.Subject;
+
 import java.util.List;
 
 public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHolder>{
 
-    public List<Materia> materiaList;
+    public List<Subject> subjectList;
     private Context context;
     private int fragment;
 
@@ -30,22 +31,22 @@ public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHo
         }
     }
 
-    public AdapterMateria(List<Materia> materias){
-        this.materiaList = materias;
+    public AdapterMateria(List<Subject> subjects){
+        this.subjectList = subjects;
     }
 
-    public AdapterMateria(int fragment, Context context, List<Materia> materias){
+    public AdapterMateria(int fragment, Context context, List<Subject> subjects){
         this.fragment = fragment;
         this.context = context;
-        this.materiaList = materias;
+        this.subjectList = subjects;
     }
 
-    public List<Materia> getMateriaList() {
-        return materiaList;
+    public List<Subject> getSubjectList() {
+        return subjectList;
     }
 
-    public void setMateriaList(List<Materia> materiaList) {
-        this.materiaList = materiaList;
+    public void setSubjectList(List<Subject> subjectList) {
+        this.subjectList = subjectList;
     }
 
     public Context getContext() {
@@ -74,17 +75,17 @@ public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int position){
-        Materia materia = materiaList.get(position);
-        //myViewHolder.nombre.setText(materiaList.get(myViewHolder.getAdapterPosition()).getNombreMateria());
-        //myViewHolder.promedio.setText(Float.toString(materiaList.get(myViewHolder.getAdapterPosition()).getPromedio()));
-        myViewHolder.nombre.setText(materia.getNombreMateria());
-        myViewHolder.promedio.setText(Float.toString(materia.getPromedio()));
+        Subject subject = subjectList.get(position);
+        //myViewHolder.nombre.setText(subjectList.get(myViewHolder.getAdapterPosition()).getNameSubject());
+        //myViewHolder.promedio.setText(Float.toString(subjectList.get(myViewHolder.getAdapterPosition()).getAvarage()));
+        myViewHolder.nombre.setText(subject.getNameSubject());
+        myViewHolder.promedio.setText(Float.toString(subject.getAvarage()));
 
         myViewHolder.editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ActivityEditGrade.class);
-                intent.putExtra("Materia", materiaList.get(myViewHolder.getAdapterPosition()));
+                intent.putExtra("Subject", subjectList.get(myViewHolder.getAdapterPosition()));
                 intent.putExtra("Fragment", fragment);
                 ((ActivityHome) context).startActivityForResult(intent, 999);
             }
@@ -93,7 +94,7 @@ public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHo
 
     @Override
     public int getItemCount() {
-        return materiaList.size();
+        return subjectList.size();
     }
 
 

@@ -5,85 +5,65 @@ import android.os.Parcelable;
 
 public class Grade implements Parcelable {
 
-    private Integer idTarea;
-    private Integer fk_materia;
-    private String descripcionTarea;
-    private String nombreMateria;
-    private String fecha;
-    private String hora;
+    private Integer idGrade;
+    private Integer fk_subject;
+    private String descriptionGrade;
+    private float percentage;
+    private float grade;
 
-    public Grade(Integer idTarea, Integer fk_materia, String descripcionTarea, String nombreMateria, String fecha, String hora) {
-        this.idTarea = idTarea;
-        this.fk_materia = fk_materia;
-        this.descripcionTarea = descripcionTarea;
-        this.nombreMateria = nombreMateria;
-        this.fecha = fecha;
-        this.hora = hora;
+
+
+    public Grade(Integer idGrade, Integer fk_subject, String descriptionGrade, float percentage, float grade) {
+        this.idGrade = idGrade;
+        this.fk_subject = fk_subject;
+        this.descriptionGrade = descriptionGrade;
+        this.percentage = percentage;
+        this.grade = grade;
     }
 
     public Grade() {
+
     }
 
-    @Override
-    public String toString() {
-        return "Grade{" +
-                "idTarea=" + idTarea +
-                ", fk_materia=" + fk_materia +
-                ", descripcionTarea='" + descripcionTarea + '\'' +
-                ", nombreMateria='" + nombreMateria + '\'' +
-                ", fecha='" + fecha + '\'' +
-                ", hora='" + hora + '\'' +
-                '}';
+    public Integer getIdGrade() {
+        return idGrade;
     }
 
-    public Integer getIdTarea() {
-        return idTarea;
+    public void setIdGrade(Integer idGrade) {
+        this.idGrade = idGrade;
     }
 
-    public void setIdTarea(Integer idTarea) {
-        this.idTarea = idTarea;
+    public String getDescriptionGrade() {
+        return descriptionGrade;
     }
 
-    public Integer getFk_materia() {
-        return fk_materia;
+    public void setDescriptionGrade(String descriptionGrade) {
+        this.descriptionGrade = descriptionGrade;
     }
 
-    public void setFk_materia(Integer fk_materia) {
-        this.fk_materia = fk_materia;
+    public float getPercentage() {
+        return percentage;
     }
 
-    public String getDescripcionTarea() {
-        return descripcionTarea;
+    public void setPercentage(float percentage) {
+        this.percentage = percentage;
     }
 
-    public void setDescripcionTarea(String descripcionTarea) {
-        this.descripcionTarea = descripcionTarea;
+    public float getGrade() {
+        return grade;
     }
 
-    public String getNombreMateria() {
-        return nombreMateria;
+    public void setGrade(float grade) {
+        this.grade = grade;
     }
 
-    public void setNombreMateria(String nombreMateria) {
-        this.nombreMateria = nombreMateria;
+    public Integer getFk_subject() {
+        return fk_subject;
     }
 
-    public String getFecha() {
-        return fecha;
+    public void setFk_subject(Integer fk_subject) {
+        this.fk_subject = fk_subject;
     }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getHora() {
-        return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
-    }
-
 
     @Override
     public int describeContents() {
@@ -92,21 +72,19 @@ public class Grade implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.idTarea);
-        dest.writeValue(this.fk_materia);
-        dest.writeString(this.descripcionTarea);
-        dest.writeString(this.nombreMateria);
-        dest.writeString(this.fecha);
-        dest.writeString(this.hora);
+        dest.writeInt(this.idGrade);
+        dest.writeInt(this.fk_subject);
+        dest.writeString(this.descriptionGrade);
+        dest.writeFloat(this.percentage);
+        dest.writeFloat(this.grade);
     }
 
     protected Grade(Parcel in) {
-        this.idTarea = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.fk_materia = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.descripcionTarea = in.readString();
-        this.nombreMateria = in.readString();
-        this.fecha = in.readString();
-        this.hora = in.readString();
+        this.idGrade = in.readInt();
+        this.fk_subject = in.readInt();
+        this.descriptionGrade = in.readString();
+        this.percentage = in.readFloat();
+        this.grade = in.readFloat();
     }
 
     public static final Creator<Grade> CREATOR = new Creator<Grade>() {

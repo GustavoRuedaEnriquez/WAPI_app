@@ -14,7 +14,8 @@ import android.widget.Button;
 import com.iteso.wapi.ActivityEditHomework;
 import com.iteso.wapi.AdapterHomework;
 import com.iteso.wapi.R;
-import com.iteso.wapi.beans.Grade;
+import com.iteso.wapi.beans.Homework;
+
 import java.util.ArrayList;
 
 
@@ -36,7 +37,7 @@ public class FragmentHomework extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    ArrayList<Grade> grades = new ArrayList<>();
+    ArrayList<Homework> homework = new ArrayList<>();
     RecyclerView recyclerView;
     RecyclerView recyclerViewProximas;
     AdapterHomework adapterHomework;
@@ -98,21 +99,21 @@ public class FragmentHomework extends Fragment {
         LinearLayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
         recyclerViewProximas.setLayoutManager(mLayoutManager2);
 
-        grades = new ArrayList<>();
-        grades.add(new Grade(1, 1, "Leer sobre Teclado Matricial", "Micros", "Mañana", "9:00"));
-        grades.add(new Grade(2, 1, "Realizar reporte de practica 4", "Micros", "Mañana", "11:55"));
+        homework = new ArrayList<>();
+        homework.add(new Homework(1, 1, "Leer sobre Teclado Matricial", "Mañana", "9:00"));
+        homework.add(new Homework(2, 1, "Realizar reporte de practica 4", "Mañana", "11:55"));
 
-        adapterHomework = new AdapterHomework(4, getActivity(), grades);
+        adapterHomework = new AdapterHomework(4, getActivity(), homework);
         recyclerView.setAdapter(adapterHomework);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), mLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-        grades = new ArrayList<>();
-        grades.add(new Grade(3, 2, "Informe de finanzas", "ADSI", "29/10", "7:00"));
-        grades.add(new Grade(4, 2, "Practica de laboratorio 9", "GBD", "30/10", "13:00"));
+        homework = new ArrayList<>();
+        homework.add(new Homework(3, 2, "Informe de finanzas", "29/10", "7:00"));
+        homework.add(new Homework(4, 2, "Practica de laboratorio 9", "30/10", "13:00"));
 
-        adapterHomework = new AdapterHomework(4, getActivity(), grades);
+        adapterHomework = new AdapterHomework(4, getActivity(), homework);
         recyclerViewProximas.setAdapter(adapterHomework);
 
         agregar.setOnClickListener(new View.OnClickListener() {

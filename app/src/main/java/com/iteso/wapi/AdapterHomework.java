@@ -8,13 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.iteso.wapi.beans.Grade;
+import com.iteso.wapi.beans.Homework;
 
 import java.util.List;
 
 public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyViewHolder>{
 
-    public List<Grade> gradeList;
+    public List<Homework> homeworkList;
     private Context context;
     private int fragment;
 
@@ -30,22 +30,22 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
         }
     }
 
-    public AdapterHomework(List<Grade> grades){
-        this.gradeList = grades;
+    public AdapterHomework(List<Homework> homework){
+        this.homeworkList = homework;
     }
 
-    public AdapterHomework(int fragment, Context context, List<Grade> grades){
+    public AdapterHomework(int fragment, Context context, List<Homework> homework){
         this.fragment = fragment;
         this.context = context;
-        this.gradeList = grades;
+        this.homeworkList = homework;
     }
 
-    public List<Grade> getGradeList() {
-        return gradeList;
+    public List<Homework> getHomeworkList() {
+        return homeworkList;
     }
 
-    public void setGradeList(List<Grade> grades) {
-        this.gradeList = grades;
+    public void setHomeworkList(List<Homework> homework) {
+        this.homeworkList = homework;
     }
 
     public Context getContext() {
@@ -74,18 +74,18 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterHomework.MyViewHolder myViewHolder, int position){
-        final Grade grade = gradeList.get(position);
-        //myViewHolder.nombre.setText(materiaList.get(myViewHolder.getAdapterPosition()).getNombreMateria());
-        //myViewHolder.promedio.setText(Float.toString(materiaList.get(myViewHolder.getAdapterPosition()).getPromedio()));
-        myViewHolder.descripcion.setText(grade.getDescripcionTarea());
-        myViewHolder.materia.setText(grade.getNombreMateria());
-        myViewHolder.fecha.setText(grade.getFecha());
-        myViewHolder.hora.setText(grade.getHora());
+        final Homework homework = homeworkList.get(position);
+        //myViewHolder.nombre.setText(subjectList.get(myViewHolder.getAdapterPosition()).getNameSubject());
+        //myViewHolder.promedio.setText(Float.toString(subjectList.get(myViewHolder.getAdapterPosition()).getAvarage()));
+        myViewHolder.descripcion.setText(homework.getDescriptionHomework());
+        myViewHolder.materia.setText("Subject");
+        myViewHolder.fecha.setText(homework.getDeliveryDate());
+        myViewHolder.hora.setText(homework.getDeliveryTime());
 
     }
 
     @Override
     public int getItemCount() {
-        return gradeList.size();
+        return homeworkList.size();
     }
 }
