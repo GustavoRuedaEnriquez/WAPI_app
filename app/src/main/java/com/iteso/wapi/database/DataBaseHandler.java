@@ -32,6 +32,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     //Schedule Table
     public static final String TABLE_SCHEDULE      = "Schedule";
     public static final String SCHEDULE_ID         = "Schedule_Id";
+    public static final String SCHEDULE_FK_SUBJECT = "Schedule_FK_Subject";
     public static final String SCHEDULE_DAY        = "Schedule_Day";
     public static final String SCHEDULE_START_HOUR = "Schedule_Start_Hour";
     public static final String SCHEDULE_END_HOUR   = "Schedule_End_Hour";
@@ -90,6 +91,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
 
         String tableSchedule = "CREATE TABLE " + TABLE_SCHEDULE + " ("
                             + SCHEDULE_ID + " INTEGER PRIMARY KEY, "
+                            + SCHEDULE_FK_SUBJECT + " INTEGER, "
                             + SCHEDULE_DAY + " INTEGER, "
                             + SCHEDULE_START_HOUR + " INTEGER, "
                             + SCHEDULE_END_HOUR + " INTEGER) ";
