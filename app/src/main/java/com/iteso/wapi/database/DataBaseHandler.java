@@ -27,7 +27,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     public static final String SUBJECT_ID           = "Subject_Id";
     public static final String SUBJECT_FK_PERIOD    = "Subject_FK_Period";
     public static final String SUBJECT_NAME         = "Subject_Name";
-    public static final String SUBJECT_FK_SCHEDULE  = "Subject_FK_Schedule";
+    public static final String SUBJECT_SCHEDULE     = "Subject_Schedule";
     public static final String SUBJECT_AVERAGE      = "Subject_Average";
 
     //Schedule Table
@@ -36,7 +36,6 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     public static final String SCHEDULE_DAY        = "Schedule_Day";
     public static final String SCHEDULE_START_HOUR = "Schedule_Start_Hour";
     public static final String SCHEDULE_END_HOUR   = "Schedule_End_Hour";
-    public static final String SCHEDULE_FK_SUBJECT = "Schedule_FK_Subject";
 
     //Grade Table
     public static final String TABLE_GRADE       = "Grade";
@@ -44,7 +43,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     public static final String GRADE_FK_SUBJECT  = "Grade_FK_Subject";
     public static final String GRADE_DESCRIPTION = "Grade_Description";
     public static final String GRADE_PERCENTAGE  = "Grade_Percentage";
-    public static final String GRADE_GRADE_VALUE = "Grade_Grade_Value";
+    public static final String GRADE_VALUE       = "Grade_Value";
 
     //Homework Table
     public static final String TABLE_HOMEWORK       = "Homework";
@@ -88,22 +87,21 @@ public class DataBaseHandler extends SQLiteOpenHelper{
                             + SUBJECT_ID + " INTEGER PRIMARY KEY, "
                             + SUBJECT_FK_PERIOD + " INTEGER, "
                             + SUBJECT_NAME + " TEXT, "
-                            + SUBJECT_FK_SCHEDULE + " INTEGER, "
+                            + SUBJECT_SCHEDULE + " INTEGER, "
                             + SUBJECT_AVERAGE + " REAL)";
 
         String tableSchedule = "CREATE TABLE " + TABLE_SCHEDULE + " ("
                             + SCHEDULE_ID + " INTEGER PRIMARY KEY, "
                             + SCHEDULE_DAY + " INTEGER, "
                             + SCHEDULE_START_HOUR + " INTEGER, "
-                            + SCHEDULE_END_HOUR + " INTEGER, "
-                            + SCHEDULE_FK_SUBJECT + " INTEGER)";
+                            + SCHEDULE_END_HOUR + " INTEGER) ";
 
         String tableGrade = "CREATE TABLE " + TABLE_GRADE + " ("
                             + GRADE_ID + " INTEGER PRIMARY KEY, "
                             + GRADE_FK_SUBJECT + "INTEGER, "
                             + GRADE_DESCRIPTION + " TEXT, "
                             + GRADE_PERCENTAGE + " REAL, "
-                            + GRADE_GRADE_VALUE + " REAL)";
+                            + GRADE_VALUE + " REAL)";
 
         String tableHomework = "CREATE TABLE " + TABLE_HOMEWORK + " ("
                             + HOMEWORK_ID + " INTEGER PRIMARY KEY, "
