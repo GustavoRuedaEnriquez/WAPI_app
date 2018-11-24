@@ -12,6 +12,15 @@ public class Payment implements Parcelable {
     private int date;
     private String studentUsername;
 
+    public Payment(){
+        this.paymentId = 0;
+        this.name = "";
+        this.description = "";
+        this.amount = 0;
+        this.date = 0;
+        this.studentUsername = "";
+    }
+
     public Payment(int paymentId, String name, String description, double amount, int date, String studentUsername) {
         this.paymentId = paymentId;
         this.name = name;
