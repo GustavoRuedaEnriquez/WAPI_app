@@ -35,7 +35,6 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     public static final String SCHEDULE_DAY        = "Schedule_Day";
     public static final String SCHEDULE_START_HOUR = "Schedule_Start_Hour";
     public static final String SCHEDULE_END_HOUR   = "Schedule_End_Hour";
-    public static final String SCHEDULE_FK_SUBJECT = "Schedule_FK_Subject";
 
     //Grade Table
     public static final String TABLE_GRADE       = "Grade";
@@ -43,7 +42,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     public static final String GRADE_FK_SUBJECT  = "Grade_FK_Subject";
     public static final String GRADE_DESCRIPTION = "Grade_Description";
     public static final String GRADE_PERCENTAGE  = "Grade_Percentage";
-    public static final String GRADE_VALUE = "Grade_Value";
+    public static final String GRADE_VALUE       = "Grade_Value";
 
     //Homework Table
     public static final String TABLE_HOMEWORK       = "Homework";
@@ -93,8 +92,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
                             + SCHEDULE_ID + " INTEGER PRIMARY KEY, "
                             + SCHEDULE_DAY + " INTEGER, "
                             + SCHEDULE_START_HOUR + " INTEGER, "
-                            + SCHEDULE_END_HOUR + " INTEGER, "
-                            + SCHEDULE_FK_SUBJECT + " INTEGER)";
+                            + SCHEDULE_END_HOUR + " INTEGER) ";
 
         String tableGrade = "CREATE TABLE " + TABLE_GRADE + " ("
                             + GRADE_ID + " INTEGER PRIMARY KEY, "
