@@ -27,7 +27,6 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     public static final String SUBJECT_ID           = "Subject_Id";
     public static final String SUBJECT_FK_PERIOD    = "Subject_FK_Period";
     public static final String SUBJECT_NAME         = "Subject_Name";
-    public static final String SUBJECT_SCHEDULE     = "Subject_Schedule";
     public static final String SUBJECT_AVERAGE      = "Subject_Average";
 
     //Schedule Table
@@ -87,7 +86,6 @@ public class DataBaseHandler extends SQLiteOpenHelper{
                             + SUBJECT_ID + " INTEGER PRIMARY KEY, "
                             + SUBJECT_FK_PERIOD + " INTEGER, "
                             + SUBJECT_NAME + " TEXT, "
-                            + SUBJECT_SCHEDULE + " INTEGER, "
                             + SUBJECT_AVERAGE + " REAL)";
 
         String tableSchedule = "CREATE TABLE " + TABLE_SCHEDULE + " ("
