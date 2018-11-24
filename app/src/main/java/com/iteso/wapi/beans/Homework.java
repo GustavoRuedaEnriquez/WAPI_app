@@ -8,10 +8,11 @@ public class Homework implements Parcelable {
     private Integer idHomework;
     private Integer fk_subject;
     private String descriptionHomework;
-    private String deliveryDate;
-    private String deliveryTime;
+    private Integer deliveryDate;
+    private Integer deliveryTime;
 
-    public Homework(Integer idHomework, Integer fk_subject, String descriptionHomework, String deliveryDate, String deliveryTime) {
+
+    public Homework(Integer idHomework, Integer fk_subject, String descriptionHomework, Integer deliveryDate, Integer deliveryTime) {
         this.idHomework = idHomework;
         this.fk_subject = fk_subject;
         this.descriptionHomework = descriptionHomework;
@@ -57,19 +58,19 @@ public class Homework implements Parcelable {
         this.descriptionHomework = descriptionHomework;
     }
 
-    public String getDeliveryDate() {
+    public Integer getDeliveryDate() {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(String deliveryDate) {
+    public void setDeliveryDate(Integer deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 
-    public String getDeliveryTime() {
+    public Integer getDeliveryTime() {
         return deliveryTime;
     }
 
-    public void setDeliveryTime(String deliveryTime) {
+    public void setDeliveryTime(Integer deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
 
@@ -84,16 +85,16 @@ public class Homework implements Parcelable {
         dest.writeValue(this.idHomework);
         dest.writeValue(this.fk_subject);
         dest.writeString(this.descriptionHomework);
-        dest.writeString(this.deliveryDate);
-        dest.writeString(this.deliveryTime);
+        dest.writeValue(this.deliveryDate);
+        dest.writeValue(this.deliveryTime);
     }
 
     protected Homework(Parcel in) {
         this.idHomework = (Integer) in.readValue(Integer.class.getClassLoader());
         this.fk_subject = (Integer) in.readValue(Integer.class.getClassLoader());
         this.descriptionHomework = in.readString();
-        this.deliveryDate = in.readString();
-        this.deliveryTime = in.readString();
+        this.deliveryDate = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.deliveryTime = (Integer) in.readValue(Integer.class.getClassLoader());
     }
 
     public static final Creator<Homework> CREATOR = new Creator<Homework>() {

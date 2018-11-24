@@ -12,6 +12,16 @@ public class Grade implements Parcelable {
     private float grade;
 
 
+    @Override
+    public String toString() {
+        return "Grade{" +
+                "idGrade=" + idGrade +
+                ", fk_subject=" + fk_subject +
+                ", descriptionGrade='" + descriptionGrade + '\'' +
+                ", percentage=" + percentage +
+                ", grade=" + grade +
+                '}';
+    }
 
     public Grade(Integer idGrade, Integer fk_subject, String descriptionGrade, float percentage, float grade) {
         this.idGrade = idGrade;

@@ -10,6 +10,16 @@ public class Subject implements Parcelable {
     private String nameSubject;
     private float avarage;
 
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "idSubject=" + idSubject +
+                ", fk_period=" + fk_period +
+                ", nameSubject='" + nameSubject + '\'' +
+                ", avarage=" + avarage +
+                '}';
+    }
+
     public Subject() {
 
     }
