@@ -6,6 +6,15 @@ public class Period {
     private String namePeriod;
     private String userName;
 
+    @Override
+    public String toString() {
+        return "Period{" +
+                "idPeriod=" + idPeriod +
+                ", namePeriod='" + namePeriod + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
+
     public int getIdPeriod() {
         return idPeriod;
     }
