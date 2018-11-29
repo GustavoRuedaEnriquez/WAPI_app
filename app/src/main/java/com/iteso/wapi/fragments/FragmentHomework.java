@@ -37,7 +37,7 @@ public class FragmentHomework extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    ArrayList<Homework> homework = new ArrayList<>();
+    ArrayList<Homework> homework;
     RecyclerView recyclerView;
     RecyclerView recyclerViewProximas;
     AdapterHomework adapterHomework;

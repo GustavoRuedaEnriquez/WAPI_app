@@ -88,6 +88,7 @@ public class GradeControl {
         return grades;
     }
 
+
     public void updateGrade(Grade updatedGrade, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
         String updateQuery = "UPDATE " + DataBaseHandler.TABLE_GRADE

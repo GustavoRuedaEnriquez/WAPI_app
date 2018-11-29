@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.iteso.wapi.beans.Grade;
 import com.iteso.wapi.beans.Subject;
+import com.iteso.wapi.database.DataBaseHandler;
+import com.iteso.wapi.database.GradeControl;
 
 import java.util.ArrayList;
 
@@ -29,13 +31,17 @@ public class ActivityEditGrade extends AppCompatActivity {
         setContentView(R.layout.activity_edit_grade);
         nomMateria = findViewById(R.id.activity_edit_grade_materia);
         back = findViewById(R.id.activity_edit_grade_back);
+        DataBaseHandler dh = DataBaseHandler.getInstance(this);
+        GradeControl gradeControl = new GradeControl();
 
-        calificaciones = new ArrayList<>();
-        calificaciones.add(new Grade(1, 1, "Examen 1", (float) 20, (float) 100));
-        calificaciones.add(new Grade(2, 1, "Examen 2", (float) 20, (float) 90));
-        calificaciones.add(new Grade(3, 1, "Examen 3", (float) 20, (float) 90));
-        calificaciones.add(new Grade(4, 1, "Tareas", (float) 10, (float) 70));
-        calificaciones.add(new Grade(5, 1, "Proyecto", (float) 30, (float) 90));
+        if (getIntent().getExtras() != null) {
+            subject = getIntent().getParcelableExtra("Subject");
+            if (subject != null) {
+                nomMateria.setText(subject.getNameSubject());
+            }
+        }
+
+        calificaciones = gradeControl.getGradesBySubject(subject.getIdSubject(),dh);
 
         recyclerView = findViewById(R.id.activity_edit_grade_recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -46,12 +52,7 @@ public class ActivityEditGrade extends AppCompatActivity {
 
         recyclerView.setAdapter(adapterGrade);
 
-        if (getIntent().getExtras() != null) {
-            subject = getIntent().getParcelableExtra("Subject");
-            if (subject != null) {
-                nomMateria.setText(subject.getNameSubject());
-            }
-        }
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -15,8 +15,14 @@ import android.widget.Spinner;
 
 import com.iteso.wapi.AdapterMateria;
 import com.iteso.wapi.R;
+import com.iteso.wapi.beans.Grade;
+import com.iteso.wapi.beans.Period;
 import com.iteso.wapi.beans.Schedule;
 import com.iteso.wapi.beans.Subject;
+import com.iteso.wapi.database.DataBaseHandler;
+import com.iteso.wapi.database.GradeControl;
+import com.iteso.wapi.database.PeriodControl;
+import com.iteso.wapi.database.SubjectControl;
 
 import java.util.ArrayList;
 
@@ -39,9 +45,11 @@ public class FragmentGrades extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    ArrayList<Subject> subjects = new ArrayList<>();
+    ArrayList<Subject> subjects;
+    ArrayList<Period> periods;
     RecyclerView recyclerView;
     AdapterMateria adapterMateria;
+    DataBaseHandler dh;
     Spinner spinner;
 
 
@@ -82,13 +90,19 @@ public class FragmentGrades extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_grades, container, false);
         recyclerView = rootView.findViewById(R.id.fragment_calificacion_recyclerView);
+
+        dh = DataBaseHandler.getInstance(getContext());
+        PeriodControl periodControl = new PeriodControl();
+        periods = periodControl.getPeriodsByStudent("sbriones",dh);
+        ArrayList<String> namePeriods = new ArrayList<>();
+        for (int x = 0; x < periods.size() ; x++){
+            namePeriods.add(periods.get(x).getNamePeriod());
+        }
+
         spinner = (Spinner) rootView.findViewById(R.id.fragment_calificacion_spinner);
 
-        ArrayAdapter<CharSequence> adapterPeriodo = ArrayAdapter.createFromResource(rootView.getContext(),
-                R.array.periodo, android.R.layout.simple_spinner_item);
-        adapterPeriodo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinner.setAdapter(adapterPeriodo);
+        spinner.setAdapter(new ArrayAdapter<>(inflater.getContext(),
+                android.R.layout.simple_spinner_dropdown_item, namePeriods.toArray()));
 
         return rootView;
     }
@@ -97,16 +111,15 @@ public class FragmentGrades extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        SubjectControl subjectControl = new SubjectControl();
+        GradeControl gradeControl = new GradeControl();
+
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
 
-        Schedule dias = new Schedule();
+        subjects = subjectControl.getSubjectsByPeriod(spinner.getSelectedItemPosition(), dh);
 
-        subjects = new ArrayList<>();
-        subjects.add(new Subject(1,1, "Micros", (float) 5.3));
-        subjects.add(new Subject(2, 1, "Moviles", (float)3.3));
-        subjects.add(new Subject(3, 1, "GBD", (float)9.0));
 
         adapterMateria = new AdapterMateria(2, getActivity(), subjects);
         recyclerView.setAdapter(adapterMateria);
