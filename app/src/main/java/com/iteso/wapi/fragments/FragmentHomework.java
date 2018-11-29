@@ -99,9 +99,9 @@ public class FragmentHomework extends Fragment {
         LinearLayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
         recyclerViewProximas.setLayoutManager(mLayoutManager2);
 
-        homework = new ArrayList<>();
-        homework.add(new Homework(1, 1, "Leer sobre Teclado Matricial", "Mañana", "9:00"));
-        homework.add(new Homework(2, 1, "Realizar reporte de practica 4", "Mañana", "11:55"));
+        //homework = new ArrayList<>();
+        //homework.add(new Homework(1, 1, "Leer sobre Teclado Matricial", "Mañana", "9:00"));
+        //homework.add(new Homework(2, 1, "Realizar reporte de practica 4", "Mañana", "11:55"));
 
         adapterHomework = new AdapterHomework(4, getActivity(), homework);
         recyclerView.setAdapter(adapterHomework);
@@ -110,8 +110,8 @@ public class FragmentHomework extends Fragment {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         homework = new ArrayList<>();
-        homework.add(new Homework(3, 2, "Informe de finanzas", "29/10", "7:00"));
-        homework.add(new Homework(4, 2, "Practica de laboratorio 9", "30/10", "13:00"));
+        //homework.add(new Homework(3, 2, "Informe de finanzas", "29/10", "7:00"));
+        //homework.add(new Homework(4, 2, "Practica de laboratorio 9", "30/10", "13:00"));
 
         adapterHomework = new AdapterHomework(4, getActivity(), homework);
         recyclerViewProximas.setAdapter(adapterHomework);
