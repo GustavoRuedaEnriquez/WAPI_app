@@ -32,4 +32,16 @@
     <string name="fragment_payment_pay_mastercard">Mastercard</string>
     <string name="fragment_payment_button_text">Pagar</string>
 
+    <!--Activity Edit Subject Strings-->
+    <string name="activity_edit_subject_name_hint">Nombre de la materia</string>
+    <string name="activity_edit_subject_name_title">Editar Materia</string>
+    <string name="activity_edit_subject_save">Guardar</string>
+    <string name="activity_edit_subject_cancel">Cancelar</string>
+
+    <!--Activity Create Subject Strings-->
+    <string name="activity_create_subject_name_hint">Nombre de la materia</string>
+    <string name="activity_create_subject_name_title">Nueva Materia</string>
+    <string name="activity_create_subject_save">Guardar</string>
+    <string name="activity_create_subject_cancel">Cancelar</string>
+
 </resources>
