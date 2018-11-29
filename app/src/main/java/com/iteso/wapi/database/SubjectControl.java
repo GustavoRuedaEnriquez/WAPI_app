@@ -12,17 +12,15 @@ public class SubjectControl {
 
     public void addSubject(Subject subject, DataBaseHandler dh){
         int nextId = maxIdSubject(dh) + 1;
-
         SQLiteDatabase db = dh.getWritableDatabase();
         ContentValues values = new ContentValues();
-
         values.put(DataBaseHandler.SUBJECT_ID, nextId);
         values.put(DataBaseHandler.SUBJECT_FK_PERIOD, subject.getFk_period());
         values.put(DataBaseHandler.SUBJECT_NAME, subject.getNameSubject());
         values.put(DataBaseHandler.SUBJECT_AVERAGE, subject.getAvarage());
         db.insert(DataBaseHandler.TABLE_STUDENT, null, values);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -46,8 +44,8 @@ public class SubjectControl {
             subjects.add(subject);
         }
         try{
-            cursor.close();
-            db.close();
+           // cursor.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -74,8 +72,8 @@ public class SubjectControl {
             subjects.add(subject);
         }
         try{
-            cursor.close();
-            db.close();
+           // cursor.close();
+            //db.close();
         }catch(Exception e){
 
         }
@@ -91,7 +89,7 @@ public class SubjectControl {
                 + " WHERE " + DataBaseHandler.SUBJECT_ID + " = " + updatedSubject.getIdSubject();
         db.execSQL(updateQuery);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -104,7 +102,7 @@ public class SubjectControl {
                 + " WHERE " + DataBaseHandler.SUBJECT_ID + " = " + id_subject;
         db.execSQL(deleteQuery);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -122,8 +120,8 @@ public class SubjectControl {
             result = cursor.getInt(0);
         }
         try{
-            cursor.close();
-            db.close();
+           // cursor.close();
+           // db.close();
         }catch(Exception e){
 
         }

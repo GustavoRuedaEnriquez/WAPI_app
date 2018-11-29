@@ -3,22 +3,26 @@ package com.iteso.wapi.database;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.iteso.wapi.beans.Period;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class PeriodControl {
 
     public void addPeriod(Period period, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
+        Log.i("INFO     dbh", dh.toString());
+        Log.i("INFO     db ", db.toString());
         ContentValues values = new ContentValues();
-        values.put(DataBaseHandler.PERIOD_ID, maxIdPeriod(dh));
+        values.put(DataBaseHandler.PERIOD_ID, maxIdPeriod(dh) + 1);
         values.put(DataBaseHandler.PERIOD_NAME, period.getNamePeriod());
         values.put(DataBaseHandler.PERIOD_FK_STUDENT, period.getUserName());
         db.insert(DataBaseHandler.TABLE_PERIOD, null, values);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -40,8 +44,8 @@ public class PeriodControl {
             periods.add(period);
         }
         try{
-            cursor.close();
-            db.close();
+            //cursor.close();
+            //db.close();
         }catch(Exception e){
 
         }
@@ -65,8 +69,8 @@ public class PeriodControl {
             periods.add(period);
         }
         try{
-            cursor.close();
-            db.close();
+           // cursor.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -80,7 +84,7 @@ public class PeriodControl {
                 + " WHERE " + DataBaseHandler.PERIOD_ID + " = " + periodId;
         db.execSQL(updateQuery);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -93,7 +97,7 @@ public class PeriodControl {
                 + " WHERE " + DataBaseHandler.PERIOD_ID + " = " + periodId;
         db.execSQL(deleteQuery);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -110,8 +114,8 @@ public class PeriodControl {
             result = cursor.getInt(0);
         }
         try{
-            cursor.close();
-            db.close();
+          //  cursor.close();
+          //  db.close();
         }catch(Exception e){
 
         }
