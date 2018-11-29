@@ -23,7 +23,7 @@ public class ScheduleControl {
         values.put(DataBaseHandler.SCHEDULE_FK_SUBJECT, schedule.getFk_subject());
         db.insert(DataBaseHandler.TABLE_SCHEDULE, null, values);
         try{
-            db.close();
+          //  db.close();
         }catch(Exception e){
 
         }
@@ -50,8 +50,8 @@ public class ScheduleControl {
             schedules.add(schedule);
         }
         try{
-            cursor.close();
-            db.close();
+           // cursor.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -80,8 +80,8 @@ public class ScheduleControl {
             schedules.add(schedule);
         }
         try{
-            cursor.close();
-            db.close();
+            //cursor.close();
+            //db.close();
         }catch(Exception e){
 
         }
@@ -98,7 +98,7 @@ public class ScheduleControl {
                 + " WHERE " + DataBaseHandler.SCHEDULE_ID + " = " + updatedSchedule.getIdSchedule();
         db.execSQL(updateQuery);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -111,7 +111,7 @@ public class ScheduleControl {
                 + " WHERE " + DataBaseHandler.SCHEDULE_ID + " = " + id_schedule;
         db.execSQL(deleteQuery);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -129,8 +129,8 @@ public class ScheduleControl {
             result = cursor.getInt(0);
         }
         try{
-            cursor.close();
-            db.close();
+           // cursor.close();
+           // db.close();
         }catch(Exception e){
 
         }

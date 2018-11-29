@@ -18,7 +18,7 @@ public class StudentControl {
         values.put(DataBaseHandler.STUDENT_PASSWORD, student.getPassword());
         db.insert(DataBaseHandler.TABLE_STUDENT, null, values);
         try{
-            db.close();
+            //db.close();
         }catch(Exception e){
 
         }
@@ -38,8 +38,8 @@ public class StudentControl {
             students.add(student);
         }
         try{
-            cursor.close();
-            db.close();
+           // cursor.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -61,8 +61,8 @@ public class StudentControl {
             student.setPassword(cursor.getString(1));
         }
         try{
-            cursor.close();
-            db.close();
+          //  cursor.close();
+          //  db.close();
         }catch(Exception e){
 
         }
@@ -77,7 +77,7 @@ public class StudentControl {
                             + " WHERE " + DataBaseHandler.STUDENT_USERNAME + " = '" + username + "'";
         db.execSQL(updateQuery);
         try{
-            db.close();
+          //  db.close();
         }catch(Exception e){
 
         }
@@ -90,7 +90,7 @@ public class StudentControl {
                 + " WHERE " + DataBaseHandler.STUDENT_USERNAME + " = '" + username + "'";
         db.execSQL(deleteQuery);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
