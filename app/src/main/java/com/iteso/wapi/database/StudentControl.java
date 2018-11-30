@@ -4,6 +4,7 @@ import android.app.admin.DeviceAdminInfo;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.iteso.wapi.beans.Student;
 
@@ -72,10 +73,11 @@ public class StudentControl {
     public void updateStudent(String username, Student updatedStudent, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
         String updateQuery = "UPDATE " + DataBaseHandler.TABLE_STUDENT
-                            + " SET " + DataBaseHandler.STUDENT_USERNAME + " = " + updatedStudent.getUserName()
-                            + " , " + DataBaseHandler.STUDENT_PASSWORD + " = " + updatedStudent.getPassword()
+                            + " SET " + DataBaseHandler.STUDENT_USERNAME + " = '" + updatedStudent.getUserName() + "'"
+                            + " , " + DataBaseHandler.STUDENT_PASSWORD + " = '" + updatedStudent.getPassword() + "'"
                             + " WHERE " + DataBaseHandler.STUDENT_USERNAME + " = '" + username + "'";
         db.execSQL(updateQuery);
+        Log.e("QUERY", "Executed Query: " + updateQuery);
         try{
           //  db.close();
         }catch(Exception e){
