@@ -3,6 +3,8 @@ package com.iteso.wapi.database;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import com.iteso.wapi.beans.Payment;
 import java.util.ArrayList;
 
@@ -11,7 +13,7 @@ public class PaymentControl {
     public void addPayment(Payment payment, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DataBaseHandler.PAYMENT_ID, maxIdPayment(dh));
+        values.put(DataBaseHandler.PAYMENT_ID, maxIdPayment(dh) +1);
         values.put(DataBaseHandler.PAYMENT_NAME, payment.getName());
         values.put(DataBaseHandler.PAYMENT_DESCRIPTION, payment.getDescription());
         values.put(DataBaseHandler.PAYMENT_AMOUNT, payment.getAmount());
@@ -73,7 +75,7 @@ public class PaymentControl {
                 + DataBaseHandler.PAYMENT_YEAR + ", "
                 + DataBaseHandler.PAYMENT_FK_STUDENT
                 + " FROM " + DataBaseHandler.TABLE_PAYMENT
-                + " WHERE " + DataBaseHandler.PAYMENT_ID + " = '" + fkStudentUsername + "'";
+                + " WHERE " + DataBaseHandler.PAYMENT_FK_STUDENT+ " = '" + fkStudentUsername + "'";
         Cursor cursor = db.rawQuery(selectQuery,null);
         while(cursor.moveToNext()){
             Payment payment = new Payment();
@@ -99,14 +101,14 @@ public class PaymentControl {
     public void updatePayment(int paymentId,  Payment updatedPayment, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
         String updateQuery = "UPDATE " + DataBaseHandler.TABLE_PAYMENT
-                            + " SET " + DataBaseHandler.PAYMENT_NAME + " = " + updatedPayment.getName() + ", "
-                            + DataBaseHandler.PAYMENT_DESCRIPTION + " = " + updatedPayment.getDescription() + ", "
+                            + " SET " + DataBaseHandler.PAYMENT_NAME + " = '" + updatedPayment.getName() + "', "
+                            + DataBaseHandler.PAYMENT_DESCRIPTION + " = '" + updatedPayment.getDescription() + "', "
                             + DataBaseHandler.PAYMENT_AMOUNT + " = " + updatedPayment.getAmount() + ", "
                             + DataBaseHandler.PAYMENT_DAY + " = " + updatedPayment.getDay() + ", "
                             + DataBaseHandler.PAYMENT_MONTH + " = " + updatedPayment.getMonth() + ", "
                             + DataBaseHandler.PAYMENT_YEAR + " = " + updatedPayment.getYear() + ", "
-                            + DataBaseHandler.PAYMENT_FK_STUDENT + " = " + updatedPayment.getStudentUsername()
-                            + " WHERE " + DataBaseHandler.PAYMENT_ID + " = '" + paymentId + "'";
+                            + DataBaseHandler.PAYMENT_FK_STUDENT + " = '" + updatedPayment.getStudentUsername() + "'"
+                            + " WHERE " + DataBaseHandler.PAYMENT_ID + " = " + paymentId;
         db.execSQL(updateQuery);
         try{
            // db.close();
@@ -145,6 +147,15 @@ public class PaymentControl {
 
         }
         return result;
+    }
+
+    public void updateFKUsername(String fkUsername, String fkUsernameNew, DataBaseHandler dh){
+        SQLiteDatabase db = dh.getWritableDatabase();
+        ArrayList<Payment> payments = this.getPaymentsByStudent(fkUsername, dh);
+        for(Payment index: payments){
+            index.setStudentUsername(fkUsernameNew);
+            this.updatePayment(index.getPaymentId(),index,dh);
+        }
     }
 
 }

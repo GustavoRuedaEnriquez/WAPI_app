@@ -73,10 +73,11 @@ public class StudentControl {
     public void updateStudent(String username, Student updatedStudent, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
         String updateQuery = "UPDATE " + DataBaseHandler.TABLE_STUDENT
-                            + " SET " + DataBaseHandler.STUDENT_USERNAME + " = " + updatedStudent.getUserName()
-                            + " , " + DataBaseHandler.STUDENT_PASSWORD + " = " + updatedStudent.getPassword()
+                            + " SET " + DataBaseHandler.STUDENT_USERNAME + " = '" + updatedStudent.getUserName() + "'"
+                            + " , " + DataBaseHandler.STUDENT_PASSWORD + " = '" + updatedStudent.getPassword() + "'"
                             + " WHERE " + DataBaseHandler.STUDENT_USERNAME + " = '" + username + "'";
         db.execSQL(updateQuery);
+        Log.e("QUERY", "Executed Query: " + updateQuery);
         try{
           //  db.close();
         }catch(Exception e){

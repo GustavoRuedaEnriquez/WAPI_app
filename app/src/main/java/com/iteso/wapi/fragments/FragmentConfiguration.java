@@ -1,17 +1,21 @@
 package com.iteso.wapi.fragments;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.iteso.wapi.ActivityEditInformation;
+import com.iteso.wapi.ActivityEditPeriod;
 import com.iteso.wapi.ActivityLogin;
 import com.iteso.wapi.ActivitySplashscreen;
 import com.iteso.wapi.R;
@@ -26,7 +30,7 @@ public class FragmentConfiguration extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
 
-    private Button logout, deleteAccount;
+    private Button logout, deleteAccount, edit;
     private EditText name_et, password_et;
     private StudentControl studentControl = new StudentControl();
 
@@ -68,10 +72,21 @@ public class FragmentConfiguration extends Fragment {
         name_et = v.findViewById(R.id.fragment_configuration_change_name_et);
         password_et = v.findViewById(R.id.fragment_configuration_change_password_et);
         deleteAccount = v.findViewById(R.id.fragment_configuration_erase_account_btn);
+        edit = v.findViewById(R.id.fragment_configuration_edit_btn);
 
 
         name_et.setText(sharedPreferences.getString("NAME", "Default name"));
         password_et.setText(sharedPreferences.getString("PWD", "Default password"));
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edit.setBackground(getResources().getDrawable(R.drawable.custom_selected_blue_light_btn));
+                edit.setTextColor(Color.WHITE);
+                Intent editIntent = new Intent(getActivity(), ActivityEditInformation.class);
+                startActivity(editIntent);
+            }
+        });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,11 +111,26 @@ public class FragmentConfiguration extends Fragment {
             public void onClick(View view) {
                 deleteAccount.setBackground(getResources().getDrawable(R.drawable.custom_selected_red_light_btn));
                 deleteAccount.setTextColor(Color.WHITE);
-                studentControl.deleteStudent(sharedPreferences.getString("NAME", "Default name"), dh);
-                Intent logOutIntent = new Intent(getActivity(), ActivityLogin.class);
-                startActivity(logOutIntent);
-                getActivity().finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Light_Dialog_Alert);
 
+                builder.setMessage("¿Seguro que quiere borrar su cuenta?")
+                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                studentControl.deleteStudent(sharedPreferences.getString("NAME", "Default name"), dh);
+                                Intent logOutIntent = new Intent(getActivity(), ActivityLogin.class);
+                                startActivity(logOutIntent);
+                                getActivity().finish();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //no hago nada
+                            }
+                        }).show();
+                deleteAccount.setBackground(getResources().getDrawable(R.drawable.custom_red_light_btn));
+                deleteAccount.setTextColor(Color.RED);
             }
         });
 

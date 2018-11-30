@@ -40,12 +40,7 @@ public class ActivityEditPeriod extends AppCompatActivity {
                     Toast.makeText(ActivityEditPeriod.this, "Por favor, lléne el campo.", Toast.LENGTH_LONG).show();
                 else {
                     Period newPeriod = new Period(periodControl.maxIdPeriod(dh), nameEditText.getText().toString(), sharedPreferences.getString("NAME", "Default name"));
-                    Log.e("Period", "New Period Object:  " + newPeriod.toString());
                     periodControl.addPeriod(newPeriod, dh);
-
-                    ArrayList<Period> periods = new ArrayList<>();
-                    periods = periodControl.getPeriods(dh);
-                    Log.e("Period", "Period Table " + periods.toString());
                     onBackPressed();
                 }
             }

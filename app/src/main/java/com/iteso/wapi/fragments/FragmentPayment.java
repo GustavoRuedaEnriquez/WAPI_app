@@ -90,12 +90,7 @@ public class FragmentPayment extends Fragment {
                     int realMonth = Integer.parseInt(month.getText().toString());
                     int realYear = Integer.parseInt(year.getText().toString());
                     Payment payment = new Payment(paymentControl.maxIdPayment(dh),title.getText().toString(),description.getText().toString(),realAmount,realDay,realMonth,realYear, sharedPreferences.getString("NAME", "Default name"));
-                    Log.e("PAYMENT", "Payment Object: " + payment.toString());
                     paymentControl.addPayment(payment, dh);
-
-                    ArrayList<Payment> payments = new ArrayList<>();
-                    payments = paymentControl.getPayments(dh);
-                    Log.e("PAYMENT", "Payment Table: " + payment);
                 }
             }
         });
