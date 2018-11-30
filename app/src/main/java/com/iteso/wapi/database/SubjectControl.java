@@ -3,6 +3,7 @@ package com.iteso.wapi.database;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.iteso.wapi.beans.Subject;
 
@@ -18,7 +19,7 @@ public class SubjectControl {
         values.put(DataBaseHandler.SUBJECT_FK_PERIOD, subject.getFk_period());
         values.put(DataBaseHandler.SUBJECT_NAME, subject.getNameSubject());
         values.put(DataBaseHandler.SUBJECT_AVERAGE, subject.getAvarage());
-        db.insert(DataBaseHandler.TABLE_STUDENT, null, values);
+        db.insert(DataBaseHandler.TABLE_SUBJECT, null, values);
         try{
            // db.close();
         }catch(Exception e){

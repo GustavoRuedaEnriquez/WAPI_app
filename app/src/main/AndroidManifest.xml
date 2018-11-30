@@ -25,9 +25,11 @@
         <activity
             android:name=".ActivityHome"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ActivityEditSubject" />
+        <activity android:name=".ActivityCreateSubject" />
         <activity android:name=".ActivityEditSchedule" />
         <activity android:name=".ActivityEditPeriod" />
-        <activity android:name=".ActivityEditInformation"></activity>
+        <activity android:name=".ActivityEditInformation" />
     </application>
 
 </manifest>

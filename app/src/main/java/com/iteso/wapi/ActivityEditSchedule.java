@@ -14,13 +14,15 @@ import java.util.TimerTask;
 
 public class ActivityEditSchedule extends AppCompatActivity {
 
-    private Button addPeriod;
+    private Button addPeriod, addSubject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_schedule);
         addPeriod = findViewById(R.id.edit_schedule_add_period_btn);
+        addSubject = findViewById(R.id.edit_schedule_add_subject_btn);
+
         addPeriod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,6 +39,17 @@ public class ActivityEditSchedule extends AppCompatActivity {
                 };
                 Timer timer = new Timer();
                 timer.schedule(task, 2000);
+            }
+        });
+
+        addSubject = findViewById(R.id.edit_schedule_add_subject_btn);
+        addSubject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addSubject.setBackground(getDrawable(R.drawable.custom_selected_blue_light_btn));
+                addSubject.setTextColor(Color.WHITE);
+                Intent intent = new Intent(ActivityEditSchedule.this, ActivityCreateSubject.class);
+                startActivity(intent);
             }
         });
     }
