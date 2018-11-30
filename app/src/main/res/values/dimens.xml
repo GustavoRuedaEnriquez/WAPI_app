@@ -10,4 +10,6 @@
     <dimen name="activity_edit_subject_title">35sp</dimen>
     <dimen name="activity_edit_subject_save">20sp</dimen>
     <dimen name="activity_edit_subject_btn_margin">15dp</dimen>
+
+    <dimen name="activity_subject_btn_margin_top">40dp</dimen>
 </resources>

@@ -35,7 +35,6 @@
     <!--Activity Edit Subject Strings-->
     <string name="activity_edit_subject_name_hint">Nombre de la materia</string>
     <string name="activity_edit_subject_name_title">Editar Materia</string>
-    <string name="activity_edit_subject_save">Guardar</string>
     <string name="activity_edit_subject_cancel">Cancelar</string>
 
     <!--Activity Create Subject Strings-->
@@ -43,5 +42,17 @@
     <string name="activity_create_subject_name_title">Nueva Materia</string>
     <string name="activity_create_subject_save">Guardar</string>
     <string name="activity_create_subject_cancel">Cancelar</string>
+
+    <!--Activity Create and Activity Edit Subject Strings-->
+    <string name="activity_subject_start_time">Hora de inicio: </string>
+    <string name="activity_subject_colon">:</string>
+    <string name="activity_subject_end_time">Hora de fin: </string>
+    <string name="activity_subject_save">Guardar</string>
+    <string name="activity_subject_monday">Lunes</string>
+    <string name="activity_subject_tuesday">Martes</string>
+    <string name="activity_subject_wednesday">Miércoles</string>
+    <string name="activity_subject_thursday">Jueves</string>
+    <string name="activity_subject_friday">Viernes</string>
+    <string name="activity_subject_saturday">Sábado</string>
 
 </resources>
