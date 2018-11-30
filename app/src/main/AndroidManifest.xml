@@ -10,7 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ActivitySplashscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ActivityMain" />
         <activity android:name=".ActivityMateria" />
@@ -21,14 +25,10 @@
         <activity
             android:name=".ActivityHome"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ActivityEditSubject" ></activity>
-        <activity android:name=".ActivityCreateSubject">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ActivityEditSubject" />
+        <activity android:name=".ActivityCreateSubject" />
+        <activity android:name=".ActivityEditSchedule" />
+        <activity android:name=".ActivityEditPeriod" />
     </application>
 
 </manifest>

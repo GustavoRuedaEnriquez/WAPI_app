@@ -1,6 +1,7 @@
 package com.iteso.wapi;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,7 +22,7 @@ import java.util.Objects;
 public class ActivityEditSubject extends AppCompatActivity {
     private TextView name;
     private Spinner period;
-    private Button save;
+    private Button save, cancel;
     private SharedPreferences sharedPreferences;
     private Subject subject;
     private ArrayList<Period> periods;
@@ -36,7 +37,10 @@ public class ActivityEditSubject extends AppCompatActivity {
         name    = findViewById(R.id.activity_edit_subject_name);
         period  = findViewById(R.id.activity_edit_subject_period);
         save    = findViewById(R.id.activity_edit_subject_save);
+        cancel  = findViewById(R.id.activity_edit_subject_cancel);
         subject = getIntent().getExtras().getParcelable("SUBJECT");
+
+        name.setText(subject.getNameSubject());
 
         DataBaseHandler dh = DataBaseHandler.getInstance(this);
         PeriodControl periodControl = new PeriodControl();
@@ -52,6 +56,9 @@ public class ActivityEditSubject extends AppCompatActivity {
     }
 
     public void modifySubject(View v) {
+        save.setBackground(getDrawable(R.drawable.custom_selected_blue_light_btn));
+        save.setTextColor(Color.WHITE);
+
         DataBaseHandler dh = DataBaseHandler.getInstance(this);
         SubjectControl subjectControl = new SubjectControl();
 
@@ -63,10 +70,12 @@ public class ActivityEditSubject extends AppCompatActivity {
 
         subjectControl.updateSubject(subject, dh);
 
-        //TODO: Make the intent to de past activity
+
     }
 
     public void cancelSubject(View v){
+        cancel.setBackground(getDrawable(R.drawable.custom_selected_blue_light_btn));
+        cancel.setTextColor(Color.WHITE);
         //TODO: Implement this method
     }
 }

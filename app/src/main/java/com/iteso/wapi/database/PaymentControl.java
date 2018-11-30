@@ -19,7 +19,7 @@ public class PaymentControl {
         values.put(DataBaseHandler.PAYMENT_FK_STUDENT, payment.getStudentUsername());
         db.insert(DataBaseHandler.TABLE_PAYMENT, null, values);
         try{
-            db.close();
+          //  db.close();
         }catch(Exception e){
 
         }
@@ -46,9 +46,8 @@ public class PaymentControl {
             payment.setStudentUsername(cursor.getString(5));
             payments.add(payment);
         }
-        try{
-            cursor.close();
-            db.close();
+        try{// cursor.close();
+          //  db.close();
         }catch(Exception e){
 
         }
@@ -78,8 +77,8 @@ public class PaymentControl {
             payments.add(payment);
         }
         try{
-            cursor.close();
-            db.close();
+           // cursor.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -97,7 +96,7 @@ public class PaymentControl {
                             + " WHERE " + DataBaseHandler.PAYMENT_ID + " = " + paymentId;
         db.execSQL(updateQuery);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -110,7 +109,7 @@ public class PaymentControl {
                 + " WHERE " + DataBaseHandler.PAYMENT_ID + " = " + paymentId;
         db.execSQL(deleteQuery);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -127,8 +126,8 @@ public class PaymentControl {
             result = cursor.getInt(0);
         }
         try{
-            cursor.close();
-            db.close();
+           // cursor.close();
+           // db.close();
         }catch(Exception e){
 
         }

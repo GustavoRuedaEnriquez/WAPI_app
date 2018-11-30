@@ -23,7 +23,7 @@ public class GradeControl {
         values.put(DataBaseHandler.GRADE_VALUE, grade.getGrade());
         db.insert(DataBaseHandler.TABLE_GRADE, null, values);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -51,7 +51,7 @@ public class GradeControl {
         }
         try{
             cursor.close();
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -80,8 +80,8 @@ public class GradeControl {
             grades.add(grade);
         }
         try{
-            cursor.close();
-            db.close();
+          //  cursor.close();
+          //  db.close();
         }catch(Exception e){
 
         }
@@ -98,7 +98,7 @@ public class GradeControl {
                 + " WHERE " + DataBaseHandler.GRADE_ID + " = " + updatedGrade.getIdGrade();
         db.execSQL(updateQuery);
         try{
-            db.close();
+          //  db.close();
         }catch(Exception e){
 
         }
@@ -111,7 +111,7 @@ public class GradeControl {
                 + " WHERE " + DataBaseHandler.GRADE_ID + " = " + id_grade;
         db.execSQL(deleteQuery);
         try{
-            db.close();
+          //  db.close();
         }catch(Exception e){
 
         }
@@ -129,8 +129,8 @@ public class GradeControl {
             result = cursor.getInt(0);
         }
         try{
-            cursor.close();
-            db.close();
+          //  cursor.close();
+          //  db.close();
         }catch(Exception e){
 
         }

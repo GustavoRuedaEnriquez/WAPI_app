@@ -43,22 +43,21 @@ public class ActivityLogin extends AppCompatActivity {
                 login.setBackground(getDrawable(R.drawable.custom_selected_blue_light_btn));
                 login.setTextColor(Color.WHITE);
 
-                if(username.getText().toString().trim().equalsIgnoreCase("") || password.getText().toString().trim().equalsIgnoreCase("")){
+                if (username.getText().toString().trim().equalsIgnoreCase("") || password.getText().toString().trim().equalsIgnoreCase("")) {
                     Toast.makeText(ActivityLogin.this, "Se tienen que llenar todos los campos.", Toast.LENGTH_LONG).show();
                     login.setBackground(getDrawable(R.drawable.custom_blue_light_btn));
                     login.setTextColor(getColor(R.color.colorPrimary));
-                }else{
-                    Student student = studentControl.getStudentByUsername(username.getText().toString(),dh);
-                    if(student.getUserName().equals(""))
+                } else {
+                    Student student = studentControl.getStudentByUsername(username.getText().toString(), dh);
+                    if (student.getUserName().equals(""))
                         Toast.makeText(ActivityLogin.this, "Lo sentimos, el usuario no existe en la base de datos.", Toast.LENGTH_LONG).show();
-                    else{
-                        if(studentControl.isPasswordCorrect(username.getText().toString(), password.getText().toString(),dh)){
+                    else {
+                        if (studentControl.isPasswordCorrect(username.getText().toString(), password.getText().toString(), dh)) {
                             savePreferences();
-                            Intent intent = new Intent(ActivityLogin.this,ActivityHome.class);
+                            Intent intent = new Intent(ActivityLogin.this, ActivityHome.class);
                             startActivity(intent);
                             finish();
-                        }
-                        else{
+                        } else {
                             Toast.makeText(ActivityLogin.this, "Contraseña Incorrecta", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -78,8 +77,8 @@ public class ActivityLogin extends AppCompatActivity {
         });
     }
 
-    private void savePreferences(){
-        SharedPreferences sharedPreferences = getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES,MODE_PRIVATE);
+    private void savePreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("NAME", username.getText().toString());
         editor.putString("PWD", password.getText().toString());
