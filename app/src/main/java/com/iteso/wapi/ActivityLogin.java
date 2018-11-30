@@ -49,8 +49,11 @@ public class ActivityLogin extends AppCompatActivity {
                     login.setTextColor(getColor(R.color.colorPrimary));
                 } else {
                     Student student = studentControl.getStudentByUsername(username.getText().toString(), dh);
-                    if (student.getUserName().equals(""))
+                    if (student.getUserName().equals("")){
                         Toast.makeText(ActivityLogin.this, "Lo sentimos, el usuario no existe en la base de datos.", Toast.LENGTH_LONG).show();
+                        login.setBackground(getDrawable(R.drawable.custom_blue_light_btn));
+                        login.setTextColor(getColor(R.color.colorPrimary));
+                    }
                     else {
                         if (studentControl.isPasswordCorrect(username.getText().toString(), password.getText().toString(), dh)) {
                             savePreferences();
@@ -58,7 +61,9 @@ public class ActivityLogin extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                         } else {
-                            Toast.makeText(ActivityLogin.this, "Contraseña Incorrecta", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ActivityLogin.this, "Contraseña incorrecta", Toast.LENGTH_LONG).show();
+                            login.setBackground(getDrawable(R.drawable.custom_blue_light_btn));
+                            login.setTextColor(getColor(R.color.colorPrimary));
                         }
                     }
 

@@ -4,6 +4,7 @@ import android.app.admin.DeviceAdminInfo;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.iteso.wapi.beans.Student;
 

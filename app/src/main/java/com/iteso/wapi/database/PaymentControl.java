@@ -15,7 +15,9 @@ public class PaymentControl {
         values.put(DataBaseHandler.PAYMENT_NAME, payment.getName());
         values.put(DataBaseHandler.PAYMENT_DESCRIPTION, payment.getDescription());
         values.put(DataBaseHandler.PAYMENT_AMOUNT, payment.getAmount());
-        values.put(DataBaseHandler.PAYMENT_DATE, payment.getDate());
+        values.put(DataBaseHandler.PAYMENT_DAY, payment.getDay());
+        values.put(DataBaseHandler.PAYMENT_MONTH, payment.getMonth());
+        values.put(DataBaseHandler.PAYMENT_YEAR, payment.getYear());
         values.put(DataBaseHandler.PAYMENT_FK_STUDENT, payment.getStudentUsername());
         db.insert(DataBaseHandler.TABLE_PAYMENT, null, values);
         try{
@@ -32,7 +34,9 @@ public class PaymentControl {
                 + DataBaseHandler.PAYMENT_NAME + ", "
                 + DataBaseHandler.PAYMENT_DESCRIPTION + ", "
                 + DataBaseHandler.PAYMENT_AMOUNT + ", "
-                + DataBaseHandler.PAYMENT_DATE + ", "
+                + DataBaseHandler.PAYMENT_DAY + ", "
+                + DataBaseHandler.PAYMENT_MONTH + ", "
+                + DataBaseHandler.PAYMENT_YEAR + ", "
                 + DataBaseHandler.PAYMENT_FK_STUDENT
                 + " FROM " + DataBaseHandler.TABLE_PAYMENT;
         Cursor cursor = db.rawQuery(selectQuery,null);
@@ -42,11 +46,14 @@ public class PaymentControl {
             payment.setName(cursor.getString(1));
             payment.setDescription(cursor.getString(2));
             payment.setAmount(cursor.getDouble(3));
-            payment.setDate(cursor.getInt(4));
-            payment.setStudentUsername(cursor.getString(5));
+            payment.setDay(cursor.getInt(4));
+            payment.setMonth(cursor.getInt(5));
+            payment.setYear(cursor.getInt(6));
+            payment.setStudentUsername(cursor.getString(7));
             payments.add(payment);
         }
-        try{// cursor.close();
+        try{
+            // cursor.close();
           //  db.close();
         }catch(Exception e){
 
@@ -61,10 +68,12 @@ public class PaymentControl {
                 + DataBaseHandler.PAYMENT_NAME + ", "
                 + DataBaseHandler.PAYMENT_DESCRIPTION + ", "
                 + DataBaseHandler.PAYMENT_AMOUNT + ", "
-                + DataBaseHandler.PAYMENT_DATE + ", "
+                + DataBaseHandler.PAYMENT_DAY + ", "
+                + DataBaseHandler.PAYMENT_MONTH + ", "
+                + DataBaseHandler.PAYMENT_YEAR + ", "
                 + DataBaseHandler.PAYMENT_FK_STUDENT
                 + " FROM " + DataBaseHandler.TABLE_PAYMENT
-                + " WHERE " + DataBaseHandler.PAYMENT_ID + " = " + fkStudentUsername;
+                + " WHERE " + DataBaseHandler.PAYMENT_ID + " = '" + fkStudentUsername + "'";
         Cursor cursor = db.rawQuery(selectQuery,null);
         while(cursor.moveToNext()){
             Payment payment = new Payment();
@@ -72,8 +81,10 @@ public class PaymentControl {
             payment.setName(cursor.getString(1));
             payment.setDescription(cursor.getString(2));
             payment.setAmount(cursor.getDouble(3));
-            payment.setDate(cursor.getInt(4));
-            payment.setStudentUsername(cursor.getString(5));
+            payment.setDay(cursor.getInt(4));
+            payment.setMonth(cursor.getInt(5));
+            payment.setYear(cursor.getInt(6));
+            payment.setStudentUsername(cursor.getString(7));
             payments.add(payment);
         }
         try{
@@ -91,9 +102,11 @@ public class PaymentControl {
                             + " SET " + DataBaseHandler.PAYMENT_NAME + " = " + updatedPayment.getName() + ", "
                             + DataBaseHandler.PAYMENT_DESCRIPTION + " = " + updatedPayment.getDescription() + ", "
                             + DataBaseHandler.PAYMENT_AMOUNT + " = " + updatedPayment.getAmount() + ", "
-                            + DataBaseHandler.PAYMENT_DATE + " = " + updatedPayment.getDate() + ", "
+                            + DataBaseHandler.PAYMENT_DAY + " = " + updatedPayment.getDay() + ", "
+                            + DataBaseHandler.PAYMENT_MONTH + " = " + updatedPayment.getMonth() + ", "
+                            + DataBaseHandler.PAYMENT_YEAR + " = " + updatedPayment.getYear() + ", "
                             + DataBaseHandler.PAYMENT_FK_STUDENT + " = " + updatedPayment.getStudentUsername()
-                            + " WHERE " + DataBaseHandler.PAYMENT_ID + " = " + paymentId;
+                            + " WHERE " + DataBaseHandler.PAYMENT_ID + " = '" + paymentId + "'";
         db.execSQL(updateQuery);
         try{
            // db.close();
@@ -106,7 +119,7 @@ public class PaymentControl {
         SQLiteDatabase db = dh.getWritableDatabase();
         String deleteQuery = "DELETE FROM "
                 + DataBaseHandler.TABLE_PAYMENT
-                + " WHERE " + DataBaseHandler.PAYMENT_ID + " = " + paymentId;
+                + " WHERE " + DataBaseHandler.PAYMENT_ID + " = '" + paymentId + "'";
         db.execSQL(deleteQuery);
         try{
            // db.close();

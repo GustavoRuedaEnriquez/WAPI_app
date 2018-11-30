@@ -95,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                style="@style/custom_light_Button"
+                style="@style/custom_red_light_Button"
 
                 android:layout_below="@+id/fragment_configuration_log_out_btn"
                 android:textSize="30dp"
