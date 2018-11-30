@@ -24,13 +24,13 @@
     <string name="activity_login_access_btn">Ingresar</string>
 
     <!--Fragment payments strings: -->
-    <string name="fragment_payment_name_hint">Nombre del titular</string>
-    <string name="fragment_payment_card_hint">Número de tarjeta</string>
-    <string name="fragment_payment_email_hint">Email</string>
-    <string name="fragment_payment_pay_hint">Cantidad de dinero</string>
+    <string name="fragment_payment_name_hint">Título</string>
+    <string name="fragment_payment_description_hint">Descripción</string>
+    <string name="fragment_payment_amount_hint">Cantidad</string>
+    <string name="fragment_payment_date_hint">Fecha</string>
     <string name="fragment_payment_pay_visa">Visa</string>
     <string name="fragment_payment_pay_mastercard">Mastercard</string>
-    <string name="fragment_payment_button_text">Pagar</string>
+    <string name="fragment_payment_button_text">Añadir Recordatorio</string>
 
     <!--Activity Edit Subject Strings-->
     <string name="activity_edit_subject_name_hint">Nombre de la materia</string>

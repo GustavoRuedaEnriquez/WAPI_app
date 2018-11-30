@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-   <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".fragments.FragmentConfiguration">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.FragmentConfiguration">
 
-    <android.support.v4.widget.NestedScrollView
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -19,87 +18,85 @@
                 android:id="@+id/fragment_configuration_profile_pic"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@mipmap/ic_launcher_round"
-                />
+                android:src="@mipmap/ic_launcher_round" />
 
             <TextView
                 android:id="@+id/fragment_configuration_change_name_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cambiar Nombre"
-                android:textSize="15dp"
                 android:layout_marginLeft="40dp"
                 android:layout_toRightOf="@id/fragment_configuration_profile_pic"
+                android:text="Nombre"
                 android:textColor="@color/colorPrimaryDark"
-                />
+                android:textSize="15dp" />
 
             <EditText
                 android:id="@+id/fragment_configuration_change_name_et"
+                style="@style/EditText_light_style"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
-
-                style="@style/EditText_light_style"
-
-                android:hint="Nombre"
-                android:textSize="15dp"
+                android:layout_below="@id/fragment_configuration_change_name_tv"
                 android:layout_marginLeft="40dp"
                 android:layout_toRightOf="@id/fragment_configuration_profile_pic"
-                android:layout_below="@id/fragment_configuration_change_name_tv"
-                />
+                android:hint="Nombre"
+
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/fragment_configuration_change_password_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cambiar Contraseña"
-                android:textSize="15dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="40dp"
-                android:layout_toRightOf="@id/fragment_configuration_profile_pic"
-                android:textColor="@color/colorPrimaryDark"
                 android:layout_below="@id/fragment_configuration_change_name_et"
-                />
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@id/fragment_configuration_profile_pic"
+                android:text="Contraseña"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15dp" />
 
             <EditText
                 android:id="@+id/fragment_configuration_change_password_et"
+                style="@style/EditText_light_style"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
-
-                style="@style/EditText_light_style"
-
-                android:hint="Password"
-                android:textSize="15dp"
+                android:layout_below="@id/fragment_configuration_change_password_tv"
                 android:layout_marginLeft="40dp"
                 android:layout_toRightOf="@id/fragment_configuration_profile_pic"
-                android:layout_below="@id/fragment_configuration_change_password_tv"
-                />
+                android:hint="Password"
+                android:inputType="textPassword"
 
+                android:textSize="15dp" />
 
             <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fragment_configuration_edit_btn"
+                android:text="Editar"
+                style="@style/custom_light_Button"
+                android:textSize="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/fragment_configuration_change_password_et"
+                android:layout_alignLeft="@id/fragment_configuration_change_password_et" />
+            <Button
                 android:id="@+id/fragment_configuration_log_out_btn"
+                style="@style/custom_light_Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                style="@style/custom_light_Button"
-
                 android:layout_below="@id/fragment_configuration_change_password_et"
-                android:layout_marginBottom="20dp"
                 android:layout_marginTop="150dp"
-
-                android:textSize="30dp"
-                android:text="Cerrar Sesión"/>
+                android:layout_marginBottom="20dp"
+                android:text="Cerrar Sesión"
+                android:textSize="30dp" />
 
 
             <Button
                 android:id="@+id/fragment_configuration_erase_account_btn"
+                style="@style/custom_red_light_Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                style="@style/custom_light_Button"
-
                 android:layout_below="@+id/fragment_configuration_log_out_btn"
-                android:textSize="30dp"
-                android:text="Borrar Cuenta"/>
+                android:text="Borrar Cuenta"
+                android:textSize="30dp" />
 
         </RelativeLayout>
 

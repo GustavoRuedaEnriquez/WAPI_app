@@ -9,7 +9,9 @@ public class Payment implements Parcelable {
     private String name;
     private String description;
     private double amount;
-    private int date;
+    private int day;
+    private int month;
+    private int year;
     private String studentUsername;
 
     public Payment(){
@@ -17,30 +19,43 @@ public class Payment implements Parcelable {
         this.name = "";
         this.description = "";
         this.amount = 0;
-        this.date = 0;
         this.studentUsername = "";
+        this.day = 0;
+        this.month = 0;
+        this.year = 0;
     }
 
-    public Payment(int paymentId, String name, String description, double amount, int date, String studentUsername) {
+    public Payment(int paymentId, String name, String description, double amount, int day, int month, int year, String studentUsername) {
         this.paymentId = paymentId;
         this.name = name;
         this.description = description;
         this.amount = amount;
-        this.date = date;
+        this.day = day;
+        this.month = month;
+        this.year = year;
         this.studentUsername = studentUsername;
-    }
-
-    protected Payment(Parcel in) {
-        this.paymentId = in.readInt();
-        this.name = in.readString();
-        this.description = in.readString();
-        this.amount = in.readDouble();
-        this.date = in.readInt();
-        this.studentUsername = in.readString();
     }
 
     public int getPaymentId() {
         return paymentId;
+    }
+    public int getDay() {
+        return day;
+    }
+    public void setDay(int day) {
+        this.day = day;
+    }
+    public int getMonth() {
+        return month;
+    }
+    public void setMonth(int month) {
+        this.month = month;
+    }
+    public int getYear() {
+        return year;
+    }
+    public void setYear(int year) {
+        this.year = year;
     }
     public void setPaymentId(int paymentId) {
         this.paymentId = paymentId;
@@ -63,12 +78,6 @@ public class Payment implements Parcelable {
     public void setAmount(double amount) {
         this.amount = amount;
     }
-    public int getDate() {
-        return date;
-    }
-    public void setDate(int date) {
-        this.date = date;
-    }
     public String getStudentUsername() {
         return studentUsername;
     }
@@ -83,10 +92,13 @@ public class Payment implements Parcelable {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", amount=" + amount +
-                ", date=" + date +
+                ", day=" + day +
+                ", month=" + month +
+                ", year=" + year +
                 ", studentUsername='" + studentUsername + '\'' +
                 '}';
     }
+
 
     @Override
     public int describeContents() {
@@ -99,8 +111,21 @@ public class Payment implements Parcelable {
         dest.writeString(this.name);
         dest.writeString(this.description);
         dest.writeDouble(this.amount);
-        dest.writeInt(this.date);
+        dest.writeInt(this.day);
+        dest.writeInt(this.month);
+        dest.writeInt(this.year);
         dest.writeString(this.studentUsername);
+    }
+
+    protected Payment(Parcel in) {
+        this.paymentId = in.readInt();
+        this.name = in.readString();
+        this.description = in.readString();
+        this.amount = in.readDouble();
+        this.day = in.readInt();
+        this.month = in.readInt();
+        this.year = in.readInt();
+        this.studentUsername = in.readString();
     }
 
     public static final Creator<Payment> CREATOR = new Creator<Payment>() {
