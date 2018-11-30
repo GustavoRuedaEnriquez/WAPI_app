@@ -9,13 +9,26 @@
         android:roundIcon="@mipmap/logo_wapi_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityMain">
+        <activity android:name=".ActivitySplashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ActivityMain" />
+        <activity android:name=".ActivityMateria" />
+        <activity android:name=".ActivityLogin" />
+        <activity android:name=".ActivityRegister" />
+        <activity android:name=".ActivityEditHomework" />
+        <activity android:name=".ActivityEditGrade" />
+        <activity
+            android:name=".ActivityHome"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ActivityEditSubject" />
+        <activity android:name=".ActivityCreateSubject" />
+        <activity android:name=".ActivityEditSchedule" />
+        <activity android:name=".ActivityEditPeriod" />
     </application>
 
 </manifest>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityEditHomework"
+    android:orientation="vertical"
+    android:padding="30dp">
+
+    <ImageButton
+        android:id="@+id/activity_edit_homework_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/EditText_dark_style"
+        android:src="@android:drawable/ic_media_rew"
+        android:foregroundTint="#FFFFFF"
+        android:tint="@color/colorPrimary"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="Editar Tarea"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_margin="@dimen/margin"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="Materia"
+        android:textColor="@color/colorPrimaryDark"
+        />
+
+    <Spinner
+        android:id="@+id/activity_edit_homework_materias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="Fecha de entrega"
+        android:textColor="@color/colorPrimaryDark"
+            />
+
+        <EditText
+            android:id="@+id/activity_edit_homework_fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="Ingresa porcentaje"
+            android:textColor="@color/colorPrimaryDark"
+
+            android:textSize="15dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Hora"
+            />
+        <EditText
+            android:id="@+id/activity_editar_tarea_hora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textColor="@color/colorPrimaryDark"
+            android:hint="Ingresa la hora de entrega."
+
+            android:textSize="15dp"
+            />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="Descripción"
+        />
+    <EditText
+        android:id="@+id/activity_edit_homework_descr"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:hint="Ingresa descripcion de ls tarea"
+
+        android:textSize="15dp"
+        />
+
+    <Button
+        android:id="@+id/activity_edit_homework_agregar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Agregar"
+        android:layout_gravity="center"
+        style="@style/custom_light_Button"
+        android:layout_margin="@dimen/margin"
+        android:layout_marginBottom="15dp"/>
+
+</LinearLayout>

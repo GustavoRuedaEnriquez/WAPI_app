@@ -1,3 +1,58 @@
 <resources>
     <string name="app_name">WAPI</string>
+
+    <string name="section1">Usuarios</string>
+    <string name="section2">Horario</string>
+    <string name="section3">Calificacion</string>
+    <string name="section4">Pago</string>
+    <string name="section5">Tarea</string>
+    <string name="section6">Configuracion</string>
+
+    <string-array name="periodo">
+        <item>Semestre 1</item>
+        <item>Semestre 2</item>
+        <item>Semestre 3</item>
+        <item>Semestre 4</item>
+        <item>Semestre 5</item>
+    </string-array>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="activity_login_username">Usuario</string>
+    <string name="activity_login_password">Contraseña</string>
+    <string name="activity_login_access_btn">Ingresar</string>
+
+    <!--Fragment payments strings: -->
+    <string name="fragment_payment_name_hint">Nombre del titular</string>
+    <string name="fragment_payment_card_hint">Número de tarjeta</string>
+    <string name="fragment_payment_email_hint">Email</string>
+    <string name="fragment_payment_pay_hint">Cantidad de dinero</string>
+    <string name="fragment_payment_pay_visa">Visa</string>
+    <string name="fragment_payment_pay_mastercard">Mastercard</string>
+    <string name="fragment_payment_button_text">Pagar</string>
+
+    <!--Activity Edit Subject Strings-->
+    <string name="activity_edit_subject_name_hint">Nombre de la materia</string>
+    <string name="activity_edit_subject_name_title">Editar Materia</string>
+    <string name="activity_edit_subject_cancel">Cancelar</string>
+
+    <!--Activity Create Subject Strings-->
+    <string name="activity_create_subject_name_hint">Nombre de la materia</string>
+    <string name="activity_create_subject_name_title">Nueva Materia</string>
+    <string name="activity_create_subject_save">Guardar</string>
+    <string name="activity_create_subject_cancel">Cancelar</string>
+
+    <!--Activity Create and Activity Edit Subject Strings-->
+    <string name="activity_subject_start_time">Hora de inicio: </string>
+    <string name="activity_subject_colon">:</string>
+    <string name="activity_subject_end_time">Hora de fin: </string>
+    <string name="activity_subject_save">Guardar</string>
+    <string name="activity_subject_monday">Lunes</string>
+    <string name="activity_subject_tuesday">Martes</string>
+    <string name="activity_subject_wednesday">Miércoles</string>
+    <string name="activity_subject_thursday">Jueves</string>
+    <string name="activity_subject_friday">Viernes</string>
+    <string name="activity_subject_saturday">Sábado</string>
+
 </resources>
