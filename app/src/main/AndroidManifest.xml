@@ -30,6 +30,7 @@
         <activity android:name=".ActivityEditSchedule" />
         <activity android:name=".ActivityEditPeriod" />
         <activity android:name=".ActivityEditInformation" />
+
     </application>
 
 </manifest>

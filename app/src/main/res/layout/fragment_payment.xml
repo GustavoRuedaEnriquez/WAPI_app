@@ -44,49 +44,27 @@
             android:text="Fecha"
             android:textSize="18dp"
             android:textColor="@color/colorPrimaryDark"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <EditText
-                android:layout_width="wrap_content"
+                android:id="@+id/fragment_payment_date"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:hint="DD"
-                android:id="@+id/fragment_payment_day"
-                style="@style/EditText_dark_style"
-                android:inputType="number"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="/"
-                android:textSize="20dp"
-                android:textColor="@color/colorPrimaryDark"/>
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="MM"
-                android:id="@+id/fragment_payment_month"
-                style="@style/EditText_dark_style"
-                android:inputType="number"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="/"
-                android:textSize="20dp"
-                android:textColor="@color/colorPrimaryDark"/>
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/fragment_payment_year"
-                android:hint="YYYY"
-                style="@style/EditText_dark_style"
-                android:inputType="number"/>
+                android:hint="DD/MM/YYYY"
+                android:maxLength="10"/>
 
-
+            <EditText
+                android:id="@+id/fragment_payment_hour"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:hint="HH:mm:SS"
+                android:maxLength="10"
+                />
         </LinearLayout>
-
 
         <Button
             android:id="@+id/fragment_payment_pay_button"

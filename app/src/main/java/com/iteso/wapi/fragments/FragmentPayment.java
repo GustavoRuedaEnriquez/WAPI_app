@@ -1,11 +1,17 @@
 package com.iteso.wapi.fragments;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.graphics.Color;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +19,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.iteso.wapi.ActivityHome;
 import com.iteso.wapi.ActivitySplashscreen;
 import com.iteso.wapi.R;
 import com.iteso.wapi.beans.Payment;
 import com.iteso.wapi.database.DataBaseHandler;
 import com.iteso.wapi.database.PaymentControl;
 
-import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import static android.content.Context.ALARM_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 
 public class FragmentPayment extends Fragment {
@@ -32,7 +43,9 @@ public class FragmentPayment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private EditText title, description, amount, day, month, year;
+    long timestamp;
+
+    private EditText title, description, amount, date, hour;
     private Button remind;
 
     PaymentControl paymentControl = new PaymentControl();
@@ -69,33 +82,67 @@ public class FragmentPayment extends Fragment {
         title = v.findViewById(R.id.fragment_payment_name);
         description = v.findViewById(R.id.fragment_payment_description);
         amount = v.findViewById(R.id.fragment_payment_amount);
-        day = v.findViewById(R.id.fragment_payment_day);
-        month = v.findViewById(R.id.fragment_payment_month);
-        year = v.findViewById(R.id.fragment_payment_year);
+        date = v.findViewById(R.id.fragment_payment_date);
+        hour = v.findViewById(R.id.fragment_payment_hour);
         remind = v.findViewById(R.id.fragment_payment_pay_button);
 
         remind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                remind.setBackground(getResources().getDrawable(R.drawable.custom_selected_blue_light_btn));
+                remind.setTextColor(Color.WHITE);
+                TimerTask task= new TimerTask(){
+                    @Override
+                    public void run(){
+                        remind.setBackground(getResources().getDrawable(R.drawable.custom_blue_light_btn));
+                        remind.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(task, 500);
                 if (title.getText().toString().trim().equalsIgnoreCase("") ||
                         description.getText().toString().trim().equalsIgnoreCase("") ||
                         amount.getText().toString().trim().equalsIgnoreCase("") ||
-                        day.getText().toString().trim().equalsIgnoreCase("") ||
-                        month.getText().toString().trim().equalsIgnoreCase("") ||
-                        year.getText().toString().trim().equalsIgnoreCase("")) {
-                    Toast.makeText(getActivity(), "Se tienen que llenar todos los campos.", Toast.LENGTH_LONG).show();
+                        date.getText().toString().trim().equalsIgnoreCase("")) {
+                    Toast.makeText(getActivity(), "Se tienen que llenar todos los campos. (La hora es ocional).", Toast.LENGTH_LONG).show();
                 } else {
-                    double realAmount = Double.parseDouble(amount.getText().toString());
-                    int realDay = Integer.parseInt(day.getText().toString());
-                    int realMonth = Integer.parseInt(month.getText().toString());
-                    int realYear = Integer.parseInt(year.getText().toString());
-                    Payment payment = new Payment(paymentControl.maxIdPayment(dh),title.getText().toString(),description.getText().toString(),realAmount,realDay,realMonth,realYear, sharedPreferences.getString("NAME", "Default name"));
+                    String[] dateTrimmed = date.getText().toString().split("/");
+                    String[] hourTrimmed = hour.getText().toString().split(":");
+                    Calendar c = Calendar.getInstance();
+                    c.set(Integer.parseInt(dateTrimmed[2]), Integer.parseInt(dateTrimmed[1]) - 1, Integer.parseInt(dateTrimmed[0]), Integer.parseInt(hourTrimmed[0]), Integer.parseInt(hourTrimmed[1]), Integer.parseInt(hourTrimmed[2]));
+                    timestamp = c.getTimeInMillis();
+
+                    Payment payment = new Payment(paymentControl.maxIdPayment(dh), title.getText().toString(), description.getText().toString(), Double.parseDouble(amount.getText().toString()), Long.toString(timestamp), sharedPreferences.getString("NAME", "Default name"));
                     paymentControl.addPayment(payment, dh);
+                    createNotification(payment);
                 }
             }
         });
-
         return v;
+    }
+
+    public void createNotification(Payment payment){
+        NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(NOTIFICATION_SERVICE);
+        NotificationChannel notificationChannel = new NotificationChannel("WAPI_Channel", "WAPI_CH", NotificationManager.IMPORTANCE_HIGH);
+        notificationChannel.enableLights(true);
+        notificationChannel.setLightColor(Color.BLUE);
+        notificationChannel.enableVibration(true);
+        notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+        notificationManager.createNotificationChannel(notificationChannel);
+
+        Intent intent = new Intent(getActivity(), ActivityHome.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), (int) Long.parseLong(payment.getTimestamp()), intent, 0);
+        Notification n = new Notification.Builder(getActivity())
+                .setContentTitle("Recordatorio de pago: " + payment.getName())
+                .setContentText(payment.getAmount() + "\n" + payment.getDescription())
+                .setSmallIcon(R.drawable.logo_wapi)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setChannelId("WAPI_Channel")
+                .build();
+
+        notificationManager.notify(0,n);
+        Toast.makeText(getActivity(),"Recordatorio creado", Toast.LENGTH_LONG).show();
     }
 
     @Override
