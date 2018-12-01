@@ -3,7 +3,9 @@
     android:id="@+id/item_edit_schedule_subject_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:scrollbarStyle="outsideOverlay">
+    android:scrollbarStyle="outsideOverlay"
+    android:padding="@dimen/margin"
+    android:backgroundTint="#FAFAFA">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,6 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/item_edit_schedule_subject_time_lbl"
+                android:textSize="@dimen/item_edit_schedule_subject"
                 android:textColor="@color/colorPrimaryDark" />
 
             <TextView
@@ -49,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/item_edit_schedule_subject_days_lbl"
+                android:textSize="@dimen/item_edit_schedule_subject"
                 android:textColor="@color/colorPrimaryDark" />
 
             <TextView

@@ -17,12 +17,12 @@
 
     <!--Activity edit schedule dimens-->
     <dimen name="activity_edit_schedule_title">35sp</dimen>
-    <dimen name="activity_edit_schedule_go">10sp</dimen>
+    <dimen name="activity_edit_schedule_go">16sp</dimen>
     <dimen name="activity_edit_schedule_go_margin">15dp</dimen>
     <dimen name="activity_edit_schedule_btn_margin">15dp</dimen>
-    <dimen name="activity_edit_schedule_btn">20sp</dimen>
+    <dimen name="activity_edit_schedule_btn">16sp</dimen>
 
     <!--Item edit schedule dimens-->
-    <dimen name="item_edit_schedule_subject_title">15sp</dimen>
-    <dimen name="item_edit_schedule_subject">13sp</dimen>
+    <dimen name="item_edit_schedule_subject_title">19sp</dimen>
+    <dimen name="item_edit_schedule_subject">18sp</dimen>
 </resources>

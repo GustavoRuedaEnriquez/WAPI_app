@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ActivityEditSchedule">
+    tools:context=".ActivityEditSchedule"
+    android:layout_margin="@dimen/margin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,6 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin"
+            android:gravity="center"
             android:text="@string/activity_edit_schedule_title"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/activity_edit_schedule_title"
