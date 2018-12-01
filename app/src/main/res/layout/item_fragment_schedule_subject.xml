@@ -6,6 +6,8 @@
     android:scrollbarStyle="outsideOverlay"
     android:padding="@dimen/margin"
     android:backgroundTint="#FAFAFA"
+    android:layout_marginBottom="10dp"
+    android:outlineSpotShadowColor="@android:color/transparent"
     >
 
     <LinearLayout
@@ -46,13 +48,6 @@
                 android:textSize="@dimen/item_edit_schedule_subject" />
 
         </LinearLayout>
-
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
     </LinearLayout>
 
 

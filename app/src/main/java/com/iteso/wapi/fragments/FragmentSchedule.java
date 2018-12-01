@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,9 +23,11 @@ import com.iteso.wapi.ActivitySplashscreen;
 import com.iteso.wapi.AdapterFragmentSchedule;
 import com.iteso.wapi.R;
 import com.iteso.wapi.beans.Period;
+import com.iteso.wapi.beans.Schedule;
 import com.iteso.wapi.beans.Subject;
 import com.iteso.wapi.database.DataBaseHandler;
 import com.iteso.wapi.database.PeriodControl;
+import com.iteso.wapi.database.ScheduleControl;
 import com.iteso.wapi.database.SubjectControl;
 
 import java.util.ArrayList;
@@ -36,11 +39,12 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class FragmentSchedule extends Fragment {
 
-    private Button editSchedule, go;
+    private Button editSchedule;
     private ImageButton prev, next;
     private Spinner weekDays, periodsSpinner;
     private PeriodControl periodControl;
     private SubjectControl subjectControl;
+    private ScheduleControl scheduleControl;
     private RecyclerView subjectsOfDay;
 
     private AdapterFragmentSchedule adapterFragmentSchedule;
@@ -65,15 +69,15 @@ public class FragmentSchedule extends Fragment {
         final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
         periodControl = new PeriodControl();
         subjectControl = new SubjectControl();
+        scheduleControl = new ScheduleControl();
 
         ArrayList<Period> periods = periodControl.getPeriodsByStudent(sharedPreferences.getString("NAME", "Default name"), dh);
         ArrayList<String> periodsName = new ArrayList<>();
-        for(Period index : periods)
+        for (Period index : periods)
             periodsName.add(index.getNamePeriod());
 
         View v = inflater.inflate(R.layout.fragment_schedule, container, false);
         editSchedule = v.findViewById(R.id.fragment_schedule_edit_schedule);
-        go = v.findViewById(R.id.fragment_schedule_go);
         prev = v.findViewById(R.id.fragment_schedule_previous_btn);
         next = v.findViewById(R.id.fragment_schedule_next_btn);
         weekDays = v.findViewById(R.id.fragment_schedule_day_spinner);
@@ -81,15 +85,10 @@ public class FragmentSchedule extends Fragment {
         subjectsOfDay = v.findViewById(R.id.fragment_schedule_subjects);
 
         weekDays.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.custom_spinner, days));
-        periodsSpinner.setAdapter(new ArrayAdapter<>(getActivity(),R.layout.support_simple_spinner_dropdown_item, periodsName));
+        periodsSpinner.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, periodsName));
 
-        go.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-            }
-        });
+        subjectsOfDay.setHasFixedSize(true);
+        subjectsOfDay.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         editSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +103,7 @@ public class FragmentSchedule extends Fragment {
             public void onClick(View view) {
                 prev.setBackground(getResources().getDrawable(R.drawable.custom_selected_blue_light_btn));
                 prev.setImageDrawable(getResources().getDrawable(R.drawable.custom_preview_selected_btn));
-                TimerTask task= new TimerTask(){
+                TimerTask task = new TimerTask() {
                     @Override
                     public void run() {
                         prev.setBackground(getResources().getDrawable(R.drawable.custom_blue_light_btn));
@@ -122,7 +121,7 @@ public class FragmentSchedule extends Fragment {
             public void onClick(View view) {
                 next.setBackground(getResources().getDrawable(R.drawable.custom_selected_blue_light_btn));
                 next.setImageDrawable(getResources().getDrawable(R.drawable.custom_next_selected_btn));
-                TimerTask task= new TimerTask(){
+                TimerTask task = new TimerTask() {
                     @Override
                     public void run() {
                         next.setBackground(getResources().getDrawable(R.drawable.custom_blue_light_btn));
@@ -142,39 +141,43 @@ public class FragmentSchedule extends Fragment {
                 String periodSelected = (String) periodsSpinner.getSelectedItem();
                 int periodId = periodControl.getPeriodIdByPeriodName(sharedPreferences.getString("NAME", "Default name"), periodSelected, dh);
                 ArrayList<Subject> subjects = subjectControl.getSubjectsByPeriod(periodId, dh);
-                switch(weekDays.getSelectedItemPosition()){
-                    case 0 :
-                        Log.e("SCHEDULE", "0");
-                        adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(),subjects, 0);
-                        subjectsOfDay.setAdapter(adapterFragmentSchedule);
-                        break;
-                    case 1 :
-                        Log.e("SCHEDULE", "1");
-                        adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(),subjects, 1);
-                        subjectsOfDay.setAdapter(adapterFragmentSchedule);
-                        break;
-                    case 2 :
-                        Log.e("SCHEDULE", "2");
-                        adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(),subjects, 2);
-                        subjectsOfDay.setAdapter(adapterFragmentSchedule);
-                        break;
-                    case 3 :
-                        Log.e("SCHEDULE", "3");
-                        adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(),subjects, 3);
-                        subjectsOfDay.setAdapter(adapterFragmentSchedule);
-                        break;
-                    case 4 :
-                        Log.e("SCHEDULE", "4");
-                        adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(),subjects, 4);
-                        subjectsOfDay.setAdapter(adapterFragmentSchedule);
-                        break;
-                    case 5 :
-                        Log.e("SCHEDULE", "5");
-                        adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(),subjects, 5);
-                        subjectsOfDay.setAdapter(adapterFragmentSchedule);
-                        break;
-                    default: break;
+                if (subjects.size() > 0) {
+                    switch (weekDays.getSelectedItemPosition()) {
+                        case 0:
+                            Log.e("SCHEDULE", "0");
+                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,0, dh), 0);
+                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
+                            break;
+                        case 1:
+                            Log.e("SCHEDULE", "1");
+                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,1, dh), 1);
+                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
+                            break;
+                        case 2:
+                            Log.e("SCHEDULE", "2");
+                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,2, dh), 2);
+                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
+                            break;
+                        case 3:
+                            Log.e("SCHEDULE", "3");
+                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,3, dh), 3);
+                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
+                            break;
+                        case 4:
+                            Log.e("SCHEDULE", "4");
+                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,4, dh), 4);
+                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
+                            break;
+                        case 5:
+                            Log.e("SCHEDULE", "5");
+                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,5, dh), 5);
+                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
+                            break;
+                        default:
+                            break;
+                    }
                 }
+
             }
 
             @Override
@@ -185,17 +188,29 @@ public class FragmentSchedule extends Fragment {
         return v;
     }
 
-    public void previousDay(Spinner spinner){
+    public ArrayList<Subject> subjectsPerDay(ArrayList<Subject> subjects, int day, DataBaseHandler dh) {
+        ArrayList<Subject> subjectsPerDay = new ArrayList<>();
+        for (Subject index : subjects) {
+            ArrayList<Integer> days = scheduleControl.getDaysBySubject(index.getIdSubject(), dh);
+            for (Integer int_index : days) {
+                if (int_index == day)
+                    subjectsPerDay.add(index);
+            }
+        }
+        return subjectsPerDay;
+    }
+
+    public void previousDay(Spinner spinner) {
         int position = spinner.getSelectedItemPosition();
-        if(position == 0)
+        if (position == 0)
             spinner.setSelection(5);
         else
             spinner.setSelection(position - 1);
     }
 
-    public void nextDay(Spinner spinner){
+    public void nextDay(Spinner spinner) {
         int position = spinner.getSelectedItemPosition();
-        if(position == 5)
+        if (position == 5)
             spinner.setSelection(0);
         else
             spinner.setSelection(position + 1);

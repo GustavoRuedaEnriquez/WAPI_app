@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,25 +39,14 @@ public class AdapterFragmentSchedule  extends RecyclerView.Adapter<AdapterFragme
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int i) {
+        Log.e("ADAPTER","Tamaño de mData: " + mDataSet.size());
         DataBaseHandler dh = DataBaseHandler.getInstance(context);
         ScheduleControl scheduleControl = new ScheduleControl();
-
         final Subject subject = mDataSet.get(i);
         ArrayList<Schedule> schedules = scheduleControl.getSchedulesBySubject(subject.getIdSubject(), dh);
-
-        ArrayList<Integer> days = new ArrayList<>();
-        for(Schedule index : schedules){
-            days.add(index.getDay());
-        }
-
-        int int_index = 0;
-
-        for(Integer index : days){
-            if(index == this.day){
-                holder.title.setText(subject.getNameSubject());
-                holder.time.setText(schedules.get(int_index).getInitialTime() + " - " + schedules.get(int_index).getFinalTime());
-            }
-        }
+        holder.title.setText(subject.getNameSubject());
+        String str = String.format(" %d:%02d - %d:%02d",schedules.get(0).getInitialTime()/100,schedules.get(0).getInitialTime()%100,schedules.get(0).getFinalTime()/100,schedules.get(0).getFinalTime()%100);
+        holder.time.setText(str);
     }
 
     @Override

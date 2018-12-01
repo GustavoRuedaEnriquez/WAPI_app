@@ -85,6 +85,8 @@ public class FragmentConfiguration extends Fragment {
                 edit.setTextColor(Color.WHITE);
                 Intent editIntent = new Intent(getActivity(), ActivityEditInformation.class);
                 startActivity(editIntent);
+                name_et.setText(sharedPreferences.getString("NAME", "Default name"));
+                password_et.setText(sharedPreferences.getString("PWD", "Default password"));
             }
         });
 
