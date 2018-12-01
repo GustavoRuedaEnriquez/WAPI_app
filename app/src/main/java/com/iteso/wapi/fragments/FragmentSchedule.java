@@ -1,32 +1,95 @@
 package com.iteso.wapi.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Spinner;
 
 import com.iteso.wapi.ActivityEditSchedule;
 import com.iteso.wapi.ActivityLogin;
+import com.iteso.wapi.ActivitySplashscreen;
+import com.iteso.wapi.AdapterFragmentSchedule;
 import com.iteso.wapi.R;
+import com.iteso.wapi.beans.Period;
+import com.iteso.wapi.beans.Subject;
+import com.iteso.wapi.database.DataBaseHandler;
+import com.iteso.wapi.database.PeriodControl;
+import com.iteso.wapi.database.SubjectControl;
+
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class FragmentSchedule extends Fragment {
 
-    private Button editSchedule;
+    private Button editSchedule, go;
+    private ImageButton prev, next;
+    private Spinner weekDays, periodsSpinner;
+    private PeriodControl periodControl;
+    private SubjectControl subjectControl;
+    private RecyclerView subjectsOfDay;
+
+    private AdapterFragmentSchedule adapterFragmentSchedule;
+    private ArrayList<String> days = new ArrayList<>();
 
     public FragmentSchedule() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        days.add("Lunes");
+        days.add("Martes");
+        days.add("Miércoles");
+        days.add("Jueves");
+        days.add("Viernes");
+        days.add("Sábado");
+
+        ArrayList<Subject> subjects = new ArrayList<>();
+
+        final DataBaseHandler dh = DataBaseHandler.getInstance(getActivity());
+        final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
+        periodControl = new PeriodControl();
+        subjectControl = new SubjectControl();
+
+        ArrayList<Period> periods = periodControl.getPeriodsByStudent(sharedPreferences.getString("NAME", "Default name"), dh);
+        ArrayList<String> periodsName = new ArrayList<>();
+        for(Period index : periods)
+            periodsName.add(index.getNamePeriod());
+
         View v = inflater.inflate(R.layout.fragment_schedule, container, false);
-        editSchedule = v.findViewById(R.id.fragent_schedule_edit_schedule);
+        editSchedule = v.findViewById(R.id.fragment_schedule_edit_schedule);
+        go = v.findViewById(R.id.fragment_schedule_go);
+        prev = v.findViewById(R.id.fragment_schedule_previous_btn);
+        next = v.findViewById(R.id.fragment_schedule_next_btn);
+        weekDays = v.findViewById(R.id.fragment_schedule_day_spinner);
+        periodsSpinner = v.findViewById(R.id.fragment_schedule_period_spinner);
+        subjectsOfDay = v.findViewById(R.id.fragment_schedule_subjects);
+
+        weekDays.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.custom_spinner, days));
+        periodsSpinner.setAdapter(new ArrayAdapter<>(getActivity(),R.layout.support_simple_spinner_dropdown_item, periodsName));
+
+        go.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
 
         editSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +98,107 @@ public class FragmentSchedule extends Fragment {
                 startActivity(intent);
             }
         });
+
+        prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                prev.setBackground(getResources().getDrawable(R.drawable.custom_selected_blue_light_btn));
+                prev.setImageDrawable(getResources().getDrawable(R.drawable.custom_preview_selected_btn));
+                TimerTask task= new TimerTask(){
+                    @Override
+                    public void run() {
+                        prev.setBackground(getResources().getDrawable(R.drawable.custom_blue_light_btn));
+                        prev.setImageDrawable(getResources().getDrawable(R.drawable.custom_preview_btn));
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(task, 190);
+                previousDay(weekDays);
+            }
+        });
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                next.setBackground(getResources().getDrawable(R.drawable.custom_selected_blue_light_btn));
+                next.setImageDrawable(getResources().getDrawable(R.drawable.custom_next_selected_btn));
+                TimerTask task= new TimerTask(){
+                    @Override
+                    public void run() {
+                        next.setBackground(getResources().getDrawable(R.drawable.custom_blue_light_btn));
+                        next.setImageDrawable(getResources().getDrawable(R.drawable.custom_next_btn));
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(task, 190);
+                nextDay(weekDays);
+            }
+        });
+
+        weekDays.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.e("SCHEDULE", "Entra");
+                String periodSelected = (String) periodsSpinner.getSelectedItem();
+                int periodId = periodControl.getPeriodIdByPeriodName(sharedPreferences.getString("NAME", "Default name"), periodSelected, dh);
+                ArrayList<Subject> subjects = subjectControl.getSubjectsByPeriod(periodId, dh);
+                switch(weekDays.getSelectedItemPosition()){
+                    case 0 :
+                        Log.e("SCHEDULE", "0");
+                        adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(),subjects, 0);
+                        subjectsOfDay.setAdapter(adapterFragmentSchedule);
+                        break;
+                    case 1 :
+                        Log.e("SCHEDULE", "1");
+                        adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(),subjects, 1);
+                        subjectsOfDay.setAdapter(adapterFragmentSchedule);
+                        break;
+                    case 2 :
+                        Log.e("SCHEDULE", "2");
+                        adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(),subjects, 2);
+                        subjectsOfDay.setAdapter(adapterFragmentSchedule);
+                        break;
+                    case 3 :
+                        Log.e("SCHEDULE", "3");
+                        adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(),subjects, 3);
+                        subjectsOfDay.setAdapter(adapterFragmentSchedule);
+                        break;
+                    case 4 :
+                        Log.e("SCHEDULE", "4");
+                        adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(),subjects, 4);
+                        subjectsOfDay.setAdapter(adapterFragmentSchedule);
+                        break;
+                    case 5 :
+                        Log.e("SCHEDULE", "5");
+                        adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(),subjects, 5);
+                        subjectsOfDay.setAdapter(adapterFragmentSchedule);
+                        break;
+                    default: break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         return v;
+    }
+
+    public void previousDay(Spinner spinner){
+        int position = spinner.getSelectedItemPosition();
+        if(position == 0)
+            spinner.setSelection(5);
+        else
+            spinner.setSelection(position - 1);
+    }
+
+    public void nextDay(Spinner spinner){
+        int position = spinner.getSelectedItemPosition();
+        if(position == 5)
+            spinner.setSelection(0);
+        else
+            spinner.setSelection(position + 1);
     }
 
     @Override
