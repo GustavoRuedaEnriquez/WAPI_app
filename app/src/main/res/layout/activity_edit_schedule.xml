@@ -49,10 +49,31 @@
 
         </LinearLayout>
 
-        <Spinner
-            android:id="@+id/activity_edit_schedule_periods"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/activity_edit_schedule_periods"
+                android:layout_width="0dp"
+                android:layout_weight=".8"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/activity_edit_schedule_go"
+                style="@style/custom_light_Button"
+                android:layout_width="0dp"
+                android:layout_weight=".2"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_edit_schedule_go"
+                android:textSize="@dimen/activity_edit_schedule_go"
+                android:layout_margin="@dimen/activity_edit_schedule_go_margin"
+                android:onClick="updatePeriod"/>
+
+        </LinearLayout>
+
 
         <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/activity_edit_schedule_subjects"

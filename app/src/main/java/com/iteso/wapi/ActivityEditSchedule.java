@@ -26,9 +26,11 @@ import java.util.TimerTask;
 
 public class ActivityEditSchedule extends AppCompatActivity {
 
-    private Button addPeriod, addSubject;
+    private Button addPeriod, addSubject, go;
     private Spinner periodsSpinner;
     private RecyclerView subjectsViews;
+    private ArrayList<Subject> subjects;
+    private AdapterEditSchedule adapterEditSchedule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,12 @@ public class ActivityEditSchedule extends AppCompatActivity {
         addSubject = findViewById(R.id.edit_schedule_add_subject_btn);
         periodsSpinner = findViewById(R.id.activity_edit_schedule_periods);
         subjectsViews = findViewById(R.id.activity_edit_schedule_subjects);
+        go = findViewById(R.id.activity_edit_schedule_go);
+
+        DataBaseHandler dh = DataBaseHandler.getInstance(this);
+        PeriodControl periodControl = new PeriodControl();
+        SubjectControl subjectControl = new SubjectControl();
+        SharedPreferences sharedPreferences = getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
 
         addPeriod.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,11 +77,6 @@ public class ActivityEditSchedule extends AppCompatActivity {
             }
         });
 
-        DataBaseHandler dh = DataBaseHandler.getInstance(this);
-        PeriodControl periodControl = new PeriodControl();
-        SubjectControl subjectControl = new SubjectControl();
-        SharedPreferences sharedPreferences = getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
-
         ArrayList<Period> periods = periodControl.getPeriodsByStudent(sharedPreferences.getString("NAME", "UNKNOWN"), dh);
         ArrayList<String> periodNames = new ArrayList<>();
         for (Period p : periods)
@@ -84,9 +87,37 @@ public class ActivityEditSchedule extends AppCompatActivity {
 
         if(periodNames.size() > 0) {
             periodsSpinner.setAdapter(new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, periodNames));
-            ArrayList<Subject> subjects = subjectControl.getSubjectsByPeriod(periods.get(0).getIdPeriod(), dh);
-            AdapterEditSchedule adapterEditSchedule = new AdapterEditSchedule(this, subjects);
+            subjects = subjectControl.getSubjectsByPeriod(periods.get(0).getIdPeriod(), dh);
+            adapterEditSchedule = new AdapterEditSchedule(this, subjects);
             subjectsViews.setAdapter(adapterEditSchedule);
+        }
+    }
+
+    public void updatePeriod(View v) {
+        DataBaseHandler dh = DataBaseHandler.getInstance(ActivityEditSchedule.this);
+        PeriodControl periodControl = new PeriodControl();
+        SubjectControl subjectControl = new SubjectControl();
+
+        SharedPreferences sharedPreferences = getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
+        sharedPreferences.getString("NAME", "UNKNOWN");
+        String periodName = periodsSpinner.getSelectedItem().toString();
+
+        Period currentPeriod = new Period();
+
+        for(Period period: periodControl.getPeriodsByStudent(sharedPreferences.getString("NAME", "UNKNOWN"), dh)){
+            if(period.getNamePeriod().equals(periodName)) {
+                currentPeriod = period;
+                break;
+            }
+        }
+
+        ArrayList<Subject> auxiliar = subjectControl.getSubjectsByPeriod(currentPeriod.getIdPeriod(), dh);
+        subjects.clear();
+        subjects.addAll(auxiliar);
+
+        if(adapterEditSchedule != null) {
+            Log.e("WAPI", "Entre");
+            adapterEditSchedule.notifyDataSetChanged();
         }
     }
 }

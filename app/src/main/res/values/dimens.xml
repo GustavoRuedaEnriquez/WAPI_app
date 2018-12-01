@@ -6,15 +6,23 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="row_padding_vertical">10dp</dimen>
 
+    <!--Activities subject dimens-->
+    <dimen name="activity_subject_btn_margin_top">40dp</dimen>
+
+    <!--Activity edit subject dimens-->
     <dimen name="activity_edit_subject_padding">20dp</dimen>
     <dimen name="activity_edit_subject_title">35sp</dimen>
     <dimen name="activity_edit_subject_save">20sp</dimen>
     <dimen name="activity_edit_subject_btn_margin">15dp</dimen>
 
-    <dimen name="activity_subject_btn_margin_top">40dp</dimen>
+    <!--Activity edit schedule dimens-->
     <dimen name="activity_edit_schedule_title">35sp</dimen>
+    <dimen name="activity_edit_schedule_go">10sp</dimen>
+    <dimen name="activity_edit_schedule_go_margin">15dp</dimen>
     <dimen name="activity_edit_schedule_btn_margin">15dp</dimen>
     <dimen name="activity_edit_schedule_btn">20sp</dimen>
+
+    <!--Item edit schedule dimens-->
     <dimen name="item_edit_schedule_subject_title">15sp</dimen>
     <dimen name="item_edit_schedule_subject">13sp</dimen>
 </resources>

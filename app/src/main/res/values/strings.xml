@@ -36,12 +36,15 @@
     <string name="activity_edit_subject_name_hint">Nombre de la materia</string>
     <string name="activity_edit_subject_name_title">Editar Materia</string>
     <string name="activity_edit_subject_cancel">Cancelar</string>
+    <string name="activity_edit_subject_delete">Borrar</string>
+    <string name="activity_edit_subject_delete_message">Materia eliminada</string>
 
     <!--Activity Create Subject Strings-->
     <string name="activity_create_subject_name_hint">Nombre de la materia</string>
     <string name="activity_create_subject_name_title">Nueva Materia</string>
     <string name="activity_create_subject_save">Guardar</string>
     <string name="activity_create_subject_cancel">Cancelar</string>
+    <string name="activity_create_subject_days_warn">Por favor seleccione los días</string>
 
     <!--Activity Create and Activity Edit Subject Strings-->
     <string name="activity_subject_start_time">Hora de inicio: </string>
@@ -54,11 +57,14 @@
     <string name="activity_subject_thursday">Jueves</string>
     <string name="activity_subject_friday">Viernes</string>
     <string name="activity_subject_saturday">Sábado</string>
+    <string name="activity_subject_incorrect_time_warn">Ingrese horas correctas</string>
+    <string name="activity_subject_period_warn">Debes agregar periodos primero</string>
 
     <!--Activity edit schedule strings-->
     <string name="activity_edit_schedule_title">Editar Horario</string>
     <string name="activity_edit_schedule_add_period">Añadir perdiodo</string>
     <string name="activity_edit_schedule_add_subject">Añadir materia</string>
+    <string name="activity_edit_schedule_go">Ir</string>
 
     <!--Item edit schedule subject-->
     <string name="item_edit_schedule_subject_time_lbl">Horario: </string>

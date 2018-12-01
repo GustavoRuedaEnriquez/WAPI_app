@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.iteso.wapi.beans.Period;
 import com.iteso.wapi.beans.Schedule;
@@ -28,7 +30,7 @@ import java.util.Objects;
 public class ActivityEditSubject extends AppCompatActivity {
     private TextView name;
     private Spinner period;
-    private Button save, cancel;
+    private Button save, cancel, delete;
     private SharedPreferences sharedPreferences;
     private Subject subject;
     private ArrayList<Period> periods;
@@ -49,6 +51,7 @@ public class ActivityEditSubject extends AppCompatActivity {
         period  = findViewById(R.id.activity_edit_subject_period);
         save    = findViewById(R.id.activity_edit_subject_save);
         cancel  = findViewById(R.id.activity_edit_subject_cancel);
+        delete  = findViewById(R.id.activity_edit_subject_delete);
         subject = getIntent().getExtras().getParcelable("SUBJECT");
 
         startTimeHr  = findViewById(R.id.activity_edit_subject_start_time_txt);
@@ -80,7 +83,7 @@ public class ActivityEditSubject extends AppCompatActivity {
 
         ArrayList<Schedule> schedules = scheduleControl.getSchedulesBySubject(subject.getIdSubject(), dh);
 
-        if (schedules != null) {
+        if (schedules != null && schedules.size() > 0) {
             startTimeHr.setText(String.format("%d", schedules.get(0).getInitialTime() / 100));
             startTimeMin.setText(String.format("%02d", schedules.get(0).getInitialTime() % 100));
 
@@ -93,9 +96,33 @@ public class ActivityEditSubject extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     public void modifySubject(View v) {
         save.setBackground(getDrawable(R.drawable.custom_selected_blue_light_btn));
         save.setTextColor(Color.WHITE);
+
+        if(startTimeMin.getText().toString().equals(""))
+            startTimeMin.setText("00");
+
+        if(endTimeMin.getText().toString().equals(""))
+            endTimeMin.setText("00");
+
+        try {
+            if (Integer.parseInt(startTimeHr.getText().toString()) > 11 || Integer.parseInt(endTimeHr.getText().toString()) > 11
+                    || Integer.parseInt(startTimeMin.getText().toString()) > 59
+                    || Integer.parseInt(endTimeMin.getText().toString()) > 59) {
+                Toast.makeText(this, getString(R.string.activity_subject_incorrect_time_warn), Toast.LENGTH_SHORT).show();
+                startTimeHr.setText("");
+                startTimeMin.setText("");
+                endTimeHr.setText("");
+                endTimeMin.setText("");
+
+                return;
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, getString(R.string.activity_subject_incorrect_time_warn), Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         DataBaseHandler dh = DataBaseHandler.getInstance(this);
         SubjectControl subjectControl = new SubjectControl();
@@ -110,7 +137,7 @@ public class ActivityEditSubject extends AppCompatActivity {
         subjectControl.updateSubject(subject, dh);
 
         //Look if a change were made
-        boolean change = false;
+        boolean change;
         ArrayList<Schedule> currentSchedule = scheduleControl.getSchedulesBySubject(subject.getIdSubject(), dh);
 
         int startTime = Integer.parseInt(startTimeHr.getText().toString()) * 100;
@@ -159,6 +186,28 @@ public class ActivityEditSubject extends AppCompatActivity {
     public void cancelSubject(View v) {
         cancel.setBackground(getDrawable(R.drawable.custom_selected_blue_light_btn));
         cancel.setTextColor(Color.WHITE);
+
+        Intent result = new Intent(this, ActivityEditSchedule.class);
+        startActivity(result);
+        finish();
+    }
+
+    public void deleteSubject(View v) {
+        delete.setBackground(getResources().getDrawable(R.drawable.custom_selected_red_light_btn));
+        delete.setTextColor(Color.WHITE);
+        Toast.makeText(this, getString(R.string.activity_edit_subject_delete_message), Toast.LENGTH_SHORT)
+                .show();
+
+        DataBaseHandler dh = DataBaseHandler.getInstance(this);
+        SubjectControl subjectControl = new SubjectControl();
+        ScheduleControl scheduleControl = new ScheduleControl();
+
+        ArrayList<Schedule> schedules = scheduleControl.getSchedulesBySubject(subject.getIdSubject(), dh);
+
+        for(Schedule schedule: schedules)
+            scheduleControl.deleteSchedule(schedule.getIdSchedule(), dh);
+
+        subjectControl.deleteSubject(subject.getIdSubject(), dh);
 
         Intent result = new Intent(this, ActivityEditSchedule.class);
         startActivity(result);

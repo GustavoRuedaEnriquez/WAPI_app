@@ -176,41 +176,46 @@
 
         </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_subject_btn_margin_top">
+            android:layout_marginTop="@dimen/activity_subject_btn_margin_top"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/activity_edit_subject_save"
+                style="@style/custom_light_Button"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginEnd="@dimen/activity_edit_subject_btn_margin"
+                android:layout_weight="0.5"
+                android:onClick="modifySubject"
+                android:text="@string/activity_subject_save"
+                android:textSize="@dimen/activity_edit_subject_save" />
 
-                <Button
-                    android:id="@+id/activity_edit_subject_save"
-                    style="@style/custom_light_Button"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/activity_edit_subject_btn_margin"
-                    android:layout_weight="0.5"
-                    android:onClick="modifySubject"
-                    android:text="@string/activity_subject_save"
-                    android:textSize="@dimen/activity_edit_subject_save" />
+            <Button
+                android:id="@+id/activity_edit_subject_cancel"
+                style="@style/custom_light_Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_edit_subject_btn_margin"
+                android:layout_weight="0.5"
+                android:onClick="cancelSubject"
+                android:text="@string/activity_edit_subject_cancel"
+                android:textSize="@dimen/activity_edit_subject_save" />
 
-                <Button
-                    android:id="@+id/activity_edit_subject_cancel"
-                    style="@style/custom_light_Button"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_edit_subject_btn_margin"
-                    android:layout_weight="0.5"
-                    android:onClick="cancelSubject"
-                    android:text="@string/activity_edit_subject_cancel"
-                    android:textSize="@dimen/activity_edit_subject_save" />
+        </LinearLayout>
 
-            </LinearLayout>
-
-        </RelativeLayout>
+        <Button
+            android:id="@+id/activity_edit_subject_delete"
+            style="@style/custom_red_light_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/activity_edit_subject_delete"
+            android:textSize="@dimen/activity_edit_subject_save"
+            android:onClick="deleteSubject"
+            android:layout_margin="@dimen/margin"/>
 
     </LinearLayout>
 

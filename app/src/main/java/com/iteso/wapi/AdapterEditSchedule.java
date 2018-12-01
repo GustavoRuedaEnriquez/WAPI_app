@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +45,7 @@ public class AdapterEditSchedule extends RecyclerView.Adapter<AdapterEditSchedul
 
         holder.title.setText(subject.getNameSubject());
 
-        if(schedules.size() > 0){
+        if (schedules.size() > 0) {
             //Time
             StringBuilder sc = new StringBuilder();
             sc.append(" ");
@@ -66,7 +65,7 @@ public class AdapterEditSchedule extends RecyclerView.Adapter<AdapterEditSchedul
             //Days
             sc = new StringBuilder();
             sc.append(" ");
-            for(Schedule schedule: schedules){
+            for (Schedule schedule : schedules) {
                 switch (schedule.getDay()) {
                     case 0:
                         sc.append(context.getString(R.string.activity_subject_monday));
@@ -90,8 +89,7 @@ public class AdapterEditSchedule extends RecyclerView.Adapter<AdapterEditSchedul
 
                 sc.append(", ");
             }
-            sc.deleteCharAt(sc.length()-1);
-            sc.deleteCharAt(sc.length()-1);
+            sc.deleteCharAt(sc.length() - 2);
             holder.days.setText(sc.toString());
         }
 
@@ -116,10 +114,10 @@ public class AdapterEditSchedule extends RecyclerView.Adapter<AdapterEditSchedul
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            root  = itemView.findViewById(R.id.item_edit_schedule_subject_root);
+            root = itemView.findViewById(R.id.item_edit_schedule_subject_root);
             title = itemView.findViewById(R.id.item_edit_schedule_subject_title);
-            time  = itemView.findViewById(R.id.item_edit_schedule_subject_time);
-            days  = itemView.findViewById(R.id.item_edit_schedule_subject_days);
+            time = itemView.findViewById(R.id.item_edit_schedule_subject_time);
+            days = itemView.findViewById(R.id.item_edit_schedule_subject_days);
         }
     }
 }
