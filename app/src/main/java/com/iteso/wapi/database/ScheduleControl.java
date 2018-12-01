@@ -67,7 +67,7 @@ public class ScheduleControl {
                 DataBaseHandler.SCHEDULE_START_HOUR + ", " +
                 DataBaseHandler.SCHEDULE_END_HOUR + ", " +
                 DataBaseHandler.SCHEDULE_FK_SUBJECT +
-                " FROM " + DataBaseHandler.TABLE_SUBJECT +
+                " FROM " + DataBaseHandler.TABLE_SCHEDULE +
                 " WHERE " + DataBaseHandler.SCHEDULE_FK_SUBJECT + " = " + subject;
         Cursor cursor = db.rawQuery(selectQuery,null);
         while(cursor.moveToNext()){

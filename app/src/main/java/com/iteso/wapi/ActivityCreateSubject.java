@@ -59,7 +59,7 @@ public class ActivityCreateSubject extends AppCompatActivity {
         days[WEDNESDAY] = findViewById(R.id.activity_create_subject_wednesday);
         days[THURSDAY] = findViewById(R.id.activity_create_subject_thursday);
         days[FRIDAY] = findViewById(R.id.activity_create_subject_friday);
-        days[SATURDAY] = findViewById(R.id.activity_create_subject_friday);
+        days[SATURDAY] = findViewById(R.id.activity_create_subject_saturday);
 
         DataBaseHandler dh = DataBaseHandler.getInstance(this);
         PeriodControl periodControl = new PeriodControl();
@@ -70,7 +70,7 @@ public class ActivityCreateSubject extends AppCompatActivity {
             periodNames.add(p.getNamePeriod());
 
         if (periodNames.size() == 0) {
-            Toast.makeText(this, "Debes agregar periodos primero", Toast.LENGTH_SHORT)
+            Toast.makeText(this, getString(R.string.activity_subject_period_warn), Toast.LENGTH_SHORT)
                     .show();
             onBackPressed();
         } else
@@ -83,19 +83,30 @@ public class ActivityCreateSubject extends AppCompatActivity {
         save.setBackground(getDrawable(R.drawable.custom_selected_blue_light_btn));
         save.setTextColor(Color.WHITE);
 
+        if(startTimeMin.getText().toString().equals(""))
+            startTimeMin.setText("00");
+
+        if(endTimeMin.getText().toString().equals(""))
+            endTimeMin.setText("00");
+
         try {
             if (Integer.parseInt(startTimeHr.getText().toString()) > 11 || Integer.parseInt(endTimeHr.getText().toString()) > 11
                     || Integer.parseInt(startTimeMin.getText().toString()) > 59
                     || Integer.parseInt(endTimeMin.getText().toString()) > 59) {
-                Toast.makeText(this, "Ingrese horas correctas", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.activity_subject_incorrect_time_warn), Toast.LENGTH_SHORT).show();
+                startTimeHr.setText("");
+                startTimeMin.setText("");
+                endTimeHr.setText("");
+                endTimeMin.setText("");
+
                 return;
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Ingrese horas correctas", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.activity_subject_incorrect_time_warn), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        //Add subject to db
+        //Create subject
         String subjectName = name.getText().toString();
         String periodName = period.getSelectedItem().toString();
         Period subjectPeriod = new Period();
@@ -109,9 +120,7 @@ public class ActivityCreateSubject extends AppCompatActivity {
 
         Subject subject = new Subject(idSubject, subjectPeriod.getIdPeriod(), subjectName, 6.0f);
 
-        subjectControl.addSubject(subject, dh);
-
-        //Add schedule to db
+        //Create schedules
         int startTime = Integer.parseInt(startTimeHr.getText().toString()) * 100;
         startTime += Integer.parseInt(startTimeMin.getText().toString());
 
@@ -119,19 +128,30 @@ public class ActivityCreateSubject extends AppCompatActivity {
         endTime += Integer.parseInt(endTimeMin.getText().toString());
 
         ArrayList<Schedule> schedules = new ArrayList<>();
+        boolean daysInserted = false;
         for (int i = 0; i < days.length; i++) {
             if (days[i].isChecked()) {
+                daysInserted = true;
                 Schedule schedule = new Schedule(0, i, startTime, endTime, subject.getIdSubject());
                 schedules.add(schedule);
             }
         }
 
+        if(!daysInserted){
+            Toast.makeText(this, getString(R.string.activity_create_subject_days_warn), Toast.LENGTH_SHORT)
+                    .show();
+            return;
+        }
+
+        //Add subject to the db
+        subjectControl.addSubject(subject, dh);
+
+        //Add schedule to db
         ScheduleControl scheduleControl = new ScheduleControl();
-        for(Schedule schedule: schedules)
+        for (Schedule schedule : schedules)
             scheduleControl.addSchedule(schedule, dh);
 
-//        for(Schedule schedule: scheduleControl.getSchedules(dh))
-//            Log.e("WAPI", schedule.toString());
+
 
         Intent intent = new Intent(this, ActivityEditSchedule.class);
         startActivity(intent);
