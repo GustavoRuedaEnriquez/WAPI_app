@@ -111,7 +111,7 @@ public class FragmentHomework extends Fragment {
         LinearLayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
         recyclerViewProximas.setLayoutManager(mLayoutManager2);
 
-        homeworks = homeworkControl.getHomeworksByStudent("Sbriones", dh);
+        /*homeworks = homeworkControl.getHomeworksByStudent("Sbriones", dh);
 
         for(int x = 0; x<homeworks.size(); x++){
             date = new Date(homeworks.get(x).getDeliveryYear(),homeworks.get(x).getDeliveryMonth(),homeworks.get(x).getDeliveryDay());
@@ -144,7 +144,7 @@ public class FragmentHomework extends Fragment {
                 startActivity(intent);
             }
         });
-
+*/
     }
 
     @Override

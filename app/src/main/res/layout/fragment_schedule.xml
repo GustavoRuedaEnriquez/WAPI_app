@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.FragmentSchedule">
+    tools:context=".fragments.FragmentSchedule"
+    android:padding="@dimen/margin"
+    >
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -11,16 +13,78 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/fragent_schedule_edit_schedule"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Editar Horario"/>
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+                <ImageButton
+                    android:id="@+id/fragment_schedule_previous_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/custom_preview_btn"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    style="@style/custom_light_Button"
+                    />
+                <Spinner
+                    android:id="@+id/fragment_schedule_day_spinner"
+                    android:layout_width="223dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent">
+                </Spinner>
+                <ImageButton
+                    android:id="@+id/fragment_schedule_next_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/custom_next_btn"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    style="@style/custom_light_Button"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/fragment_schedule_period_spinner"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".4"
+                    android:layout_marginTop="40dp">
+                </Spinner>
+                <Button
+                    android:layout_marginTop="@dimen/margin"
+                    android:id="@+id/fragment_schedule_edit_schedule"
+                    style="@style/custom_light_Button"
+                    android:layout_width="20dp"
+                    android:layout_height="50dp"
+                    android:layout_weight=".4"
+
+                    android:layout_marginLeft="10dp"
+                    android:text="Editar Horario" />
+            </LinearLayout>
+
+
+
+
+            <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/fragment_schedule_subjects"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:scrollbars="vertical" />
 
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+
 
 </FrameLayout>

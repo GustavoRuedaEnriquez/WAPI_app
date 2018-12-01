@@ -130,4 +130,17 @@ public class PeriodControl {
         }
     }
 
+    public int getPeriodIdByPeriodName(String fkStudentUsername, String periodName, DataBaseHandler dh){
+        int id = 0;
+        SQLiteDatabase db = dh.getReadableDatabase();
+        String selectQuery = "SELECT " + DataBaseHandler.PERIOD_ID
+                + " FROM " + DataBaseHandler.TABLE_PERIOD
+                + " WHERE " + DataBaseHandler.PERIOD_FK_STUDENT + " = '" + fkStudentUsername + "' AND " + DataBaseHandler.PERIOD_NAME + " = '" + periodName + "'";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        while(cursor.moveToNext()){
+            id = cursor.getInt(0);
+        }
+        return id;
+    }
+
 }
