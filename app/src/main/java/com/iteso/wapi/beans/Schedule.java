@@ -3,13 +3,11 @@ package com.iteso.wapi.beans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.sql.Time;
-
-public class Schedule implements Parcelable{
+public class Schedule implements Parcelable {
 
     private Integer idSchedule;
     private Integer day;
-    private Integer inicialTime;
+    private Integer initialTime;
     private Integer finalTime;
     private Integer fk_subject;
 
@@ -18,16 +16,16 @@ public class Schedule implements Parcelable{
         return "Schedule{" +
                 "idSchedule=" + idSchedule +
                 ", day=" + day +
-                ", inicialTime=" + inicialTime +
+                ", initialTime=" + initialTime +
                 ", finalTime=" + finalTime +
                 ", fk_subject=" + fk_subject +
                 '}';
     }
 
-    public Schedule(Integer idSchedule, Integer day, Integer inicialTime, Integer finalTime, Integer fk_subject) {
+    public Schedule(Integer idSchedule, Integer day, Integer initialTime, Integer finalTime, Integer fk_subject) {
         this.idSchedule = idSchedule;
         this.day = day;
-        this.inicialTime = inicialTime;
+        this.initialTime = initialTime;
         this.finalTime = finalTime;
         this.fk_subject = fk_subject;
     }
@@ -35,12 +33,14 @@ public class Schedule implements Parcelable{
     public Schedule() {
         this.idSchedule = null;
         this.day = null;
-        this.inicialTime = null;
+        this.initialTime = null;
         this.finalTime = null;
         this.fk_subject = null;
     }
 
-    public Integer getIdSchedule() { return idSchedule; }
+    public Integer getIdSchedule() {
+        return idSchedule;
+    }
 
     public void setIdSchedule(Integer idSchedule) {
         this.idSchedule = idSchedule;
@@ -54,17 +54,21 @@ public class Schedule implements Parcelable{
         this.day = day;
     }
 
-    public Integer getInicialTime() {
-        return inicialTime;
+    public Integer getInitialTime() {
+        return initialTime;
     }
 
-    public void setInicialTime(Integer inicialTime) {
-        this.inicialTime = inicialTime;
+    public void setInitialTime(Integer initialTime) {
+        this.initialTime = initialTime;
     }
 
-    public Integer getFinalTime() { return finalTime; }
+    public Integer getFinalTime() {
+        return finalTime;
+    }
 
-    public void setFinalTime(Integer finalTime) { this.finalTime = finalTime; }
+    public void setFinalTime(Integer finalTime) {
+        this.finalTime = finalTime;
+    }
 
     public Integer getFk_subject() {
         return fk_subject;
@@ -84,7 +88,7 @@ public class Schedule implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(this.idSchedule);
         dest.writeValue(this.day);
-        dest.writeValue(this.inicialTime);
+        dest.writeValue(this.initialTime);
         dest.writeValue(this.finalTime);
         dest.writeValue(this.fk_subject);
     }
@@ -92,7 +96,7 @@ public class Schedule implements Parcelable{
     protected Schedule(Parcel in) {
         this.idSchedule = (Integer) in.readValue(Integer.class.getClassLoader());
         this.day = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.inicialTime = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.initialTime = (Integer) in.readValue(Integer.class.getClassLoader());
         this.finalTime = (Integer) in.readValue(Integer.class.getClassLoader());
         this.fk_subject = (Integer) in.readValue(Integer.class.getClassLoader());
     }
@@ -108,4 +112,17 @@ public class Schedule implements Parcelable{
             return new Schedule[size];
         }
     };
+
+    public boolean equals(Schedule other) {
+        if (!day.equals(other.day))
+            return false;
+        if (!initialTime.equals(other.initialTime))
+            return false;
+        if (!finalTime.equals(other.finalTime))
+            return false;
+        if (!fk_subject.equals(other.fk_subject))
+            return false;
+
+        return true;
+    }
 }

@@ -33,7 +33,7 @@ public class HomeworkControl {
         values.put(DataBaseHandler.HOMEWORK_MIN, homework.getDeliveryMin());
         db.insert(DataBaseHandler.TABLE_HOMEWORK, null, values);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -66,8 +66,8 @@ public class HomeworkControl {
             homeworks.add(homework);
         }
         try{
-            cursor.close();
-            db.close();
+          //  cursor.close();
+          //  db.close();
         }catch(Exception e){
 
         }
@@ -166,7 +166,7 @@ public class HomeworkControl {
                 + " WHERE " + DataBaseHandler.HOMEWORK_ID + " = " + updatedHomework.getIdHomework();
         db.execSQL(updateQuery);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -179,7 +179,7 @@ public class HomeworkControl {
                 + " WHERE " + DataBaseHandler.HOMEWORK_ID + " = " + id_homework;
         db.execSQL(deleteQuery);
         try{
-            db.close();
+          //  db.close();
         }catch(Exception e){
 
         }
@@ -197,8 +197,8 @@ public class HomeworkControl {
             result = cursor.getInt(0);
         }
         try{
-            cursor.close();
-            db.close();
+          //  cursor.close();
+          //  db.close();
         }catch(Exception e){
 
         }

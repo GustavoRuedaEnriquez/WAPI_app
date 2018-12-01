@@ -17,13 +17,13 @@ public class ScheduleControl {
         ContentValues values = new ContentValues();
 
         values.put(DataBaseHandler.SCHEDULE_ID, nextId);
-        values.put(DataBaseHandler.SCHEDULE_START_HOUR, schedule.getInicialTime());
+        values.put(DataBaseHandler.SCHEDULE_START_HOUR, schedule.getInitialTime());
         values.put(DataBaseHandler.SCHEDULE_END_HOUR, schedule.getFinalTime());
         values.put(DataBaseHandler.SCHEDULE_DAY, schedule.getDay());
         values.put(DataBaseHandler.SCHEDULE_FK_SUBJECT, schedule.getFk_subject());
         db.insert(DataBaseHandler.TABLE_SCHEDULE, null, values);
         try{
-            db.close();
+          //  db.close();
         }catch(Exception e){
 
         }
@@ -38,20 +38,20 @@ public class ScheduleControl {
                 DataBaseHandler.SCHEDULE_START_HOUR + ", " +
                 DataBaseHandler.SCHEDULE_END_HOUR + ", " +
                 DataBaseHandler.SCHEDULE_FK_SUBJECT +
-                " FROM " + DataBaseHandler.TABLE_SUBJECT;
+                " FROM " + DataBaseHandler.TABLE_SCHEDULE;
         Cursor cursor = db.rawQuery(selectQuery,null);
         while(cursor.moveToNext()){
             Schedule schedule = new Schedule();
             schedule.setIdSchedule(cursor.getInt(0));
             schedule.setDay(cursor.getInt(1));
-            schedule.setInicialTime(cursor.getInt(2));
+            schedule.setInitialTime(cursor.getInt(2));
             schedule.setFinalTime(cursor.getInt(3));
             schedule.setFk_subject(cursor.getInt(4));
             schedules.add(schedule);
         }
         try{
-            cursor.close();
-            db.close();
+           // cursor.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -67,21 +67,21 @@ public class ScheduleControl {
                 DataBaseHandler.SCHEDULE_START_HOUR + ", " +
                 DataBaseHandler.SCHEDULE_END_HOUR + ", " +
                 DataBaseHandler.SCHEDULE_FK_SUBJECT +
-                " FROM " + DataBaseHandler.TABLE_SUBJECT +
+                " FROM " + DataBaseHandler.TABLE_SCHEDULE +
                 " WHERE " + DataBaseHandler.SCHEDULE_FK_SUBJECT + " = " + subject;
         Cursor cursor = db.rawQuery(selectQuery,null);
         while(cursor.moveToNext()){
             Schedule schedule = new Schedule();
             schedule.setIdSchedule(cursor.getInt(0));
             schedule.setDay(cursor.getInt(1));
-            schedule.setInicialTime(cursor.getInt(2));
+            schedule.setInitialTime(cursor.getInt(2));
             schedule.setFinalTime(cursor.getInt(3));
             schedule.setFk_subject(cursor.getInt(4));
             schedules.add(schedule);
         }
         try{
-            cursor.close();
-            db.close();
+            //cursor.close();
+            //db.close();
         }catch(Exception e){
 
         }
@@ -92,13 +92,13 @@ public class ScheduleControl {
         SQLiteDatabase db = dh.getWritableDatabase();
         String updateQuery = "UPDATE " + DataBaseHandler.TABLE_SCHEDULE
                 + " SET " + DataBaseHandler.SCHEDULE_DAY + " = " + updatedSchedule.getDay()
-                + " , " + DataBaseHandler.SCHEDULE_START_HOUR + " = " + updatedSchedule.getInicialTime()
+                + " , " + DataBaseHandler.SCHEDULE_START_HOUR + " = " + updatedSchedule.getInitialTime()
                 + " , " + DataBaseHandler.SCHEDULE_END_HOUR + " = " + updatedSchedule.getFinalTime()
                 + " , " + DataBaseHandler.SCHEDULE_FK_SUBJECT + " = " + updatedSchedule.getFk_subject()
                 + " WHERE " + DataBaseHandler.SCHEDULE_ID + " = " + updatedSchedule.getIdSchedule();
         db.execSQL(updateQuery);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -111,7 +111,7 @@ public class ScheduleControl {
                 + " WHERE " + DataBaseHandler.SCHEDULE_ID + " = " + id_schedule;
         db.execSQL(deleteQuery);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -129,8 +129,8 @@ public class ScheduleControl {
             result = cursor.getInt(0);
         }
         try{
-            cursor.close();
-            db.close();
+           // cursor.close();
+           // db.close();
         }catch(Exception e){
 
         }

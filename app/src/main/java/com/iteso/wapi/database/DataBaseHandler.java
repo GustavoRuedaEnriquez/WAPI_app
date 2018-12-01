@@ -62,7 +62,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     public static final String PAYMENT_NAME        = "Payment_Name";
     public static final String PAYMENT_DESCRIPTION = "Payment_Description";
     public static final String PAYMENT_AMOUNT      = "Payment_Amount";
-    public static final String PAYMENT_DATE        = "Payment_Date";
+    public static final String PAYMENT_TIMESTAMP   = "Payment_Timestamp";
     public static final String PAYMENT_FK_STUDENT  = "Payment_FK_Student";
 
     private DataBaseHandler(Context context){
@@ -121,7 +121,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
                             + PAYMENT_NAME + " TEXT, "
                             + PAYMENT_DESCRIPTION + " TEXT, "
                             + PAYMENT_AMOUNT + " REAL, "
-                            + PAYMENT_DATE + " INTEGER, "
+                            + PAYMENT_TIMESTAMP + " TEXT,"
                             + PAYMENT_FK_STUDENT + " TEXT)";
 
         db.execSQL(tableStudent);

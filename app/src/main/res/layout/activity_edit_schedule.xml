@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ActivityEditSchedule"
+    android:layout_margin="@dimen/margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin"
+            android:gravity="center"
+            android:text="@string/activity_edit_schedule_title"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/activity_edit_schedule_title"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/edit_schedule_add_period_btn"
+                style="@style/custom_light_Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_edit_schedule_btn_margin"
+                android:layout_weight=".5"
+                android:text="@string/activity_edit_schedule_add_period"
+                android:textSize="@dimen/activity_edit_schedule_btn" />
+
+            <Button
+                android:id="@+id/edit_schedule_add_subject_btn"
+                style="@style/custom_light_Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_edit_schedule_btn_margin"
+                android:layout_weight=".5"
+                android:text="@string/activity_edit_schedule_add_subject"
+                android:textSize="@dimen/activity_edit_schedule_btn" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/activity_edit_schedule_periods"
+                android:layout_width="0dp"
+                android:layout_weight=".8"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/activity_edit_schedule_go"
+                style="@style/custom_light_Button"
+                android:layout_width="0dp"
+                android:layout_weight=".2"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_edit_schedule_go"
+                android:textSize="@dimen/activity_edit_schedule_go"
+                android:layout_margin="@dimen/activity_edit_schedule_go_margin"
+                android:onClick="updatePeriod"/>
+
+        </LinearLayout>
+
+
+        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/activity_edit_schedule_subjects"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
+
+    </LinearLayout>
+
+
+</ScrollView>

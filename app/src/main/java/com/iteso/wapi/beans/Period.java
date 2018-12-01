@@ -6,6 +6,18 @@ public class Period {
     private String namePeriod;
     private String userName;
 
+    public Period() {
+        this.idPeriod = 0;
+        this.namePeriod = "";
+        this.userName = "";
+    }
+
+    public Period(int idPeriod, String namePeriod, String userName) {
+        this.idPeriod = idPeriod;
+        this.namePeriod = namePeriod;
+        this.userName = userName;
+    }
+
     @Override
     public String toString() {
         return "Period{" +

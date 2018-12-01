@@ -4,6 +4,7 @@ import android.app.admin.DeviceAdminInfo;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.iteso.wapi.beans.Student;
 
@@ -18,7 +19,7 @@ public class StudentControl {
         values.put(DataBaseHandler.STUDENT_PASSWORD, student.getPassword());
         db.insert(DataBaseHandler.TABLE_STUDENT, null, values);
         try{
-            db.close();
+            //db.close();
         }catch(Exception e){
 
         }
@@ -38,8 +39,8 @@ public class StudentControl {
             students.add(student);
         }
         try{
-            cursor.close();
-            db.close();
+           // cursor.close();
+           // db.close();
         }catch(Exception e){
 
         }
@@ -52,14 +53,17 @@ public class StudentControl {
         String selectQuery = "SELECT " + DataBaseHandler.STUDENT_USERNAME + ", "
                             + DataBaseHandler.STUDENT_PASSWORD
                             + " FROM " + DataBaseHandler.TABLE_STUDENT
-                            + " WHERE " + DataBaseHandler.STUDENT_USERNAME + " = " + username;
+                            + " WHERE " + DataBaseHandler.STUDENT_USERNAME + " = '" + username + "'";
         Cursor cursor = db.rawQuery(selectQuery, null);
-        cursor.moveToNext();
-        student.setUserName(cursor.getString(0));
-        student.setPassword(cursor.getString(1));
+
+        if(cursor.getCount() != 0){
+            cursor.moveToNext();
+            student.setUserName(cursor.getString(0));
+            student.setPassword(cursor.getString(1));
+        }
         try{
-            cursor.close();
-            db.close();
+          //  cursor.close();
+          //  db.close();
         }catch(Exception e){
 
         }
@@ -69,12 +73,13 @@ public class StudentControl {
     public void updateStudent(String username, Student updatedStudent, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
         String updateQuery = "UPDATE " + DataBaseHandler.TABLE_STUDENT
-                            + " SET " + DataBaseHandler.STUDENT_USERNAME + " = " + updatedStudent.getUserName()
-                            + " , " + DataBaseHandler.STUDENT_PASSWORD + " = " + updatedStudent.getPassword()
-                            + " WHERE " + DataBaseHandler.STUDENT_USERNAME + " = " + username;
+                            + " SET " + DataBaseHandler.STUDENT_USERNAME + " = '" + updatedStudent.getUserName() + "'"
+                            + " , " + DataBaseHandler.STUDENT_PASSWORD + " = '" + updatedStudent.getPassword() + "'"
+                            + " WHERE " + DataBaseHandler.STUDENT_USERNAME + " = '" + username + "'";
         db.execSQL(updateQuery);
+        Log.e("QUERY", "Executed Query: " + updateQuery);
         try{
-            db.close();
+          //  db.close();
         }catch(Exception e){
 
         }
@@ -84,13 +89,26 @@ public class StudentControl {
         SQLiteDatabase db = dh.getWritableDatabase();
         String deleteQuery = "DELETE FROM "
                 + DataBaseHandler.TABLE_STUDENT
-                + " WHERE " + DataBaseHandler.STUDENT_USERNAME + " = " + username;
+                + " WHERE " + DataBaseHandler.STUDENT_USERNAME + " = '" + username + "'";
         db.execSQL(deleteQuery);
         try{
-            db.close();
+           // db.close();
         }catch(Exception e){
 
         }
+    }
+
+    public boolean isPasswordCorrect(String username, String inputPassword, DataBaseHandler dh){
+        String password="";
+        SQLiteDatabase db = dh.getReadableDatabase();
+        String selectQuery = "SELECT " + DataBaseHandler.STUDENT_PASSWORD +
+                             " FROM " + DataBaseHandler.TABLE_STUDENT +
+                             " WHERE " + DataBaseHandler.STUDENT_USERNAME + " = '" + username + "'";
+        Cursor cursor = db.rawQuery(selectQuery,null);
+        while(cursor.moveToNext()){
+            password = cursor.getString(0);
+        }
+        return password.equals(inputPassword);
     }
 
 }

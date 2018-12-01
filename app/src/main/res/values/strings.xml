@@ -24,12 +24,49 @@
     <string name="activity_login_access_btn">Ingresar</string>
 
     <!--Fragment payments strings: -->
-    <string name="fragment_payment_name_hint">Nombre del titular</string>
-    <string name="fragment_payment_card_hint">Número de tarjeta</string>
-    <string name="fragment_payment_email_hint">Email</string>
-    <string name="fragment_payment_pay_hint">Cantidad de dinero</string>
+    <string name="fragment_payment_name_hint">Título</string>
+    <string name="fragment_payment_description_hint">Descripción</string>
+    <string name="fragment_payment_amount_hint">Cantidad</string>
+    <string name="fragment_payment_date_hint">Fecha</string>
     <string name="fragment_payment_pay_visa">Visa</string>
     <string name="fragment_payment_pay_mastercard">Mastercard</string>
-    <string name="fragment_payment_button_text">Pagar</string>
+    <string name="fragment_payment_button_text">Añadir Recordatorio</string>
 
+    <!--Activity Edit Subject Strings-->
+    <string name="activity_edit_subject_name_hint">Nombre de la materia</string>
+    <string name="activity_edit_subject_name_title">Editar Materia</string>
+    <string name="activity_edit_subject_cancel">Cancelar</string>
+    <string name="activity_edit_subject_delete">Borrar</string>
+    <string name="activity_edit_subject_delete_message">Materia eliminada</string>
+
+    <!--Activity Create Subject Strings-->
+    <string name="activity_create_subject_name_hint">Nombre de la materia</string>
+    <string name="activity_create_subject_name_title">Nueva Materia</string>
+    <string name="activity_create_subject_save">Guardar</string>
+    <string name="activity_create_subject_cancel">Cancelar</string>
+    <string name="activity_create_subject_days_warn">Por favor seleccione los días</string>
+
+    <!--Activity Create and Activity Edit Subject Strings-->
+    <string name="activity_subject_start_time">Hora de inicio: </string>
+    <string name="activity_subject_colon">:</string>
+    <string name="activity_subject_end_time">Hora de fin: </string>
+    <string name="activity_subject_save">Guardar</string>
+    <string name="activity_subject_monday">Lunes</string>
+    <string name="activity_subject_tuesday">Martes</string>
+    <string name="activity_subject_wednesday">Miércoles</string>
+    <string name="activity_subject_thursday">Jueves</string>
+    <string name="activity_subject_friday">Viernes</string>
+    <string name="activity_subject_saturday">Sábado</string>
+    <string name="activity_subject_incorrect_time_warn">Ingrese horas correctas</string>
+    <string name="activity_subject_period_warn">Debes agregar periodos primero</string>
+
+    <!--Activity edit schedule strings-->
+    <string name="activity_edit_schedule_title">Editar Horario</string>
+    <string name="activity_edit_schedule_add_period">Añadir perdiodo</string>
+    <string name="activity_edit_schedule_add_subject">Añadir materia</string>
+    <string name="activity_edit_schedule_go">Ir</string>
+
+    <!--Item edit schedule subject-->
+    <string name="item_edit_schedule_subject_time_lbl">Horario: </string>
+    <string name="item_edit_schedule_subject_days_lbl">Días: </string>
 </resources>

@@ -17,7 +17,6 @@ import com.iteso.wapi.R;
 import com.iteso.wapi.beans.Homework;
 import com.iteso.wapi.database.DataBaseHandler;
 import com.iteso.wapi.database.HomeworkControl;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -111,7 +110,6 @@ public class FragmentHomework extends Fragment {
         recyclerViewProximas.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
         recyclerViewProximas.setLayoutManager(mLayoutManager2);
-
 
         homeworks = homeworkControl.getHomeworksByStudent("Sbriones", dh);
 
