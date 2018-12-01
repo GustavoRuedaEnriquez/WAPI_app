@@ -15,8 +15,12 @@ import com.iteso.wapi.ActivityEditHomework;
 import com.iteso.wapi.AdapterHomework;
 import com.iteso.wapi.R;
 import com.iteso.wapi.beans.Homework;
-
+import com.iteso.wapi.database.DataBaseHandler;
+import com.iteso.wapi.database.HomeworkControl;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -37,13 +41,17 @@ public class FragmentHomework extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    ArrayList<Homework> homework = new ArrayList<>();
+    ArrayList<Homework> homeworksWeek;
+    ArrayList<Homework> homeworksNext;
+    ArrayList<Homework> homeworks;
+    HomeworkControl homeworkControl = new HomeworkControl();
+    DataBaseHandler dh;
     RecyclerView recyclerView;
     RecyclerView recyclerViewProximas;
     AdapterHomework adapterHomework;
     Button agregar;
     View rootView;
-
+    Date today;
 
     public FragmentHomework() {
         // Required empty public constructor
@@ -84,13 +92,17 @@ public class FragmentHomework extends Fragment {
         recyclerView = rootView.findViewById(R.id.fragment_tarea_recyclerView_semana_actual);
         recyclerViewProximas = rootView.findViewById(R.id.fragment_tarea_recyclerView_proximas_semanas);
         agregar = rootView.findViewById(R.id.fragment_tarea_agregar);
+        today = Calendar.getInstance().getTime();
         return rootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        Date date;
+        long diff;
+        int daysDiff;
+        dh = DataBaseHandler.getInstance(getContext());
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -99,21 +111,30 @@ public class FragmentHomework extends Fragment {
         LinearLayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
         recyclerViewProximas.setLayoutManager(mLayoutManager2);
 
-        //homework = new ArrayList<>();
-        //homework.add(new Homework(1, 1, "Leer sobre Teclado Matricial", "Mañana", "9:00"));
-        //homework.add(new Homework(2, 1, "Realizar reporte de practica 4", "Mañana", "11:55"));
+        homeworks = homeworkControl.getHomeworksByStudent("Sbriones", dh);
 
-        adapterHomework = new AdapterHomework(4, getActivity(), homework);
+        for(int x = 0; x<homeworks.size(); x++){
+            date = new Date(homeworks.get(x).getDeliveryYear(),homeworks.get(x).getDeliveryMonth(),homeworks.get(x).getDeliveryDay());
+            if (today.compareTo(date)<0){
+                diff = date.getTime() - today.getTime();
+                daysDiff =(int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                if(daysDiff<=7){
+                    homeworksWeek.add(homeworks.get(x));
+                }
+                else{
+                    homeworksNext.add(homeworks.get(x));
+                }
+            }
+        }
+
+        adapterHomework = new AdapterHomework(4, getActivity(), homeworksWeek);
         recyclerView.setAdapter(adapterHomework);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), mLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-        homework = new ArrayList<>();
-        //homework.add(new Homework(3, 2, "Informe de finanzas", "29/10", "7:00"));
-        //homework.add(new Homework(4, 2, "Practica de laboratorio 9", "30/10", "13:00"));
 
-        adapterHomework = new AdapterHomework(4, getActivity(), homework);
+        adapterHomework = new AdapterHomework(4, getActivity(), homeworksNext);
         recyclerViewProximas.setAdapter(adapterHomework);
 
         agregar.setOnClickListener(new View.OnClickListener() {

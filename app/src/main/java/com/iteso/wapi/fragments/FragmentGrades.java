@@ -1,6 +1,7 @@
 package com.iteso.wapi.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.annotation.Nullable;
@@ -10,15 +11,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.iteso.wapi.ActivitySplashscreen;
 import com.iteso.wapi.AdapterMateria;
 import com.iteso.wapi.R;
+import com.iteso.wapi.beans.Grade;
+import com.iteso.wapi.beans.Period;
 import com.iteso.wapi.beans.Schedule;
 import com.iteso.wapi.beans.Subject;
+import com.iteso.wapi.database.DataBaseHandler;
+import com.iteso.wapi.database.GradeControl;
+import com.iteso.wapi.database.PeriodControl;
+import com.iteso.wapi.database.SubjectControl;
 
 import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -39,10 +51,14 @@ public class FragmentGrades extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    ArrayList<Subject> subjects = new ArrayList<>();
+    ArrayList<Subject> subjects;
+    ArrayList<Period> periods;
     RecyclerView recyclerView;
     AdapterMateria adapterMateria;
+    SubjectControl subjectControl;
+    DataBaseHandler dh;
     Spinner spinner;
+    TextView avarageFinal;
 
 
     public FragmentGrades() {
@@ -82,13 +98,21 @@ public class FragmentGrades extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_grades, container, false);
         recyclerView = rootView.findViewById(R.id.fragment_calificacion_recyclerView);
+
+        //SharedPreferences sharedPreferences = getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
+        dh = DataBaseHandler.getInstance(getContext());
+        PeriodControl periodControl = new PeriodControl();
+        periods = periodControl.getPeriodsByStudent("sbriones",dh);
+        ArrayList<String> namePeriods = new ArrayList<>();
+        for (int x = 0; x < periods.size() ; x++){
+            namePeriods.add(periods.get(x).getNamePeriod());
+        }
+
         spinner = (Spinner) rootView.findViewById(R.id.fragment_calificacion_spinner);
+        avarageFinal = rootView.findViewById(R.id.fragment_calificacion_promedio);
 
-        ArrayAdapter<CharSequence> adapterPeriodo = ArrayAdapter.createFromResource(rootView.getContext(),
-                R.array.periodo, android.R.layout.simple_spinner_item);
-        adapterPeriodo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinner.setAdapter(adapterPeriodo);
+        spinner.setAdapter(new ArrayAdapter<>(inflater.getContext(),
+                android.R.layout.simple_spinner_dropdown_item, namePeriods.toArray()));
 
         return rootView;
     }
@@ -97,16 +121,13 @@ public class FragmentGrades extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        subjectControl = new SubjectControl();
+
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
 
-        Schedule dias = new Schedule();
-
-        subjects = new ArrayList<>();
-        subjects.add(new Subject(1,1, "Micros", (float) 5.3));
-        subjects.add(new Subject(2, 1, "Moviles", (float)3.3));
-        subjects.add(new Subject(3, 1, "GBD", (float)9.0));
+        subjects = subjectControl.getSubjectsByPeriod(spinner.getSelectedItemPosition(), dh);
 
         adapterMateria = new AdapterMateria(2, getActivity(), subjects);
         recyclerView.setAdapter(adapterMateria);
@@ -114,7 +135,35 @@ public class FragmentGrades extends Fragment {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), mLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                subjects.clear();
+                subjects = subjectControl.getSubjectsByPeriod(spinner.getSelectedItemPosition(), dh);
+                adapterMateria.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
+
+    public void updateAvaragePeriod(){
+        float avarage = 0;
+        String show;
+        Subject auxSubject;
+        for(int x = 0; x<subjects.size();x++){
+            auxSubject = subjects.get(x);
+            avarage += (auxSubject.getAvarage());
+        }
+        avarage = avarage / subjects.size();
+        show = "Promedio: " + avarage;
+        avarageFinal.setText(show);
+    }
+
 /*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

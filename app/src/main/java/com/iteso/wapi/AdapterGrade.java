@@ -10,27 +10,35 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iteso.wapi.beans.Grade;
+import com.iteso.wapi.beans.Subject;
+import com.iteso.wapi.database.DataBaseHandler;
+import com.iteso.wapi.database.GradeControl;
+import com.iteso.wapi.database.SubjectControl;
 
 import java.util.List;
 
 public class AdapterGrade extends RecyclerView.Adapter<AdapterGrade.MyViewHolder>{
 
-public List<Grade> gradeList;
-private Context context;
-private int fragment;
+    public List<Grade> gradeList;
+    private Context context;
+    private int fragment;
+    private Grade grade;
+    private DataBaseHandler dh;
+    private GradeControl gradeControl;
+    private SubjectControl subjectControl;
 
-class MyViewHolder extends RecyclerView.ViewHolder{
-    TextView nombre, porcentaje, calificacion;
-    ImageView borrar;
+    class MyViewHolder extends RecyclerView.ViewHolder{
+        TextView nombre, porcentaje, calificacion;
+        ImageView borrar;
 
-    MyViewHolder(View view){
-        super(view);
-        nombre = view.findViewById(R.id.item_calificacion_nombre);
-        porcentaje = view.findViewById(R.id.item_calificacion_porcentaje);
-        calificacion = view.findViewById(R.id.item_calificacion_calif);
-        borrar = view.findViewById(R.id.item_calificacion_borrar);
+        MyViewHolder(View view){
+            super(view);
+            nombre = view.findViewById(R.id.item_calificacion_nombre);
+            porcentaje = view.findViewById(R.id.item_calificacion_porcentaje);
+            calificacion = view.findViewById(R.id.item_calificacion_calif);
+            borrar = view.findViewById(R.id.item_calificacion_borrar);
+        }
     }
-}
 
     public AdapterGrade(List<Grade> grades){
         this.gradeList = grades;
@@ -70,25 +78,78 @@ class MyViewHolder extends RecyclerView.ViewHolder{
     @Override
     public AdapterGrade.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grade, parent, false);
+        dh = DataBaseHandler.getInstance(getContext());
+        gradeControl = new GradeControl();
+        subjectControl = new SubjectControl();
+
         return new AdapterGrade.MyViewHolder(item);
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterGrade.MyViewHolder myViewHolder, int position){
-        final Grade grade = gradeList.get(position);
+        final Grade[] gradeShow = {gradeList.get(position)};
         //myViewHolder.nombre.setText(subjectList.get(myViewHolder.getAdapterPosition()).getNameSubject());
         //myViewHolder.promedio.setText(Float.toString(subjectList.get(myViewHolder.getAdapterPosition()).getPromedio()));
-        myViewHolder.nombre.setText(grade.getDescriptionGrade());
-        myViewHolder.porcentaje.setText(Float.toString(grade.getPercentage()));
-        myViewHolder.calificacion.setText(Float.toString(grade.getGrade()));
+        myViewHolder.nombre.setText(gradeShow[0].getDescriptionGrade());
+        myViewHolder.porcentaje.setText(Float.toString(gradeShow[0].getPercentage()));
+        myViewHolder.calificacion.setText(Float.toString(gradeShow[0].getGrade()));
 
         myViewHolder.borrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //gradeList.remove(myViewHolder.getAdapterPosition());
+                grade = gradeList.get(myViewHolder.getAdapterPosition());
+                gradeControl.deleteGrade(grade.getIdGrade(),dh);
+                gradeList.remove(myViewHolder.getAdapterPosition());
             }
         });
+
+        myViewHolder.nombre.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                grade = gradeList.get(myViewHolder.getAdapterPosition());
+                grade.setDescriptionGrade(myViewHolder.nombre.getText().toString());
+                grade.setPercentage(Float.valueOf(myViewHolder.porcentaje.getText().toString()));
+                grade.setGrade(Float.valueOf(myViewHolder.calificacion.getText().toString()));
+                gradeControl.updateGrade(grade, dh);
+                gradeList.set(myViewHolder.getAdapterPosition(),grade);
+                updateAvarageSubject();
+            }
+        });
+        myViewHolder.porcentaje.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                grade = gradeList.get(myViewHolder.getAdapterPosition());
+                grade.setDescriptionGrade(myViewHolder.nombre.getText().toString());
+                grade.setPercentage(Float.valueOf(myViewHolder.porcentaje.getText().toString()));
+                grade.setGrade(Float.valueOf(myViewHolder.calificacion.getText().toString()));
+                gradeControl.updateGrade(grade, dh);
+                gradeList.set(myViewHolder.getAdapterPosition(),grade);
+                updateAvarageSubject();
+            }
+        });
+        myViewHolder.calificacion.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                grade = gradeList.get(myViewHolder.getAdapterPosition());
+                grade.setDescriptionGrade(myViewHolder.nombre.getText().toString());
+                grade.setPercentage(Float.valueOf(myViewHolder.porcentaje.getText().toString()));
+                grade.setGrade(Float.valueOf(myViewHolder.calificacion.getText().toString()));
+                gradeControl.updateGrade(grade, dh);
+                gradeList.set(myViewHolder.getAdapterPosition(),grade);
+                updateAvarageSubject();
+            }
+        });
+    }
+
+    public void updateAvarageSubject(){
+        float avarage = 0;
+        Grade auxGrade;
+        for(int x = 0; x<gradeList.size();x++){
+            auxGrade = gradeList.get(x);
+            avarage += (auxGrade.getGrade() * (auxGrade.getPercentage()/100));
+        }
+        //subjectControl.updateSubject(auxGrade.getFk_subject(),dh);
     }
 
     @Override
