@@ -1,7 +1,9 @@
 package com.iteso.wapi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,7 +41,7 @@ public class AdapterEditSchedule extends RecyclerView.Adapter<AdapterEditSchedul
         DataBaseHandler dh = DataBaseHandler.getInstance(context);
         ScheduleControl scheduleControl = new ScheduleControl();
 
-        Subject subject = mDataSet.get(i);
+        final Subject subject = mDataSet.get(i);
         ArrayList<Schedule> schedules = scheduleControl.getSchedulesBySubject(subject.getIdSubject(), dh);
 
         holder.title.setText(subject.getNameSubject());
@@ -92,6 +94,15 @@ public class AdapterEditSchedule extends RecyclerView.Adapter<AdapterEditSchedul
             sc.deleteCharAt(sc.length()-1);
             holder.days.setText(sc.toString());
         }
+
+        holder.root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ActivityEditSubject.class);
+                intent.putExtra("SUBJECT", subject);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -101,9 +112,11 @@ public class AdapterEditSchedule extends RecyclerView.Adapter<AdapterEditSchedul
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView title, time, days;
+        CardView root;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            root  = itemView.findViewById(R.id.item_edit_schedule_subject_root);
             title = itemView.findViewById(R.id.item_edit_schedule_subject_title);
             time  = itemView.findViewById(R.id.item_edit_schedule_subject_time);
             days  = itemView.findViewById(R.id.item_edit_schedule_subject_days);

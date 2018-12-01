@@ -83,6 +83,12 @@ public class ActivityCreateSubject extends AppCompatActivity {
         save.setBackground(getDrawable(R.drawable.custom_selected_blue_light_btn));
         save.setTextColor(Color.WHITE);
 
+        if(startTimeMin.getText().toString().equals(""))
+            startTimeMin.setText("00");
+
+        if(endTimeMin.getText().toString().equals(""))
+            endTimeMin.setText("00");
+
         try {
             if (Integer.parseInt(startTimeHr.getText().toString()) > 11 || Integer.parseInt(endTimeHr.getText().toString()) > 11
                     || Integer.parseInt(startTimeMin.getText().toString()) > 59
@@ -135,9 +141,6 @@ public class ActivityCreateSubject extends AppCompatActivity {
         ScheduleControl scheduleControl = new ScheduleControl();
         for (Schedule schedule : schedules)
             scheduleControl.addSchedule(schedule, dh);
-
-//        for(Schedule schedule: scheduleControl.getSchedules(dh))
-//            Log.e("WAPI", schedule.toString());
 
         Intent intent = new Intent(this, ActivityEditSchedule.class);
         startActivity(intent);

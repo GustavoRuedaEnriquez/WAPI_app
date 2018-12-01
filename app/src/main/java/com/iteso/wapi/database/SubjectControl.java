@@ -85,7 +85,7 @@ public class SubjectControl {
         SQLiteDatabase db = dh.getWritableDatabase();
         String updateQuery = "UPDATE " + DataBaseHandler.TABLE_SUBJECT
                 + " SET " + DataBaseHandler.SUBJECT_FK_PERIOD + " = " + updatedSubject.getFk_period()
-                + " , " + DataBaseHandler.SUBJECT_NAME + " = " + updatedSubject.getNameSubject()
+                + " , " + DataBaseHandler.SUBJECT_NAME + " = '" + updatedSubject.getNameSubject() + "'"
                 + " , " + DataBaseHandler.SUBJECT_AVERAGE + " = " + updatedSubject.getAvarage()
                 + " WHERE " + DataBaseHandler.SUBJECT_ID + " = " + updatedSubject.getIdSubject();
         db.execSQL(updateQuery);

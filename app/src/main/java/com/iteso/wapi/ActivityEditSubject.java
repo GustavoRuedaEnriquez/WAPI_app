@@ -1,5 +1,7 @@
 package com.iteso.wapi;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ public class ActivityEditSubject extends AppCompatActivity {
     private CheckBox[] days;
     private static final int MONDAY = 0, TUESDAY = 1, WEDNESDAY = 2, THURSDAY = 3, FRIDAY = 4, SATURDAY = 5;
 
+    @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,11 +81,11 @@ public class ActivityEditSubject extends AppCompatActivity {
         ArrayList<Schedule> schedules = scheduleControl.getSchedulesBySubject(subject.getIdSubject(), dh);
 
         if (schedules != null) {
-            startTimeHr.setText(schedules.get(0).getInitialTime() / 100);
-            startTimeMin.setText(schedules.get(0).getInitialTime() % 100);
+            startTimeHr.setText(String.format("%d", schedules.get(0).getInitialTime() / 100));
+            startTimeMin.setText(String.format("%02d", schedules.get(0).getInitialTime() % 100));
 
-            endTimeHr.setText(schedules.get(0).getFinalTime() / 100);
-            endTimeMin.setText(schedules.get(0).getFinalTime() % 100);
+            endTimeHr.setText(String.format("%d", schedules.get(0).getFinalTime() / 100));
+            endTimeMin.setText(String.format("%02d", schedules.get(0).getFinalTime() % 100));
 
             for (Schedule schedule : schedules)
                 days[schedule.getDay()].setChecked(true);
@@ -148,12 +151,17 @@ public class ActivityEditSubject extends AppCompatActivity {
                 scheduleControl.addSchedule(current, dh);
         }
 
-        //TODO: implement back
+        Intent result = new Intent(this, ActivityEditSchedule.class);
+        startActivity(result);
+        finish();
     }
 
     public void cancelSubject(View v) {
         cancel.setBackground(getDrawable(R.drawable.custom_selected_blue_light_btn));
         cancel.setTextColor(Color.WHITE);
-        //TODO: Implement this method
+
+        Intent result = new Intent(this, ActivityEditSchedule.class);
+        startActivity(result);
+        finish();
     }
 }
