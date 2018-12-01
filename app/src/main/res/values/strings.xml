@@ -55,4 +55,12 @@
     <string name="activity_subject_friday">Viernes</string>
     <string name="activity_subject_saturday">Sábado</string>
 
+    <!--Activity edit schedule strings-->
+    <string name="activity_edit_schedule_title">Editar Horario</string>
+    <string name="activity_edit_schedule_add_period">Añadir perdiodo</string>
+    <string name="activity_edit_schedule_add_subject">Añadir materia</string>
+
+    <!--Item edit schedule subject-->
+    <string name="item_edit_schedule_subject_time_lbl">Horario: </string>
+    <string name="item_edit_schedule_subject_days_lbl">Días: </string>
 </resources>

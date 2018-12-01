@@ -1,20 +1,33 @@
 package com.iteso.wapi;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
+import com.iteso.wapi.beans.Period;
+import com.iteso.wapi.beans.Subject;
 import com.iteso.wapi.database.DataBaseHandler;
+import com.iteso.wapi.database.PeriodControl;
+import com.iteso.wapi.database.SubjectControl;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class ActivityEditSchedule extends AppCompatActivity {
 
     private Button addPeriod, addSubject;
+    private Spinner periodsSpinner;
+    private RecyclerView subjectsViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +35,8 @@ public class ActivityEditSchedule extends AppCompatActivity {
         setContentView(R.layout.activity_edit_schedule);
         addPeriod = findViewById(R.id.edit_schedule_add_period_btn);
         addSubject = findViewById(R.id.edit_schedule_add_subject_btn);
+        periodsSpinner = findViewById(R.id.activity_edit_schedule_periods);
+        subjectsViews = findViewById(R.id.activity_edit_schedule_subjects);
 
         addPeriod.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,5 +67,25 @@ public class ActivityEditSchedule extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        DataBaseHandler dh = DataBaseHandler.getInstance(this);
+        PeriodControl periodControl = new PeriodControl();
+        SubjectControl subjectControl = new SubjectControl();
+        SharedPreferences sharedPreferences = getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
+
+        ArrayList<Period> periods = periodControl.getPeriodsByStudent(sharedPreferences.getString("NAME", "UNKNOWN"), dh);
+        ArrayList<String> periodNames = new ArrayList<>();
+        for (Period p : periods)
+            periodNames.add(p.getNamePeriod());
+
+        subjectsViews.setHasFixedSize(true);
+        subjectsViews.setLayoutManager(new LinearLayoutManager(this));
+
+        if(periodNames.size() > 0) {
+            periodsSpinner.setAdapter(new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, periodNames));
+            ArrayList<Subject> subjects = subjectControl.getSubjectsByPeriod(periods.get(0).getIdPeriod(), dh);
+            AdapterEditSchedule adapterEditSchedule = new AdapterEditSchedule(this, subjects);
+            subjectsViews.setAdapter(adapterEditSchedule);
+        }
     }
 }

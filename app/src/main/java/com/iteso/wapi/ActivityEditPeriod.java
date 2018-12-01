@@ -1,9 +1,9 @@
 package com.iteso.wapi;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,8 +12,6 @@ import android.widget.Toast;
 import com.iteso.wapi.beans.Period;
 import com.iteso.wapi.database.DataBaseHandler;
 import com.iteso.wapi.database.PeriodControl;
-
-import java.util.ArrayList;
 
 public class ActivityEditPeriod extends AppCompatActivity {
 
@@ -41,7 +39,10 @@ public class ActivityEditPeriod extends AppCompatActivity {
                 else {
                     Period newPeriod = new Period(periodControl.maxIdPeriod(dh), nameEditText.getText().toString(), sharedPreferences.getString("NAME", "Default name"));
                     periodControl.addPeriod(newPeriod, dh);
-                    onBackPressed();
+
+                    Intent intent = new Intent(ActivityEditPeriod.this, ActivityEditSchedule.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });

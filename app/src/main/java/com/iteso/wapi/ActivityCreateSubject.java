@@ -59,7 +59,7 @@ public class ActivityCreateSubject extends AppCompatActivity {
         days[WEDNESDAY] = findViewById(R.id.activity_create_subject_wednesday);
         days[THURSDAY] = findViewById(R.id.activity_create_subject_thursday);
         days[FRIDAY] = findViewById(R.id.activity_create_subject_friday);
-        days[SATURDAY] = findViewById(R.id.activity_create_subject_friday);
+        days[SATURDAY] = findViewById(R.id.activity_create_subject_saturday);
 
         DataBaseHandler dh = DataBaseHandler.getInstance(this);
         PeriodControl periodControl = new PeriodControl();
@@ -88,6 +88,11 @@ public class ActivityCreateSubject extends AppCompatActivity {
                     || Integer.parseInt(startTimeMin.getText().toString()) > 59
                     || Integer.parseInt(endTimeMin.getText().toString()) > 59) {
                 Toast.makeText(this, "Ingrese horas correctas", Toast.LENGTH_SHORT).show();
+                startTimeHr.setText("");
+                startTimeMin.setText("");
+                endTimeHr.setText("");
+                endTimeMin.setText("");
+
                 return;
             }
         } catch (Exception e) {
@@ -121,13 +126,14 @@ public class ActivityCreateSubject extends AppCompatActivity {
         ArrayList<Schedule> schedules = new ArrayList<>();
         for (int i = 0; i < days.length; i++) {
             if (days[i].isChecked()) {
+                Log.e("WAPI", i + "");
                 Schedule schedule = new Schedule(0, i, startTime, endTime, subject.getIdSubject());
                 schedules.add(schedule);
             }
         }
 
         ScheduleControl scheduleControl = new ScheduleControl();
-        for(Schedule schedule: schedules)
+        for (Schedule schedule : schedules)
             scheduleControl.addSchedule(schedule, dh);
 
 //        for(Schedule schedule: scheduleControl.getSchedules(dh))

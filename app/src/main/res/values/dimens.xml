@@ -12,4 +12,9 @@
     <dimen name="activity_edit_subject_btn_margin">15dp</dimen>
 
     <dimen name="activity_subject_btn_margin_top">40dp</dimen>
+    <dimen name="activity_edit_schedule_title">35sp</dimen>
+    <dimen name="activity_edit_schedule_btn_margin">15dp</dimen>
+    <dimen name="activity_edit_schedule_btn">20sp</dimen>
+    <dimen name="item_edit_schedule_subject_title">15sp</dimen>
+    <dimen name="item_edit_schedule_subject">13sp</dimen>
 </resources>
