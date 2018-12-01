@@ -8,16 +8,22 @@ public class Homework implements Parcelable {
     private Integer idHomework;
     private Integer fk_subject;
     private String descriptionHomework;
-    private Integer deliveryDate;
-    private Integer deliveryTime;
+    private Integer deliveryYear;
+    private Integer deliveryMonth;
+    private Integer deliveryDay;
+    private Integer deliveryHour;
+    private Integer deliveryMin;
 
 
-    public Homework(Integer idHomework, Integer fk_subject, String descriptionHomework, Integer deliveryDate, Integer deliveryTime) {
+    public Homework(Integer idHomework, Integer fk_subject, String descriptionHomework, Integer deliveryYear, Integer deliveryMonth, Integer deliveryDay, Integer deliveryHour, Integer deliveryMin) {
         this.idHomework = idHomework;
         this.fk_subject = fk_subject;
         this.descriptionHomework = descriptionHomework;
-        this.deliveryDate = deliveryDate;
-        this.deliveryTime = deliveryTime;
+        this.deliveryYear = deliveryYear;
+        this.deliveryMonth = deliveryMonth;
+        this.deliveryDay = deliveryDay;
+        this.deliveryHour = deliveryHour;
+        this.deliveryMin = deliveryMin;
     }
 
     public Homework() {
@@ -29,8 +35,11 @@ public class Homework implements Parcelable {
                 "idHomework=" + idHomework +
                 ", fk_subject=" + fk_subject +
                 ", descriptionHomework='" + descriptionHomework + '\'' +
-                ", deliveryDate='" + deliveryDate + '\'' +
-                ", deliveryTime='" + deliveryTime + '\'' +
+                ", deliveryYear=" + deliveryYear +
+                ", deliveryMonth=" + deliveryMonth +
+                ", deliveryDay=" + deliveryDay +
+                ", deliveryHour=" + deliveryHour +
+                ", deliveryMin=" + deliveryMin +
                 '}';
     }
 
@@ -58,22 +67,45 @@ public class Homework implements Parcelable {
         this.descriptionHomework = descriptionHomework;
     }
 
-    public Integer getDeliveryDate() {
-        return deliveryDate;
+    public Integer getDeliveryYear() {
+        return deliveryYear;
     }
 
-    public void setDeliveryDate(Integer deliveryDate) {
-        this.deliveryDate = deliveryDate;
+    public void setDeliveryYear(Integer deliveryYear) {
+        this.deliveryYear = deliveryYear;
     }
 
-    public Integer getDeliveryTime() {
-        return deliveryTime;
+    public Integer getDeliveryMonth() {
+        return deliveryMonth;
     }
 
-    public void setDeliveryTime(Integer deliveryTime) {
-        this.deliveryTime = deliveryTime;
+    public void setDeliveryMonth(Integer deliveryMonth) {
+        this.deliveryMonth = deliveryMonth;
     }
 
+    public Integer getDeliveryDay() {
+        return deliveryDay;
+    }
+
+    public void setDeliveryDay(Integer deliveryDay) {
+        this.deliveryDay = deliveryDay;
+    }
+
+    public Integer getDeliveryHour() {
+        return deliveryHour;
+    }
+
+    public void setDeliveryHour(Integer deliveryHour) {
+        this.deliveryHour = deliveryHour;
+    }
+
+    public Integer getDeliveryMin() {
+        return deliveryMin;
+    }
+
+    public void setDeliveryMin(Integer deliveryMin) {
+        this.deliveryMin = deliveryMin;
+    }
 
     @Override
     public int describeContents() {
@@ -85,16 +117,22 @@ public class Homework implements Parcelable {
         dest.writeValue(this.idHomework);
         dest.writeValue(this.fk_subject);
         dest.writeString(this.descriptionHomework);
-        dest.writeValue(this.deliveryDate);
-        dest.writeValue(this.deliveryTime);
+        dest.writeValue(this.deliveryYear);
+        dest.writeValue(this.deliveryMonth);
+        dest.writeValue(this.deliveryDay);
+        dest.writeValue(this.deliveryHour);
+        dest.writeValue(this.deliveryMin);
     }
 
     protected Homework(Parcel in) {
         this.idHomework = (Integer) in.readValue(Integer.class.getClassLoader());
         this.fk_subject = (Integer) in.readValue(Integer.class.getClassLoader());
         this.descriptionHomework = in.readString();
-        this.deliveryDate = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.deliveryTime = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.deliveryYear = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.deliveryMonth = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.deliveryDay = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.deliveryHour = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.deliveryMin = (Integer) in.readValue(Integer.class.getClassLoader());
     }
 
     public static final Creator<Homework> CREATOR = new Creator<Homework>() {

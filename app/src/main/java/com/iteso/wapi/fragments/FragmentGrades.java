@@ -1,6 +1,7 @@
 package com.iteso.wapi.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.annotation.Nullable;
@@ -10,9 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.iteso.wapi.ActivitySplashscreen;
 import com.iteso.wapi.AdapterMateria;
 import com.iteso.wapi.R;
 import com.iteso.wapi.beans.Grade;
@@ -25,6 +29,8 @@ import com.iteso.wapi.database.PeriodControl;
 import com.iteso.wapi.database.SubjectControl;
 
 import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -49,8 +55,10 @@ public class FragmentGrades extends Fragment {
     ArrayList<Period> periods;
     RecyclerView recyclerView;
     AdapterMateria adapterMateria;
+    SubjectControl subjectControl;
     DataBaseHandler dh;
     Spinner spinner;
+    TextView avarageFinal;
 
 
     public FragmentGrades() {
@@ -91,6 +99,7 @@ public class FragmentGrades extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_grades, container, false);
         recyclerView = rootView.findViewById(R.id.fragment_calificacion_recyclerView);
 
+        //SharedPreferences sharedPreferences = getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
         dh = DataBaseHandler.getInstance(getContext());
         PeriodControl periodControl = new PeriodControl();
         periods = periodControl.getPeriodsByStudent("sbriones",dh);
@@ -100,6 +109,7 @@ public class FragmentGrades extends Fragment {
         }
 
         spinner = (Spinner) rootView.findViewById(R.id.fragment_calificacion_spinner);
+        avarageFinal = rootView.findViewById(R.id.fragment_calificacion_promedio);
 
         spinner.setAdapter(new ArrayAdapter<>(inflater.getContext(),
                 android.R.layout.simple_spinner_dropdown_item, namePeriods.toArray()));
@@ -111,8 +121,7 @@ public class FragmentGrades extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        SubjectControl subjectControl = new SubjectControl();
-        GradeControl gradeControl = new GradeControl();
+        subjectControl = new SubjectControl();
 
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -120,14 +129,41 @@ public class FragmentGrades extends Fragment {
 
         subjects = subjectControl.getSubjectsByPeriod(spinner.getSelectedItemPosition(), dh);
 
-
         adapterMateria = new AdapterMateria(2, getActivity(), subjects);
         recyclerView.setAdapter(adapterMateria);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), mLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                subjects.clear();
+                subjects = subjectControl.getSubjectsByPeriod(spinner.getSelectedItemPosition(), dh);
+                adapterMateria.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
+
+    public void updateAvaragePeriod(){
+        float avarage = 0;
+        String show;
+        Subject auxSubject;
+        for(int x = 0; x<subjects.size();x++){
+            auxSubject = subjects.get(x);
+            avarage += (auxSubject.getAvarage());
+        }
+        avarage = avarage / subjects.size();
+        show = "Promedio: " + avarage;
+        avarageFinal.setText(show);
+    }
+
 /*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

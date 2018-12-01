@@ -52,16 +52,47 @@
         android:textColor="@color/colorPrimaryDark"
             />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <EditText
-            android:id="@+id/activity_edit_homework_fecha"
-            android:layout_width="match_parent"
+            android:id="@+id/activity_edit_homework_day"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
-
-            android:hint="Ingresa porcentaje"
             android:textColor="@color/colorPrimaryDark"
-
             android:textSize="15dp"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="/"
+            android:textSize="15dp"
+            />
+        <EditText
+            android:id="@+id/activity_edit_homework_month"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="/"
+            android:textSize="15dp"
+            />
+        <EditText
+            android:id="@+id/activity_edit_homework_year"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15dp"
+            />
+    </LinearLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -70,16 +101,33 @@
             android:textColor="@color/colorPrimaryDark"
             android:text="Hora"
             />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <EditText
-            android:id="@+id/activity_editar_tarea_hora"
-            android:layout_width="match_parent"
+            android:id="@+id/activity_edit_homework_hour"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
-
             android:textColor="@color/colorPrimaryDark"
-            android:hint="Ingresa la hora de entrega."
-
             android:textSize="15dp"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text=":"
+            android:textSize="15dp"
+            />
+        <EditText
+            android:id="@+id/activity_edit_homework_min"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15dp"
+            />
+    </LinearLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
