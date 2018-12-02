@@ -17,11 +17,18 @@
     </string-array>
 
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="activity_login_username">Usuario</string>
+    <!-- Activity Login -->
+    <string name="activity_login_start">Iniciar</string>
+    <string name="activity_login_username">Nombre de usuario</string>
     <string name="activity_login_password">Contraseña</string>
     <string name="activity_login_access_btn">Ingresar</string>
+    <string name="activity_login_register_btn">¿No tienes cuenta aún? Crea una aquí.</string>
+
+    <!-- Activity Register -->
+    <string name="activity_register_username">Nombre de usuario</string>
+    <string name="activity_register_password">Contraseña</string>
+    <string name="activity_register_terms">Acepto los términos y condiciones</string>
+    <string name="activity_register_btn">Registrarse</string>
 
     <!--Fragment payments strings: -->
     <string name="fragment_payment_name_hint">Título</string>
