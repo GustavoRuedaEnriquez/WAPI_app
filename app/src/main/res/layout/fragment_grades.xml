@@ -54,6 +54,9 @@
 
                 <TextView
                     android:id="@+id/fragment_calificacion_promedio"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center"
+                    android:textSize="25dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 

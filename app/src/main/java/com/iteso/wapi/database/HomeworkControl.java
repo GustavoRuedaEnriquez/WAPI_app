@@ -112,6 +112,27 @@ public class HomeworkControl {
         return homeworks;
     }
 
+    public String getHomeworksSubjectName(int idSubject, DataBaseHandler dh){
+        SQLiteDatabase db = dh.getReadableDatabase();
+        String result = "";
+        String selectQuery = "SELECT " +
+                DataBaseHandler.SUBJECT_NAME +
+                " FROM " + DataBaseHandler.TABLE_SUBJECT +
+                " WHERE " + DataBaseHandler.SUBJECT_ID + " = " + idSubject;
+        Cursor cursor = db.rawQuery(selectQuery,null);
+        while(cursor.moveToNext()){
+            result = cursor.getString(0);
+        }
+        try{
+            cursor.close();
+            db.close();
+        }catch(Exception e){
+
+        }
+        return result;
+    }
+
+
     public ArrayList<Homework> getHomeworksByStudent(String student, DataBaseHandler dh){
         ArrayList<Homework> homeworks = new ArrayList<>();
         SQLiteDatabase db = dh.getReadableDatabase();
@@ -129,7 +150,7 @@ public class HomeworkControl {
                 " ON " + DataBaseHandler.HOMEWORK_FK_SUBJECT + " = " + DataBaseHandler.SUBJECT_ID +
                 " JOIN " + DataBaseHandler.TABLE_PERIOD +
                 " ON " + DataBaseHandler.PERIOD_ID + " = " + DataBaseHandler.SUBJECT_FK_PERIOD +
-                " WHERE " + DataBaseHandler.PERIOD_FK_STUDENT + " = " + student;
+                " WHERE " + DataBaseHandler.PERIOD_FK_STUDENT + " = '" + student+"'";
         Cursor cursor = db.rawQuery(selectQuery,null);
         while(cursor.moveToNext()){
             Homework homework = new Homework();

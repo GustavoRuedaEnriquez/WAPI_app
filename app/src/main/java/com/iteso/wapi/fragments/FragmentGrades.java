@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,10 +100,11 @@ public class FragmentGrades extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_grades, container, false);
         recyclerView = rootView.findViewById(R.id.fragment_calificacion_recyclerView);
 
-        //SharedPreferences sharedPreferences = getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
         dh = DataBaseHandler.getInstance(getContext());
         PeriodControl periodControl = new PeriodControl();
-        periods = periodControl.getPeriodsByStudent("sbriones",dh);
+        periods = new ArrayList<>();
+        periods = periodControl.getPeriodsByStudent(sharedPreferences.getString("NAME", "UNKNOWN"),dh);
         ArrayList<String> namePeriods = new ArrayList<>();
         for (int x = 0; x < periods.size() ; x++){
             namePeriods.add(periods.get(x).getNamePeriod());
@@ -127,20 +129,15 @@ public class FragmentGrades extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
 
-        subjects = subjectControl.getSubjectsByPeriod(spinner.getSelectedItemPosition(), dh);
-
-        adapterMateria = new AdapterMateria(2, getActivity(), subjects);
-        recyclerView.setAdapter(adapterMateria);
-
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), mLayoutManager.getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 subjects.clear();
-                subjects = subjectControl.getSubjectsByPeriod(spinner.getSelectedItemPosition(), dh);
-                adapterMateria.notifyDataSetChanged();
+                subjects = subjectControl.getSubjectsByPeriod(periods.get(spinner.getSelectedItemPosition()).getIdPeriod(), dh);
+                adapterMateria = new AdapterMateria(2, getActivity(), subjects);
+                recyclerView.setAdapter(adapterMateria);
+                updateAvaragePeriod();
             }
 
             @Override
@@ -148,6 +145,8 @@ public class FragmentGrades extends Fragment {
 
             }
         });
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), mLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
     }
 
@@ -186,5 +185,19 @@ public class FragmentGrades extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(periods.size()>0){
+            subjects = subjectControl.getSubjectsByPeriod(periods.get(spinner.getSelectedItemPosition()).getIdPeriod(), dh);
+        }
+        else{
+            subjects = new ArrayList<>();
+        }
+        updateAvaragePeriod();
+        adapterMateria = new AdapterMateria(2, getActivity(), subjects);
+        recyclerView.setAdapter(adapterMateria);
     }
 }
