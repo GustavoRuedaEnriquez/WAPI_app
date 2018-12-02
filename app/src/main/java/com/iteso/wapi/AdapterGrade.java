@@ -102,6 +102,8 @@ public class AdapterGrade extends RecyclerView.Adapter<AdapterGrade.MyViewHolder
                 grade = gradeList.get(myViewHolder.getAdapterPosition());
                 gradeControl.deleteGrade(grade.getIdGrade(),dh);
                 gradeList.remove(myViewHolder.getAdapterPosition());
+                notifyDataSetChanged();
+                updateAvarageSubject();
             }
         });
 
@@ -128,6 +130,7 @@ public class AdapterGrade extends RecyclerView.Adapter<AdapterGrade.MyViewHolder
     public void updateGrade(MyViewHolder myViewHolder){
         if((Float.valueOf(myViewHolder.porcentaje.getText().toString()) >=0.0 & Float.valueOf(myViewHolder.porcentaje.getText().toString()) <=100.0)
                 & (Float.valueOf(myViewHolder.porcentaje.getText().toString()) >=0.0 & Float.valueOf(myViewHolder.porcentaje.getText().toString()) <=100.0)){
+            if(validatePercentage()){
             grade = gradeList.get(myViewHolder.getAdapterPosition());
             grade.setDescriptionGrade(myViewHolder.nombre.getText().toString());
             grade.setPercentage(Float.valueOf(myViewHolder.porcentaje.getText().toString()));
@@ -135,6 +138,10 @@ public class AdapterGrade extends RecyclerView.Adapter<AdapterGrade.MyViewHolder
             gradeControl.updateGrade(grade, dh);
             gradeList.set(myViewHolder.getAdapterPosition(),grade);
             updateAvarageSubject();
+            }
+            else {
+                Toast.makeText(getContext(), "Total de porcentajes erroneos", Toast.LENGTH_SHORT).show();
+            }
         }
         else{
             Toast.makeText(getContext(), "Error en datos ingresados", Toast.LENGTH_SHORT).show();
@@ -143,12 +150,23 @@ public class AdapterGrade extends RecyclerView.Adapter<AdapterGrade.MyViewHolder
 
     public void updateAvarageSubject(){
         float avarage = 0;
-        Grade auxGrade;
+        Grade auxGrade = new Grade();
         for(int x = 0; x<gradeList.size();x++){
             auxGrade = gradeList.get(x);
             avarage += (auxGrade.getGrade() * (auxGrade.getPercentage()/100));
         }
-        //subjectControl.updateSubject(auxGrade.getFk_subject(),dh);
+        subjectControl.updateSubjectById(auxGrade.getFk_subject(),avarage, dh);
+    }
+
+    public boolean validatePercentage(){
+        float totalPercentage = 0;
+        Grade auxGrade = new Grade();
+        for(int x = 0; x<gradeList.size();x++){
+            auxGrade = gradeList.get(x);
+            totalPercentage += auxGrade.getPercentage();
+        }
+        if(totalPercentage<=100) return true;
+        else return false;
     }
 
     @Override

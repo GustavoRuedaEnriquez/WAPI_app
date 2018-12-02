@@ -126,6 +126,19 @@ public class SubjectControl {
         }
     }
 
+    public void updateSubjectById(int updatedSubject, float avarage, DataBaseHandler dh){
+        SQLiteDatabase db = dh.getWritableDatabase();
+        String updateQuery = "UPDATE " + DataBaseHandler.TABLE_SUBJECT
+                + " SET " + DataBaseHandler.SUBJECT_AVERAGE + " = " + avarage
+                + " WHERE " + DataBaseHandler.SUBJECT_ID + " = " + updatedSubject;
+        db.execSQL(updateQuery);
+        try{
+            // db.close();
+        }catch(Exception e){
+
+        }
+    }
+
     public void deleteSubject(int id_subject, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
         String deleteQuery = "DELETE FROM "
