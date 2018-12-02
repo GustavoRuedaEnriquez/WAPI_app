@@ -90,7 +90,7 @@ public class ActivityCreateSubject extends AppCompatActivity {
             endTimeMin.setText("00");
 
         try {
-            if (Integer.parseInt(startTimeHr.getText().toString()) > 11 || Integer.parseInt(endTimeHr.getText().toString()) > 11
+            if (Integer.parseInt(startTimeHr.getText().toString()) > 23 || Integer.parseInt(endTimeHr.getText().toString()) > 23
                     || Integer.parseInt(startTimeMin.getText().toString()) > 59
                     || Integer.parseInt(endTimeMin.getText().toString()) > 59) {
                 Toast.makeText(this, getString(R.string.activity_subject_incorrect_time_warn), Toast.LENGTH_SHORT).show();
