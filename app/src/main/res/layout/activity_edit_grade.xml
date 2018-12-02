@@ -13,14 +13,6 @@
         android:orientation="vertical"
         android:padding="30dp">
 
-        <ImageButton
-            android:id="@+id/activity_edit_grade_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/EditText_dark_style"
-            android:src="@android:drawable/ic_media_rew"
-            android:tint="@color/colorPrimary"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

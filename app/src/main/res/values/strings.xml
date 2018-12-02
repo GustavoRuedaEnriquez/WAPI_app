@@ -72,6 +72,12 @@
     <string name="activity_edit_schedule_add_period">Añadir perdiodo</string>
     <string name="activity_edit_schedule_add_subject">Añadir materia</string>
     <string name="activity_edit_schedule_go">Ir</string>
+    <string name="activity_edit_schedule_delete">Eliminar periodo</string>
+    <string name="activity_edit_schedule_delete_dialog_title">Eliminar periodo</string>
+    <string name="activity_edit_schedule_delete_dialog_ok">Si</string>
+    <string name="activity_edit_schedule_delete_dialog_cancel">Canelar</string>
+    <string name="activity_edit_schedule_delete_dialog_message">¿Seguro que desea eliminar este periodo?</string>
+
 
     <!--Item edit schedule subject-->
     <string name="item_edit_schedule_subject_time_lbl">Horario: </string>
