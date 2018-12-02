@@ -24,7 +24,7 @@
             android:id="@+id/fragment_payment_description"
             style="@style/EditText_dark_style"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="wrap_content"
             android:gravity="top"
             android:hint="@string/fragment_payment_description"
             android:inputType="text|textMultiLine" />

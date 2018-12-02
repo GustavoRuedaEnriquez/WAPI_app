@@ -50,11 +50,11 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     public static final String HOMEWORK_ID          = "Homework_Id";
     public static final String HOMEWORK_FK_SUBJECT  = "Homework_FK_Subject";
     public static final String HOMEWORK_DESCRIPTION = "Homework_Description";
-    public static final String HOMEWORK_DAY        = "Homework_Day";
-    public static final String HOMEWORK_MONTH        = "Homework_Month";
+    public static final String HOMEWORK_DAY         = "Homework_Day";
+    public static final String HOMEWORK_MONTH       = "Homework_Month";
     public static final String HOMEWORK_YEAR        = "Homework_Year";
     public static final String HOMEWORK_HOUR        = "Homework_Hour";
-    public static final String HOMEWORK_MIN        = "Homework_Min";
+    public static final String HOMEWORK_MIN         = "Homework_Min";
 
     //Payment Table
     public static final String TABLE_PAYMENT       = "Payment";
@@ -101,7 +101,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
 
         String tableGrade = "CREATE TABLE " + TABLE_GRADE + " ("
                             + GRADE_ID + " INTEGER PRIMARY KEY, "
-                            + GRADE_FK_SUBJECT + "INTEGER, "
+                            + GRADE_FK_SUBJECT + " INTEGER, "
                             + GRADE_DESCRIPTION + " TEXT, "
                             + GRADE_PERCENTAGE + " REAL, "
                             + GRADE_VALUE + " REAL)";

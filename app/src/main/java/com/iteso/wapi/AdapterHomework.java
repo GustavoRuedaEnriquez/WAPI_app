@@ -6,22 +6,32 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iteso.wapi.beans.Homework;
+import com.iteso.wapi.database.DataBaseHandler;
+import com.iteso.wapi.database.HomeworkControl;
 
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyViewHolder>{
 
     public List<Homework> homeworkList;
+    public HomeworkControl homeworkControl;
+    public Homework homework;
+    public DataBaseHandler dh;
     private Context context;
     private int fragment;
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView descripcion, materia, fecha, hora;
+        ImageView erase;
 
         MyViewHolder(View view){
             super(view);
@@ -29,6 +39,7 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
             materia = view.findViewById(R.id.item_tarea_materia);
             fecha = view.findViewById(R.id.item_tarea_fecha);
             hora = view.findViewById(R.id.item_tarea_hora);
+            erase = view.findViewById(R.id.item_tarea_erase);
         }
     }
 
@@ -76,7 +87,9 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterHomework.MyViewHolder myViewHolder, int position){
-        final Homework homework = homeworkList.get(position);
+        homework = homeworkList.get(position);
+        homeworkControl = new HomeworkControl();
+        dh = DataBaseHandler.getInstance(getContext());
         Date deliveryDay = Calendar.getInstance().getTime();
         String dayString;
         //myViewHolder.nombre.setText(subjectList.get(myViewHolder.getAdapterPosition()).getNameSubject());
@@ -102,12 +115,21 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
                 dayString = "Saturday";
                 break;
         }
-        myViewHolder.materia.setText("Materiaa");
+        myViewHolder.materia.setText(homeworkControl.getHomeworksSubjectName(homework.getFk_subject(), dh));
         String dateToShow = dayString + " " +homework.getDeliveryDay()+"/"+homework.getDeliveryMonth();
         myViewHolder.fecha.setText(dateToShow);
         String hourToShow =homework.getDeliveryHour()+":"+homework.getDeliveryMin();
         myViewHolder.hora.setText(hourToShow);
 
+        myViewHolder.erase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homework = homeworkList.get(myViewHolder.getAdapterPosition());
+                homeworkControl.deleteHomework(homework.getIdHomework(),dh);
+                homeworkList.remove(myViewHolder.getAdapterPosition());
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override

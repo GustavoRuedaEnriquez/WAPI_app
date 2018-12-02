@@ -81,6 +81,36 @@ public class SubjectControl {
         return subjects;
     }
 
+    public ArrayList<Subject> getSubjectsByStudent(String student, DataBaseHandler dh){
+        ArrayList<Subject> subjects = new ArrayList<>();
+        SQLiteDatabase db = dh.getReadableDatabase();
+        String selectQuery = "SELECT " +
+                DataBaseHandler.SUBJECT_ID + ", " +
+                DataBaseHandler.SUBJECT_FK_PERIOD + ", " +
+                DataBaseHandler.SUBJECT_NAME + ", " +
+                DataBaseHandler.SUBJECT_AVERAGE +
+                " FROM " + DataBaseHandler.TABLE_SUBJECT +
+                " JOIN " + DataBaseHandler.TABLE_PERIOD +
+                " ON " + DataBaseHandler.SUBJECT_FK_PERIOD + " = " + DataBaseHandler.PERIOD_ID+
+                " WHERE " + DataBaseHandler.PERIOD_FK_STUDENT + " = '" + student + "'";
+        Cursor cursor = db.rawQuery(selectQuery,null);
+        while(cursor.moveToNext()){
+            Subject subject = new Subject();
+            subject.setIdSubject(cursor.getInt(0));
+            subject.setFk_period(cursor.getInt(1));
+            subject.setNameSubject(cursor.getString(2));
+            subject.setAvarage(cursor.getFloat(3));
+            subjects.add(subject);
+        }
+        try{
+            // cursor.close();
+            //db.close();
+        }catch(Exception e){
+
+        }
+        return subjects;
+    }
+  
     public ArrayList<Subject> getSubjectsByPeriodAndDayOrdered(int period, int day, DataBaseHandler dh){
         ArrayList<Subject> subjects = new ArrayList<>();
         SQLiteDatabase db = dh.getReadableDatabase();
@@ -94,7 +124,6 @@ public class SubjectControl {
                 " WHERE " + DataBaseHandler.SUBJECT_FK_PERIOD + " = " + period + " AND " + DataBaseHandler.SCHEDULE_DAY + " = " + day + " " +
                 " ORDER BY " + DataBaseHandler.SCHEDULE_START_HOUR + " ASC ";
         Cursor cursor = db.rawQuery(selectQuery,null);
-        Log.e("DB", "Executed: " + selectQuery);
         while(cursor.moveToNext()){
             Subject subject = new Subject();
             subject.setIdSubject(cursor.getInt(0));
@@ -112,8 +141,6 @@ public class SubjectControl {
         return subjects;
     }
 
-
-
     public void updateSubject(Subject updatedSubject, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
         String updateQuery = "UPDATE " + DataBaseHandler.TABLE_SUBJECT
@@ -124,6 +151,19 @@ public class SubjectControl {
         db.execSQL(updateQuery);
         try{
            // db.close();
+        }catch(Exception e){
+
+        }
+    }
+
+    public void updateSubjectById(int updatedSubject, float avarage, DataBaseHandler dh){
+        SQLiteDatabase db = dh.getWritableDatabase();
+        String updateQuery = "UPDATE " + DataBaseHandler.TABLE_SUBJECT
+                + " SET " + DataBaseHandler.SUBJECT_AVERAGE + " = " + avarage
+                + " WHERE " + DataBaseHandler.SUBJECT_ID + " = " + updatedSubject;
+        db.execSQL(updateQuery);
+        try{
+            // db.close();
         }catch(Exception e){
 
         }
