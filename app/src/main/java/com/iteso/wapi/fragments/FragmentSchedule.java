@@ -2,6 +2,7 @@ package com.iteso.wapi.fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -96,6 +97,17 @@ public class FragmentSchedule extends Fragment {
         editSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                editSchedule.setBackground(getResources().getDrawable(R.drawable.custom_selected_blue_light_btn));
+                editSchedule.setTextColor(Color.WHITE);
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        editSchedule.setBackground(getResources().getDrawable(R.drawable.custom_blue_light_btn));
+                        editSchedule.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(task, 190);
                 Intent intent = new Intent(getActivity(), ActivityEditSchedule.class);
                 startActivity(intent);
             }
