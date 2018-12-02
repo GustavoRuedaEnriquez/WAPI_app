@@ -54,7 +54,8 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/fragment_payment_date_placeholder"
-                android:maxLength="10"/>
+                android:maxLength="10"
+                style="@style/EditText_dark_style"/>
 
             <EditText
                 android:id="@+id/fragment_payment_hour"
@@ -63,6 +64,7 @@
                 android:layout_marginLeft="@dimen/margin"
                 android:hint="@string/fragment_payment_hour_placeholder"
                 android:maxLength="10"
+                style="@style/EditText_dark_style"
                 />
         </LinearLayout>
 

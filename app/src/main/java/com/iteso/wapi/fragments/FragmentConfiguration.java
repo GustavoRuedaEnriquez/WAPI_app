@@ -84,6 +84,8 @@ public class FragmentConfiguration extends Fragment {
                 startActivity(editIntent);
 
                 updateInformation();
+                edit.setBackground(getResources().getDrawable(R.drawable.custom_blue_light_btn));
+                edit.setTextColor(getResources().getColor(R.color.colorPrimary));
             }
         });
 
