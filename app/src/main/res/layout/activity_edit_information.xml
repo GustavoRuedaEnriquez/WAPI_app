@@ -11,9 +11,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/activity_edit_info_title"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin"
-            android:text="Editar información"
             android:textColor="@color/colorPrimary"
             android:textSize="35dp"
             android:textStyle="bold" />
@@ -21,10 +21,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/fragment_configuration_username"
+            android:textSize="19dp"
             android:layout_marginLeft="@dimen/margin"
-            android:text="Nombre"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="19dp" />
+            android:textColor="@color/colorPrimaryDark"/>
 
         <EditText
             android:id="@+id/activit_edit_info_name_et"
@@ -38,11 +38,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/activity_edit_info_new_password"
+            android:textSize="19dp"
             android:layout_marginLeft="@dimen/margin"
             android:layout_marginTop="20dp"
-            android:text="Nueva contraseña"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="19dp" />
+            android:textColor="@color/colorPrimaryDark"/>
 
         <EditText
             android:id="@+id/activit_edit_info_password_et"
@@ -56,11 +56,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/activity_edit_info_confirm_password"
+            android:textSize="19dp"
             android:layout_marginLeft="@dimen/margin"
             android:layout_marginTop="20dp"
-            android:text="Confirmar contraseña"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="19dp" />
+            android:textColor="@color/colorPrimaryDark"/>
 
         <EditText
             android:id="@+id/activit_edit_info_confirm_password_et"
@@ -69,18 +69,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin"
             android:layout_marginRight="@dimen/margin"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"/>
 
         <Button
             android:id="@+id/activity_edit_info_save_btn"
             style="@style/custom_light_Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin"
+            android:text="@string/activity_edit_info_btn"
+            android:textSize="30dp"
             android:layout_marginTop="80dp"
-            android:layout_marginRight="@dimen/margin"
-            android:text="Guardar"
-            android:textSize="30dp" />
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"/>
 
     </LinearLayout>
 

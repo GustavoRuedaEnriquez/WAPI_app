@@ -39,7 +39,6 @@ public class AdapterFragmentSchedule  extends RecyclerView.Adapter<AdapterFragme
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int i) {
-        Log.e("ADAPTER","Tamaño de mData: " + mDataSet.size());
         DataBaseHandler dh = DataBaseHandler.getInstance(context);
         ScheduleControl scheduleControl = new ScheduleControl();
         final Subject subject = mDataSet.get(i);

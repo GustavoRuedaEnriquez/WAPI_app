@@ -49,6 +49,7 @@
         android:orientation="horizontal">
         <EditText
             android:id="@+id/activity_edit_homework_day"
+            android:inputType="number"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
@@ -63,6 +64,7 @@
             />
         <EditText
             android:id="@+id/activity_edit_homework_month"
+            android:inputType="number"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
@@ -77,6 +79,7 @@
             />
         <EditText
             android:id="@+id/activity_edit_homework_year"
+            android:inputType="number"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
@@ -98,6 +101,7 @@
         android:orientation="horizontal">
         <EditText
             android:id="@+id/activity_edit_homework_hour"
+            android:inputType="number"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
@@ -112,6 +116,7 @@
             />
         <EditText
             android:id="@+id/activity_edit_homework_min"
+            android:inputType="number"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"

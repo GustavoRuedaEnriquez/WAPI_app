@@ -27,6 +27,8 @@ import com.iteso.wapi.database.SubjectControl;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ActivityCreateSubject extends AppCompatActivity {
     private TextView name;
@@ -83,6 +85,16 @@ public class ActivityCreateSubject extends AppCompatActivity {
         save.setBackground(getDrawable(R.drawable.custom_selected_blue_light_btn));
         save.setTextColor(Color.WHITE);
 
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                save.setBackground(getDrawable(R.drawable.custom_blue_light_btn));
+                save.setTextColor(getColor(R.color.colorPrimary));
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(task, 2000);
+
         if(startTimeMin.getText().toString().equals(""))
             startTimeMin.setText("00");
 
@@ -118,7 +130,7 @@ public class ActivityCreateSubject extends AppCompatActivity {
         SubjectControl subjectControl = new SubjectControl();
         int idSubject = subjectControl.maxIdSubject(dh) + 1;
 
-        Subject subject = new Subject(idSubject, subjectPeriod.getIdPeriod(), subjectName, 6.0f);
+        Subject subject = new Subject(idSubject, subjectPeriod.getIdPeriod(), subjectName, 0.0f);
 
         //Create schedules
         int startTime = Integer.parseInt(startTimeHr.getText().toString()) * 100;
@@ -151,8 +163,13 @@ public class ActivityCreateSubject extends AppCompatActivity {
         for (Schedule schedule : schedules)
             scheduleControl.addSchedule(schedule, dh);
 
+        Intent intent = new Intent(this, ActivityEditSchedule.class);
+        startActivity(intent);
+        finish();
+    }
 
-
+    @Override
+    public void onBackPressed() {
         Intent intent = new Intent(this, ActivityEditSchedule.class);
         startActivity(intent);
         finish();

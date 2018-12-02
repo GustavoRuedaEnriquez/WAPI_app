@@ -2,6 +2,7 @@ package com.iteso.wapi.fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-
 import com.iteso.wapi.ActivityEditSchedule;
 import com.iteso.wapi.ActivityLogin;
 import com.iteso.wapi.ActivitySplashscreen;
@@ -30,11 +30,9 @@ import com.iteso.wapi.database.DataBaseHandler;
 import com.iteso.wapi.database.PeriodControl;
 import com.iteso.wapi.database.ScheduleControl;
 import com.iteso.wapi.database.SubjectControl;
-
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import static android.content.Context.MODE_PRIVATE;
 
 
@@ -59,12 +57,12 @@ public class FragmentSchedule extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        days.add("Lunes");
-        days.add("Martes");
-        days.add("Miércoles");
-        days.add("Jueves");
-        days.add("Viernes");
-        days.add("Sábado");
+        days.add(getResources().getString(R.string.fragment_schedule_monday));
+        days.add(getResources().getString(R.string.fragment_schedule_tuesday));
+        days.add(getResources().getString(R.string.fragment_schedule_wednesday));
+        days.add(getResources().getString(R.string.fragment_schedule_thursday));
+        days.add(getResources().getString(R.string.fragment_schedule_friday));
+        days.add(getResources().getString(R.string.fragment_schedule_saturday));
 
         final DataBaseHandler dh = DataBaseHandler.getInstance(getActivity());
         final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
@@ -99,6 +97,17 @@ public class FragmentSchedule extends Fragment {
         editSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                editSchedule.setBackground(getResources().getDrawable(R.drawable.custom_selected_blue_light_btn));
+                editSchedule.setTextColor(Color.WHITE);
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        editSchedule.setBackground(getResources().getDrawable(R.drawable.custom_blue_light_btn));
+                        editSchedule.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(task, 190);
                 Intent intent = new Intent(getActivity(), ActivityEditSchedule.class);
                 startActivity(intent);
             }
@@ -177,7 +186,7 @@ public class FragmentSchedule extends Fragment {
         updateAdapter();
     }
 
-    public ArrayList<Subject> subjectsPerDay(ArrayList<Subject> subjects, int day, DataBaseHandler dh) {
+    /*public ArrayList<Subject> subjectsPerDay(ArrayList<Subject> subjects, int day, DataBaseHandler dh) {
         ArrayList<Subject> subjectsPerDay = new ArrayList<>();
         for (Subject index : subjects) {
             ArrayList<Integer> days = scheduleControl.getDaysBySubject(index.getIdSubject(), dh);
@@ -187,7 +196,7 @@ public class FragmentSchedule extends Fragment {
             }
         }
         return subjectsPerDay;
-    }
+    }*/
 
     public void previousDay(Spinner spinner) {
         int position = spinner.getSelectedItemPosition();
@@ -220,60 +229,9 @@ public class FragmentSchedule extends Fragment {
 
         if (subjectControl.getSubjectsByPeriod(periodId, dh).size() > 0) {
             subjects.clear();
-            ArrayList<Subject> allSubjects = subjectControl.getSubjectsByPeriod(currentPeriod.getIdPeriod(), dh);
-            subjects.addAll(subjectsPerDay(allSubjects, weekDays.getSelectedItemPosition(), dh));
+            ArrayList<Subject> allSubjects = subjectControl.getSubjectsByPeriodAndDayOrdered(currentPeriod.getIdPeriod(), weekDays.getSelectedItemPosition(), dh);
+            subjects.addAll(allSubjects);
             adapterFragmentSchedule.notifyDataSetChanged();
-//
-//            switch (weekDays.getSelectedItemPosition()) {
-//                case 0:
-//                    Log.e("SCHEDULE", "0");
-//                    FragmentSchedule.this.subjects.clear();
-//                    FragmentSchedule.this.subjects.addAll(subjectsPerDay(subjects,0, dh));
-//                    FragmentSchedule.this.adapter.notifyDataSetChanged();
-////                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,0, dh), 0);
-////                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
-//                    break;
-//                case 1:
-//                    Log.e("SCHEDULE", "1");
-//                    FragmentSchedule.this.subjects.clear();
-//                    FragmentSchedule.this.subjects.addAll(subjectsPerDay(subjects,1, dh));
-//                    FragmentSchedule.this.adapter.notifyDataSetChanged();
-////                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,1, dh), 1);
-////                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
-//                    break;
-//                case 2:
-//                    Log.e("SCHEDULE", "2");
-//                    FragmentSchedule.this.subjects.clear();
-//                    FragmentSchedule.this.subjects.addAll(subjectsPerDay(subjects,2, dh));
-//                    FragmentSchedule.this.adapter.notifyDataSetChanged();
-////                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,2, dh), 2);
-////                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
-//                    break;
-//                case 3:
-//                    Log.e("SCHEDULE", "3");
-//                    FragmentSchedule.this.subjects.clear();
-//                    FragmentSchedule.this.subjects.addAll(subjectsPerDay(subjects,3, dh));
-//                    FragmentSchedule.this.adapter.notifyDataSetChanged();
-////                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,3, dh), 3);
-////                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
-//                    break;
-//                case 4:
-//                    Log.e("SCHEDULE", "4");
-//                    FragmentSchedule.this.subjects.clear();
-//                    FragmentSchedule.this.subjects.addAll(subjectsPerDay(subjects,4, dh));
-//                    FragmentSchedule.this.adapter.notifyDataSetChanged();
-////                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,4, dh), 4);
-////                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
-//                    break;
-//                case 5:
-//                    Log.e("SCHEDULE", "5");
-//                    FragmentSchedule.this.subjects.clear();
-//                    FragmentSchedule.this.subjects.addAll(subjectsPerDay(subjects,5, dh));
-//                    FragmentSchedule.this.adapter.notifyDataSetChanged();
-////                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,5, dh), 5);
-////                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
-//                    break;
-//            }
         }
     }
 
