@@ -13,14 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.iteso.wapi.ActivityEditInformation;
 import com.iteso.wapi.ActivityLogin;
 import com.iteso.wapi.ActivitySplashscreen;
 import com.iteso.wapi.R;
 import com.iteso.wapi.database.DataBaseHandler;
 import com.iteso.wapi.database.StudentControl;
-
 import static android.content.Context.MODE_PRIVATE;
 
 
@@ -114,8 +112,8 @@ public class FragmentConfiguration extends Fragment {
                 deleteAccount.setTextColor(Color.WHITE);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Light_Dialog_Alert);
 
-                builder.setMessage("¿Seguro que quiere borrar su cuenta?")
-                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                builder.setMessage(getResources().getString(R.string.fragment_configuration_message_disclaimer))
+                        .setPositiveButton(getResources().getString(R.string.fragment_configuration_yes), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 studentControl.deleteStudent(sharedPreferences.getString("NAME", "Default name"), dh);
@@ -124,13 +122,13 @@ public class FragmentConfiguration extends Fragment {
                                 getActivity().finish();
                             }
                         })
-                        .setNegativeButton("No", null)
-                        .show();
+
+                        .setNegativeButton(getResources().getString(R.string.fragment_configuration_no), null).show();
+              
                 deleteAccount.setBackground(getResources().getDrawable(R.drawable.custom_red_light_btn));
                 deleteAccount.setTextColor(Color.RED);
             }
         });
-
         return v;
     }
 

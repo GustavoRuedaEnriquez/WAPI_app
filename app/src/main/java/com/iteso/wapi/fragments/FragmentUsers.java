@@ -34,15 +34,7 @@ public class FragmentUsers extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentUsers.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static FragmentUsers newInstance(String param1, String param2) {
         FragmentUsers fragment = new FragmentUsers();
         Bundle args = new Bundle();
@@ -67,7 +59,7 @@ public class FragmentUsers extends Fragment {
         View v = inflater.inflate(R.layout.fragment_users, container, false);
         greeting = v.findViewById(R.id.fragment_users_greeting);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
-        greeting.setText("Bienvenido " + sharedPreferences.getString("NAME","Default name"));
+        greeting.setText(getResources().getString(R.string.fragment_user_greeting) + " " + sharedPreferences.getString("NAME","Default name"));
         return v;
     }
 

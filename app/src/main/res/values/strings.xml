@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">WAPI</string>
-
     <string name="section1">Usuarios</string>
     <string name="section2">Horario</string>
     <string name="section3">Calificacion</string>
@@ -16,28 +15,59 @@
         <item>Semestre 5</item>
     </string-array>
 
-
-    <!-- Activity Login -->
+    <!-- Activity Login Strings -->
     <string name="activity_login_start">Iniciar</string>
     <string name="activity_login_username">Nombre de usuario</string>
     <string name="activity_login_password">Contraseña</string>
     <string name="activity_login_access_btn">Ingresar</string>
     <string name="activity_login_register_btn">¿No tienes cuenta aún? Crea una aquí.</string>
 
-    <!-- Activity Register -->
+    <!-- Activity Register Strings -->
     <string name="activity_register_username">Nombre de usuario</string>
     <string name="activity_register_password">Contraseña</string>
     <string name="activity_register_terms">Acepto los términos y condiciones</string>
     <string name="activity_register_btn">Registrarse</string>
 
-    <!--Fragment payments strings: -->
-    <string name="fragment_payment_name_hint">Título</string>
-    <string name="fragment_payment_description_hint">Descripción</string>
-    <string name="fragment_payment_amount_hint">Cantidad</string>
-    <string name="fragment_payment_date_hint">Fecha</string>
-    <string name="fragment_payment_pay_visa">Visa</string>
-    <string name="fragment_payment_pay_mastercard">Mastercard</string>
-    <string name="fragment_payment_button_text">Añadir Recordatorio</string>
+    <!--Fragment User Strings -->
+    <string name="fragment_user_greeting">Bienvenido</string>
+
+    <!-- Fragment Schedule Strings -->
+    <string name="fragment_schedule_monday">Lunes</string>
+    <string name="fragment_schedule_tuesday">Martes</string>
+    <string name="fragment_schedule_wednesday">Miércoles</string>
+    <string name="fragment_schedule_thursday">Jueves</string>
+    <string name="fragment_schedule_friday">Viernes</string>
+    <string name="fragment_schedule_saturday">Sábado</string>
+    <string name="fragment_schedule_edit_schedule_btn">Editar Horario</string>
+
+    <!-- Fragment Payment Strings -->
+    <string name="fragment_payment_title">Título</string>
+    <string name="fragment_payment_description">Descripción</string>
+    <string name="fragment_payment_amount">Cantidad</string>
+    <string name="fragment_payment_date">Fecha</string>
+    <string name="fragment_payment_date_placeholder">DD/MM/AAAA</string>
+    <string name="fragment_payment_hour_placeholder">hh:mm:ss</string>
+    <string name="fragment_payment_btn">Añadir Recordatorio</string>
+    <string name="fragment_payment_warning_toast">Se tienen que llenar todos los campos. (La hora es opcional).</string>
+    <string name="fragment_payment_reminder_title">Recordatorio de pago: </string>
+    <string name="fragment_payment_reminder_toast">Recordatorio creado.</string>
+
+    <!-- Fragment Configuration Strings -->
+    <string name="fragment_configuration_username">Nombre de usuario</string>
+    <string name="fragment_configuration_password">Contraseña</string>
+    <string name="fragment_configuration_edit_btn">Editar</string>
+    <string name="fragment_configuration_logout_btn">Cerrar Sesión</string>
+    <string name="fragment_configuration_delete_account_btn">Borrar Cuenta</string>
+    <string name="fragment_configuration_message_disclaimer">¿Seguro que quiere borrar su cuenta?</string>
+    <string name="fragment_configuration_yes">Sí</string>
+    <string name="fragment_configuration_no">No</string>
+
+    <!-- Activity Edit Information -->
+    <string name="activity_edit_info_title">Editar información</string>
+    <string name="activity_edit_info_new_password">Nueva contraseña</string>
+    <string name="activity_edit_info_confirm_password">Confirmar contraseña</string>
+    <string name="activity_edit_info_btn">Guardar</string>
+    <string name="activity_edit_info_toast">Por favor, confirme correctamente la contraseña.</string>
 
     <!--Activity Edit Subject Strings-->
     <string name="activity_edit_subject_name_hint">Nombre de la materia</string>
@@ -69,15 +99,14 @@
 
     <!--Activity edit schedule strings-->
     <string name="activity_edit_schedule_title">Editar Horario</string>
-    <string name="activity_edit_schedule_add_period">Añadir perdiodo</string>
+    <string name="activity_edit_schedule_add_period">Añadir periodo</string>
     <string name="activity_edit_schedule_add_subject">Añadir materia</string>
     <string name="activity_edit_schedule_go">Ir</string>
     <string name="activity_edit_schedule_delete">Eliminar periodo</string>
     <string name="activity_edit_schedule_delete_dialog_title">Eliminar periodo</string>
     <string name="activity_edit_schedule_delete_dialog_ok">Si</string>
-    <string name="activity_edit_schedule_delete_dialog_cancel">Canelar</string>
+    <string name="activity_edit_schedule_delete_dialog_cancel">Cancelar</string>
     <string name="activity_edit_schedule_delete_dialog_message">¿Seguro que desea eliminar este periodo?</string>
-
 
     <!--Item edit schedule subject-->
     <string name="item_edit_schedule_subject_time_lbl">Horario: </string>

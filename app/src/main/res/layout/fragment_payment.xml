@@ -17,7 +17,7 @@
             style="@style/EditText_dark_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/fragment_payment_name_hint"
+            android:hint="@string/fragment_payment_title"
             android:inputType="textPersonName" />
 
         <EditText
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:gravity="top"
-            android:hint="@string/fragment_payment_description_hint"
+            android:hint="@string/fragment_payment_description"
             android:inputType="text|textMultiLine" />
 
         <EditText
@@ -34,14 +34,14 @@
             style="@style/EditText_dark_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/fragment_payment_amount_hint"
+            android:hint="@string/fragment_payment_amount"
             android:inputType="numberDecimal" />
 
         <TextView
             android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha"
+            android:text="@string/fragment_payment_date"
             android:textSize="18dp"
             android:textColor="@color/colorPrimaryDark"/>
         <LinearLayout
@@ -53,7 +53,7 @@
                 android:id="@+id/fragment_payment_date"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:hint="DD/MM/YYYY"
+                android:hint="@string/fragment_payment_date_placeholder"
                 android:maxLength="10"/>
 
             <EditText
@@ -61,7 +61,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin"
-                android:hint="HH:mm:SS"
+                android:hint="@string/fragment_payment_hour_placeholder"
                 android:maxLength="10"
                 />
         </LinearLayout>
@@ -74,7 +74,7 @@
             android:layout_gravity="center"
             android:textSize="@dimen/margin"
             android:layout_marginTop="@dimen/margin"
-            android:text="@string/fragment_payment_button_text" />
+            android:text="@string/fragment_payment_btn" />
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>
