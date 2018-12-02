@@ -174,7 +174,7 @@ public class FragmentSchedule extends Fragment {
         updateAdapter();
     }
 
-    public ArrayList<Subject> subjectsPerDay(ArrayList<Subject> subjects, int day, DataBaseHandler dh) {
+    /*public ArrayList<Subject> subjectsPerDay(ArrayList<Subject> subjects, int day, DataBaseHandler dh) {
         ArrayList<Subject> subjectsPerDay = new ArrayList<>();
         for (Subject index : subjects) {
             ArrayList<Integer> days = scheduleControl.getDaysBySubject(index.getIdSubject(), dh);
@@ -184,7 +184,7 @@ public class FragmentSchedule extends Fragment {
             }
         }
         return subjectsPerDay;
-    }
+    }*/
 
     public void previousDay(Spinner spinner) {
         int position = spinner.getSelectedItemPosition();
@@ -217,8 +217,8 @@ public class FragmentSchedule extends Fragment {
 
         if (subjectControl.getSubjectsByPeriod(periodId, dh).size() > 0) {
             subjects.clear();
-            ArrayList<Subject> allSubjects = subjectControl.getSubjectsByPeriod(currentPeriod.getIdPeriod(), dh);
-            subjects.addAll(subjectsPerDay(allSubjects, weekDays.getSelectedItemPosition(), dh));
+            ArrayList<Subject> allSubjects = subjectControl.getSubjectsByPeriodAndDayOrdered(currentPeriod.getIdPeriod(), weekDays.getSelectedItemPosition(), dh);
+            subjects.addAll(allSubjects);
             adapterFragmentSchedule.notifyDataSetChanged();
         }
     }

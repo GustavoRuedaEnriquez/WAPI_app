@@ -81,6 +81,39 @@ public class SubjectControl {
         return subjects;
     }
 
+    public ArrayList<Subject> getSubjectsByPeriodAndDayOrdered(int period, int day, DataBaseHandler dh){
+        ArrayList<Subject> subjects = new ArrayList<>();
+        SQLiteDatabase db = dh.getReadableDatabase();
+        String selectQuery = "SELECT " +
+                DataBaseHandler.SUBJECT_ID + ", " +
+                DataBaseHandler.SUBJECT_FK_PERIOD + ", " +
+                DataBaseHandler.SUBJECT_NAME + ", " +
+                DataBaseHandler.SUBJECT_AVERAGE +
+                " FROM " + DataBaseHandler.TABLE_SUBJECT +
+                " JOIN " + DataBaseHandler.TABLE_SCHEDULE + " ON " + DataBaseHandler.SUBJECT_ID  + " = " + DataBaseHandler.SCHEDULE_FK_SUBJECT +
+                " WHERE " + DataBaseHandler.SUBJECT_FK_PERIOD + " = " + period + " AND " + DataBaseHandler.SCHEDULE_DAY + " = " + day + " " +
+                " ORDER BY " + DataBaseHandler.SCHEDULE_START_HOUR + " ASC ";
+        Cursor cursor = db.rawQuery(selectQuery,null);
+        Log.e("DB", "Executed: " + selectQuery);
+        while(cursor.moveToNext()){
+            Subject subject = new Subject();
+            subject.setIdSubject(cursor.getInt(0));
+            subject.setFk_period(cursor.getInt(1));
+            subject.setNameSubject(cursor.getString(2));
+            subject.setAvarage(cursor.getFloat(3));
+            subjects.add(subject);
+        }
+        try{
+            // cursor.close();
+            //db.close();
+        }catch(Exception e){
+
+        }
+        return subjects;
+    }
+
+
+
     public void updateSubject(Subject updatedSubject, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
         String updateQuery = "UPDATE " + DataBaseHandler.TABLE_SUBJECT

@@ -118,7 +118,7 @@ public class ActivityCreateSubject extends AppCompatActivity {
         SubjectControl subjectControl = new SubjectControl();
         int idSubject = subjectControl.maxIdSubject(dh) + 1;
 
-        Subject subject = new Subject(idSubject, subjectPeriod.getIdPeriod(), subjectName, 6.0f);
+        Subject subject = new Subject(idSubject, subjectPeriod.getIdPeriod(), subjectName, 0.0f);
 
         //Create schedules
         int startTime = Integer.parseInt(startTimeHr.getText().toString()) * 100;
