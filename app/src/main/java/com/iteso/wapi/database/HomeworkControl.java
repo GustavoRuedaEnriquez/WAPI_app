@@ -210,7 +210,7 @@ public class HomeworkControl {
         SQLiteDatabase db = dh.getReadableDatabase();
         int result = 0;
 
-        String select = "Select MAX("+DataBaseHandler.HOMEWORK_ID+") " + " From "+DataBaseHandler.TABLE_HOMEWORK+
+        String select = "SELECT MAX("+DataBaseHandler.HOMEWORK_ID+") " + " FROM "+DataBaseHandler.TABLE_HOMEWORK+
                 " GROUP BY "+DataBaseHandler.HOMEWORK_ID;
 
         Cursor cursor = db.rawQuery(select, null);

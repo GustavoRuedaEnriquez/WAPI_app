@@ -74,6 +74,7 @@ public class ActivityEditSchedule extends AppCompatActivity {
                 addSubject.setTextColor(Color.WHITE);
                 Intent intent = new Intent(ActivityEditSchedule.this, ActivityCreateSubject.class);
                 startActivity(intent);
+                finish();   //MODIFICADO
             }
         });
 

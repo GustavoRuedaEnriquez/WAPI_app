@@ -29,7 +29,6 @@ public class ActivityEditGrade extends AppCompatActivity {
     ArrayList<Grade> calificaciones;
     RecyclerView recyclerView;
     AdapterGrade adapterGrade;
-    ImageButton back;
     Button addGrade;
     EditText editTitle, editPorc, editGrade;
     DataBaseHandler dh;
@@ -40,7 +39,6 @@ public class ActivityEditGrade extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_grade);
         nomMateria = findViewById(R.id.activity_edit_grade_materia);
-        back = findViewById(R.id.activity_edit_grade_back);
         editTitle = findViewById(R.id.activity_edit_grade_materia_edit_desc);
         editPorc = findViewById(R.id.activity_edit_grade_materia_edit_porc);
         editGrade = findViewById(R.id.activity_edit_grade_materia_edit_cali);
@@ -67,23 +65,6 @@ public class ActivityEditGrade extends AppCompatActivity {
         adapterGrade = new AdapterGrade(2, this, calificaciones);
 
         recyclerView.setAdapter(adapterGrade);
-
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                avarage = 0;
-                for(int x =0; x<calificaciones.size();x++){
-                    avarage += (calificaciones.get(x).getGrade()*(calificaciones.get(x).getPercentage() / 100));
-                }
-                subject.setAvarage(avarage);
-                subjectControl.updateSubject(subject, dh);
-
-                Intent intent = new Intent(ActivityEditGrade.this, ActivityHome.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         addGrade.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -27,6 +27,8 @@ import com.iteso.wapi.database.SubjectControl;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ActivityCreateSubject extends AppCompatActivity {
     private TextView name;
@@ -82,6 +84,16 @@ public class ActivityCreateSubject extends AppCompatActivity {
     public void addSubject(View v) {
         save.setBackground(getDrawable(R.drawable.custom_selected_blue_light_btn));
         save.setTextColor(Color.WHITE);
+
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                save.setBackground(getDrawable(R.drawable.custom_blue_light_btn));
+                save.setTextColor(getColor(R.color.colorPrimary));
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(task, 2000);
 
         if(startTimeMin.getText().toString().equals(""))
             startTimeMin.setText("00");

@@ -13,18 +13,9 @@
         android:orientation="vertical"
         android:padding="30dp">
 
-        <ImageButton
-            android:id="@+id/activity_edit_grade_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/EditText_dark_style"
-            android:src="@android:drawable/ic_media_rew"
-            android:tint="@color/colorPrimary"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:textSize="33dp"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin"
@@ -38,11 +29,14 @@
             android:id="@+id/activity_edit_grade_materia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="25dp"
             />
 
         <RelativeLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -55,6 +49,7 @@
                 android:layout_marginLeft="15dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_alignBottom="@+id/activity_edit_grade_materia_edit_desc"
+                android:textStyle="bold"
                 />
             <EditText
                 android:id="@+id/activity_edit_grade_materia_edit_desc"
@@ -63,6 +58,7 @@
                 android:hint="Ingresa descripción"
                 android:textSize="15dp"
                 android:layout_toRightOf="@id/activity_edit_grade_materia_text_desc"
+                style="@style/EditText_dark_style"
                 />
 
             <TextView
@@ -74,6 +70,7 @@
                 android:layout_alignBottom="@+id/activity_edit_grade_materia_edit_porc"
                 android:text="Porcentaje"
                 android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
                 />
             <EditText
                 android:id="@+id/activity_edit_grade_materia_edit_porc"
@@ -84,6 +81,7 @@
                 android:textSize="15dp"
                 android:layout_toRightOf="@id/activity_edit_grade_materia_text_porc"
                 android:layout_below="@id/activity_edit_grade_materia_edit_desc"
+                style="@style/EditText_dark_style"
                 />
 
             <TextView
@@ -95,6 +93,7 @@
                 android:layout_alignBottom="@+id/activity_edit_grade_materia_edit_cali"
                 android:text="Calificación"
                 android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
                 />
             <EditText
                 android:id="@+id/activity_edit_grade_materia_edit_cali"
@@ -105,6 +104,7 @@
                 android:textSize="15dp"
                 android:layout_toRightOf="@id/activity_edit_grade_materia_text_cali"
                 android:layout_below="@id/activity_edit_grade_materia_edit_porc"
+                style="@style/EditText_dark_style"
                 />
 
         </RelativeLayout>
@@ -114,7 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/custom_light_Button"
-            android:textSize="15dp"
+            android:textSize="18dp"
             android:text="Agregar"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin"
