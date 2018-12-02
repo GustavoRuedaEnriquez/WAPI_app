@@ -47,4 +47,11 @@ public class ActivityEditPeriod extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ActivityEditPeriod.this, ActivityEditSchedule.class);
+        startActivity(intent);
+        finish();
+    }
 }

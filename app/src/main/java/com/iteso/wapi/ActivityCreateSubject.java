@@ -151,8 +151,13 @@ public class ActivityCreateSubject extends AppCompatActivity {
         for (Schedule schedule : schedules)
             scheduleControl.addSchedule(schedule, dh);
 
+        Intent intent = new Intent(this, ActivityEditSchedule.class);
+        startActivity(intent);
+        finish();
+    }
 
-
+    @Override
+    public void onBackPressed() {
         Intent intent = new Intent(this, ActivityEditSchedule.class);
         startActivity(intent);
         finish();

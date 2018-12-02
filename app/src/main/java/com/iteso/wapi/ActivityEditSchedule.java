@@ -60,6 +60,7 @@ public class ActivityEditSchedule extends AppCompatActivity {
                 addPeriod.setTextColor(Color.WHITE);
                 Intent intent = new Intent(ActivityEditSchedule.this, ActivityEditPeriod.class);
                 startActivity(intent);
+                finish();
                 TimerTask task = new TimerTask() {
                     @Override
                     public void run() {
@@ -80,6 +81,7 @@ public class ActivityEditSchedule extends AppCompatActivity {
                 addSubject.setTextColor(Color.WHITE);
                 Intent intent = new Intent(ActivityEditSchedule.this, ActivityCreateSubject.class);
                 startActivity(intent);
+                finish();
             }
         });
 
