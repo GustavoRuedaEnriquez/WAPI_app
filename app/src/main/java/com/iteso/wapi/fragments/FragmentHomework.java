@@ -142,6 +142,7 @@ public class FragmentHomework extends Fragment {
         recyclerViewProximas.setLayoutManager(mLayoutManager2);
 
         homeworks = homeworkControl.getHomeworksByStudent(sharedPreferences.getString("NAME", "UNKNOWN"), dh);
+        orderByDates();
         homeworksNext = new ArrayList<>();
         homeworksWeek = new ArrayList<>();
 
@@ -174,4 +175,26 @@ public class FragmentHomework extends Fragment {
         recyclerViewProximas.addItemDecoration(dividerItemDecorationProximas);
 
     }
+
+    public void orderByDates(){
+        int min =0;
+        Date dateMin;
+        Date date;
+        Homework homeworkAux;
+        for(int x = 0 ; x < homeworks.size() ; x++) {
+            min = x;
+            dateMin = new Date(homeworks.get(x).getDeliveryYear()- 1900,homeworks.get(x).getDeliveryMonth()-1,homeworks.get(x).getDeliveryDay(), homeworks.get(x).getDeliveryHour(), homeworks.get(x).getDeliveryMin());
+            for (int y = x; y < homeworks.size(); y++) {
+                date = new Date(homeworks.get(y).getDeliveryYear()- 1900,homeworks.get(y).getDeliveryMonth()-1,homeworks.get(y).getDeliveryDay(), homeworks.get(y).getDeliveryHour(), homeworks.get(y).getDeliveryMin());
+                if(dateMin.getTime() > date.getTime()){
+                    dateMin= date;
+                    min= y;
+                }
+            }
+            homeworkAux = homeworks.get(x);
+            homeworks.set(x, homeworks.get(min));
+            homeworks.set(min, homeworkAux);
+        }
+    }
+
 }

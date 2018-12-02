@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iteso.wapi.beans.Homework;
@@ -23,12 +24,14 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
 
     public List<Homework> homeworkList;
     public HomeworkControl homeworkControl;
+    public Homework homework;
     public DataBaseHandler dh;
     private Context context;
     private int fragment;
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView descripcion, materia, fecha, hora;
+        ImageView erase;
 
         MyViewHolder(View view){
             super(view);
@@ -36,6 +39,7 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
             materia = view.findViewById(R.id.item_tarea_materia);
             fecha = view.findViewById(R.id.item_tarea_fecha);
             hora = view.findViewById(R.id.item_tarea_hora);
+            erase = view.findViewById(R.id.item_tarea_erase);
         }
     }
 
@@ -83,7 +87,7 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterHomework.MyViewHolder myViewHolder, int position){
-        final Homework homework = homeworkList.get(position);
+        homework = homeworkList.get(position);
         homeworkControl = new HomeworkControl();
         dh = DataBaseHandler.getInstance(getContext());
         Date deliveryDay = Calendar.getInstance().getTime();
@@ -117,6 +121,15 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
         String hourToShow =homework.getDeliveryHour()+":"+homework.getDeliveryMin();
         myViewHolder.hora.setText(hourToShow);
 
+        myViewHolder.erase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homework = homeworkList.get(myViewHolder.getAdapterPosition());
+                homeworkControl.deleteHomework(homework.getIdHomework(),dh);
+                homeworkList.remove(myViewHolder.getAdapterPosition());
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
