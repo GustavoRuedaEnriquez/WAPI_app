@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    
+    android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -12,76 +11,77 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Editar información"
             android:layout_gravity="center"
-            android:textSize="35dp"
+            android:layout_margin="@dimen/margin"
+            android:text="Editar información"
             android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            android:layout_margin="@dimen/margin"/>
+            android:textSize="35dp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin"
             android:text="Nombre"
-            android:textSize="19dp"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_marginLeft="@dimen/margin"/>
+            android:textSize="19dp" />
 
         <EditText
             android:id="@+id/activit_edit_info_name_et"
+            style="@style/EditText_dark_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin"
             android:layout_marginRight="@dimen/margin"
-            style="@style/EditText_dark_style"
-            android:hint="Nombre"/>
+            android:hint="Nombre" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nueva contraseña"
-            android:textSize="19dp"
-            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginLeft="@dimen/margin"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="@dimen/margin"/>
+            android:text="Nueva contraseña"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="19dp" />
 
         <EditText
             android:id="@+id/activit_edit_info_password_et"
+            style="@style/EditText_dark_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin"
             android:layout_marginRight="@dimen/margin"
-            style="@style/EditText_dark_style" />
+            android:inputType="textPassword" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirmar contraseña"
-            android:textSize="19dp"
-            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginLeft="@dimen/margin"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="@dimen/margin"/>
+            android:text="Confirmar contraseña"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="19dp" />
 
         <EditText
             android:id="@+id/activit_edit_info_confirm_password_et"
+            style="@style/EditText_dark_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin"
             android:layout_marginRight="@dimen/margin"
-            style="@style/EditText_dark_style" />
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/activity_edit_info_save_btn"
+            style="@style/custom_light_Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/custom_light_Button"
-            android:text="Guardar"
-            android:textSize="30dp"
-            android:layout_marginTop="80dp"
             android:layout_marginLeft="@dimen/margin"
+            android:layout_marginTop="80dp"
             android:layout_marginRight="@dimen/margin"
-            />
+            android:text="Guardar"
+            android:textSize="30dp" />
 
     </LinearLayout>
-    
+
 </android.support.v4.widget.NestedScrollView>
