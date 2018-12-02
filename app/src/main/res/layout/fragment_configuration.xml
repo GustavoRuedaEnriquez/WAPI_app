@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_toRightOf="@id/fragment_configuration_profile_pic"
-                android:text="Nombre"
+                android:text="@string/fragment_configuration_username"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15dp" />
 
@@ -50,7 +50,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="20dp"
                 android:layout_toRightOf="@id/fragment_configuration_profile_pic"
-                android:text="Contraseña"
+                android:text="@string/fragment_configuration_password"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15dp" />
 
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/fragment_configuration_edit_btn"
-                android:text="Editar"
+                android:text="@string/fragment_configuration_edit_btn"
                 style="@style/custom_light_Button"
                 android:textSize="15dp"
                 android:layout_marginTop="15dp"
@@ -85,7 +85,7 @@
                 android:layout_below="@id/fragment_configuration_change_password_et"
                 android:layout_marginTop="150dp"
                 android:layout_marginBottom="20dp"
-                android:text="Cerrar Sesión"
+                android:text="@string/fragment_configuration_logout_btn"
                 android:textSize="30dp" />
 
 
@@ -95,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fragment_configuration_log_out_btn"
-                android:text="Borrar Cuenta"
+                android:text="@string/fragment_configuration_delete_account_btn"
                 android:textSize="30dp" />
 
         </RelativeLayout>

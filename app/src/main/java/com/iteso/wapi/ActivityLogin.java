@@ -77,7 +77,6 @@ public class ActivityLogin extends AppCompatActivity {
                 register_link.setTextColor(getColor(R.color.colorPrimaryDark));
                 Intent intent = new Intent(ActivityLogin.this, ActivityRegister.class);
                 startActivity(intent);
-                finish();
             }
         });
     }

@@ -65,7 +65,7 @@ public class ActivityEditInformation extends AppCompatActivity {
                     else{
                         save.setBackground(getResources().getDrawable(R.drawable.custom_blue_light_btn));
                         save.setTextColor(getResources().getColor(R.color.colorPrimary));
-                        Toast.makeText(ActivityEditInformation.this, "Por favor, confirme correctamente la contraseña.",Toast.LENGTH_LONG).show();
+                        Toast.makeText(ActivityEditInformation.this, getResources().getString(R.string.activity_edit_info_toast),Toast.LENGTH_LONG).show();
                         newStudent.setPassword(sharedPreferences.getString("PWD", "Default name"));
                     }
 
@@ -79,6 +79,12 @@ public class ActivityEditInformation extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
     private void savePreferences(Student student) {

@@ -1,5 +1,6 @@
 package com.iteso.wapi;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -35,6 +36,7 @@ public class AdapterEditSchedule extends RecyclerView.Adapter<AdapterEditSchedul
         this.mDataSet = mDataSet;
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int i) {
         DataBaseHandler dh = DataBaseHandler.getInstance(context);
@@ -99,6 +101,7 @@ public class AdapterEditSchedule extends RecyclerView.Adapter<AdapterEditSchedul
                 Intent intent = new Intent(context, ActivityEditSubject.class);
                 intent.putExtra("SUBJECT", subject);
                 context.startActivity(intent);
+                ((ActivityEditSchedule)context).finish();
             }
         });
     }

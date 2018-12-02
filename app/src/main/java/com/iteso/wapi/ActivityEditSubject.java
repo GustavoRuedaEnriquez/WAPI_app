@@ -65,7 +65,7 @@ public class ActivityEditSubject extends AppCompatActivity {
         days[WEDNESDAY] = findViewById(R.id.activity_edit_subject_wednesday);
         days[THURSDAY]  = findViewById(R.id.activity_edit_subject_thursday);
         days[FRIDAY]    = findViewById(R.id.activity_edit_subject_friday);
-        days[SATURDAY]  = findViewById(R.id.activity_edit_subject_friday);
+        days[SATURDAY]  = findViewById(R.id.activity_edit_subject_saturday);
 
         name.setText(subject.getNameSubject());
 
@@ -108,7 +108,7 @@ public class ActivityEditSubject extends AppCompatActivity {
             endTimeMin.setText("00");
 
         try {
-            if (Integer.parseInt(startTimeHr.getText().toString()) > 11 || Integer.parseInt(endTimeHr.getText().toString()) > 11
+            if (Integer.parseInt(startTimeHr.getText().toString()) > 23 || Integer.parseInt(endTimeHr.getText().toString()) > 23
                     || Integer.parseInt(startTimeMin.getText().toString()) > 59
                     || Integer.parseInt(endTimeMin.getText().toString()) > 59) {
                 Toast.makeText(this, getString(R.string.activity_subject_incorrect_time_warn), Toast.LENGTH_SHORT).show();
@@ -209,6 +209,13 @@ public class ActivityEditSubject extends AppCompatActivity {
 
         subjectControl.deleteSubject(subject.getIdSubject(), dh);
 
+        Intent result = new Intent(this, ActivityEditSchedule.class);
+        startActivity(result);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
         Intent result = new Intent(this, ActivityEditSchedule.class);
         startActivity(result);
         finish();

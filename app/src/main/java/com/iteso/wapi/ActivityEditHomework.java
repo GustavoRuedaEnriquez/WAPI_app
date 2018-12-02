@@ -24,7 +24,6 @@ public class ActivityEditHomework extends AppCompatActivity {
 
     Spinner spinner;
     EditText description, day, month, year, hour, min;
-    ImageButton back;
     Button addHomework;
     HomeworkControl homeworkControl = new HomeworkControl();
     DataBaseHandler dh;
@@ -42,7 +41,6 @@ public class ActivityEditHomework extends AppCompatActivity {
         year = findViewById(R.id.activity_edit_homework_year);
         hour = findViewById(R.id.activity_edit_homework_hour);
         min = findViewById(R.id.activity_edit_homework_min);
-        back = findViewById(R.id.activity_edit_homework_back);
         addHomework = findViewById(R.id.activity_edit_homework_agregar);
 
         dh = DataBaseHandler.getInstance(this);
@@ -79,13 +77,6 @@ public class ActivityEditHomework extends AppCompatActivity {
                 else{
                     Toast.makeText(ActivityEditHomework.this, "Error en datos de hora o fecha", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
             }
         });
     }

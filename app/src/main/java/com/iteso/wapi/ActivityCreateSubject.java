@@ -102,7 +102,7 @@ public class ActivityCreateSubject extends AppCompatActivity {
             endTimeMin.setText("00");
 
         try {
-            if (Integer.parseInt(startTimeHr.getText().toString()) > 11 || Integer.parseInt(endTimeHr.getText().toString()) > 11
+            if (Integer.parseInt(startTimeHr.getText().toString()) > 23 || Integer.parseInt(endTimeHr.getText().toString()) > 23
                     || Integer.parseInt(startTimeMin.getText().toString()) > 59
                     || Integer.parseInt(endTimeMin.getText().toString()) > 59) {
                 Toast.makeText(this, getString(R.string.activity_subject_incorrect_time_warn), Toast.LENGTH_SHORT).show();
@@ -163,8 +163,13 @@ public class ActivityCreateSubject extends AppCompatActivity {
         for (Schedule schedule : schedules)
             scheduleControl.addSchedule(schedule, dh);
 
+        Intent intent = new Intent(this, ActivityEditSchedule.class);
+        startActivity(intent);
+        finish();
+    }
 
-
+    @Override
+    public void onBackPressed() {
         Intent intent = new Intent(this, ActivityEditSchedule.class);
         startActivity(intent);
         finish();
