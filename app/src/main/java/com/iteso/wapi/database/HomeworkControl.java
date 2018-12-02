@@ -129,7 +129,7 @@ public class HomeworkControl {
                 " ON " + DataBaseHandler.HOMEWORK_FK_SUBJECT + " = " + DataBaseHandler.SUBJECT_ID +
                 " JOIN " + DataBaseHandler.TABLE_PERIOD +
                 " ON " + DataBaseHandler.PERIOD_ID + " = " + DataBaseHandler.SUBJECT_FK_PERIOD +
-                " WHERE " + DataBaseHandler.PERIOD_FK_STUDENT + " = " + student;
+                " WHERE " + DataBaseHandler.PERIOD_FK_STUDENT + " = '" + student + "'";
         Cursor cursor = db.rawQuery(selectQuery,null);
         while(cursor.moveToNext()){
             Homework homework = new Homework();

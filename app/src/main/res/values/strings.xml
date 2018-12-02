@@ -16,7 +16,6 @@
         <item>Semestre 5</item>
     </string-array>
 
-
     <!-- Activity Login -->
     <string name="activity_login_start">Iniciar</string>
     <string name="activity_login_username">Nombre de usuario</string>
@@ -29,6 +28,11 @@
     <string name="activity_register_password">Contraseña</string>
     <string name="activity_register_terms">Acepto los términos y condiciones</string>
     <string name="activity_register_btn">Registrarse</string>
+
+    <!--Fragment user strings-->
+    <string name="fragment_user_homework">Tareas para hoy</string>
+    <string name="fragment_user_time_lbl">Fecha de entrega:\ </string>
+    <string name="fragment_user_description_lbl">Descripción:\ </string>
 
     <!--Fragment payments strings: -->
     <string name="fragment_payment_name_hint">Título</string>
