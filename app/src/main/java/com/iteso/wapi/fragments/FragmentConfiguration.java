@@ -13,15 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.iteso.wapi.ActivityEditInformation;
-import com.iteso.wapi.ActivityEditPeriod;
 import com.iteso.wapi.ActivityLogin;
 import com.iteso.wapi.ActivitySplashscreen;
 import com.iteso.wapi.R;
 import com.iteso.wapi.database.DataBaseHandler;
 import com.iteso.wapi.database.StudentControl;
-
 import static android.content.Context.MODE_PRIVATE;
 
 
@@ -85,8 +82,8 @@ public class FragmentConfiguration extends Fragment {
                 edit.setTextColor(Color.WHITE);
                 Intent editIntent = new Intent(getActivity(), ActivityEditInformation.class);
                 startActivity(editIntent);
-                name_et.setText(sharedPreferences.getString("NAME", "Default name"));
-                password_et.setText(sharedPreferences.getString("PWD", "Default password"));
+
+                updateInformation();
             }
         });
 
@@ -125,17 +122,13 @@ public class FragmentConfiguration extends Fragment {
                                 getActivity().finish();
                             }
                         })
-                        .setNegativeButton(getResources().getString(R.string.fragment_configuration_no), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //no hago nada
-                            }
-                        }).show();
+
+                        .setNegativeButton(getResources().getString(R.string.fragment_configuration_no), null).show();
+              
                 deleteAccount.setBackground(getResources().getDrawable(R.drawable.custom_red_light_btn));
                 deleteAccount.setTextColor(Color.RED);
             }
         });
-
         return v;
     }
 
@@ -148,5 +141,18 @@ public class FragmentConfiguration extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateInformation();
+    }
+
+    private void updateInformation() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
+
+        name_et.setText(sharedPreferences.getString("NAME", "Default name"));
+        password_et.setText(sharedPreferences.getString("PWD", "Default password"));
     }
 }

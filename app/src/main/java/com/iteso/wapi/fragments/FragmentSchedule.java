@@ -16,10 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-
 import com.iteso.wapi.ActivityEditSchedule;
 import com.iteso.wapi.ActivityLogin;
 import com.iteso.wapi.ActivitySplashscreen;
+import com.iteso.wapi.AdapterEditSchedule;
 import com.iteso.wapi.AdapterFragmentSchedule;
 import com.iteso.wapi.R;
 import com.iteso.wapi.beans.Period;
@@ -29,11 +29,9 @@ import com.iteso.wapi.database.DataBaseHandler;
 import com.iteso.wapi.database.PeriodControl;
 import com.iteso.wapi.database.ScheduleControl;
 import com.iteso.wapi.database.SubjectControl;
-
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import static android.content.Context.MODE_PRIVATE;
 
 
@@ -46,9 +44,11 @@ public class FragmentSchedule extends Fragment {
     private SubjectControl subjectControl;
     private ScheduleControl scheduleControl;
     private RecyclerView subjectsOfDay;
-
+    private ArrayList<Subject> subjects;
     private AdapterFragmentSchedule adapterFragmentSchedule;
     private ArrayList<String> days = new ArrayList<>();
+    private Period currentPeriod;
+    ArrayList<Period> periods;
 
     public FragmentSchedule() {
         // Required empty public constructor
@@ -63,18 +63,21 @@ public class FragmentSchedule extends Fragment {
         days.add(getResources().getString(R.string.fragment_schedule_friday));
         days.add(getResources().getString(R.string.fragment_schedule_saturday));
 
-        ArrayList<Subject> subjects = new ArrayList<>();
-
         final DataBaseHandler dh = DataBaseHandler.getInstance(getActivity());
         final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
         periodControl = new PeriodControl();
         subjectControl = new SubjectControl();
         scheduleControl = new ScheduleControl();
+        subjects = new ArrayList<>();
 
-        ArrayList<Period> periods = periodControl.getPeriodsByStudent(sharedPreferences.getString("NAME", "Default name"), dh);
+        periods = periodControl.getPeriodsByStudent(sharedPreferences.getString("NAME", "Default name"), dh);
         ArrayList<String> periodsName = new ArrayList<>();
         for (Period index : periods)
             periodsName.add(index.getNamePeriod());
+
+        if(periods.size() > 0) {
+            currentPeriod = periods.get(0);
+        }
 
         View v = inflater.inflate(R.layout.fragment_schedule, container, false);
         editSchedule = v.findViewById(R.id.fragment_schedule_edit_schedule);
@@ -138,40 +141,7 @@ public class FragmentSchedule extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.e("SCHEDULE", "Entra");
-                String periodSelected = (String) periodsSpinner.getSelectedItem();
-                int periodId = periodControl.getPeriodIdByPeriodName(sharedPreferences.getString("NAME", "Default name"), periodSelected, dh);
-                ArrayList<Subject> subjects = subjectControl.getSubjectsByPeriod(periodId, dh);
-                if (subjects.size() > 0) {
-                    switch (weekDays.getSelectedItemPosition()) {
-                        case 0:
-                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,0, dh), 0);
-                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
-                            break;
-                        case 1:
-                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,1, dh), 1);
-                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
-                            break;
-                        case 2:
-                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,2, dh), 2);
-                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
-                            break;
-                        case 3:
-                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,3, dh), 3);
-                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
-                            break;
-                        case 4:
-                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,4, dh), 4);
-                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
-                            break;
-                        case 5:
-                            adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,5, dh), 5);
-                            subjectsOfDay.setAdapter(adapterFragmentSchedule);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
+                updateAdapter();
             }
 
             @Override
@@ -179,7 +149,29 @@ public class FragmentSchedule extends Fragment {
 
             }
         });
+        adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjects, 0);
+        subjectsOfDay.setAdapter(adapterFragmentSchedule);
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        DataBaseHandler dh = DataBaseHandler.getInstance(getActivity());
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
+        periodControl = new PeriodControl();
+        subjectControl = new SubjectControl();
+        scheduleControl = new ScheduleControl();
+
+        ArrayList<Period> periods = periodControl.getPeriodsByStudent(sharedPreferences.getString("NAME", "Default name"), dh);
+        ArrayList<String> periodsName = new ArrayList<>();
+        for (Period index : periods)
+            periodsName.add(index.getNamePeriod());
+
+        periodsSpinner.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, periodsName));
+
+        updateAdapter();
     }
 
     public ArrayList<Subject> subjectsPerDay(ArrayList<Subject> subjects, int day, DataBaseHandler dh) {
@@ -208,6 +200,27 @@ public class FragmentSchedule extends Fragment {
             spinner.setSelection(0);
         else
             spinner.setSelection(position + 1);
+    }
+
+    private void updateAdapter() {
+        DataBaseHandler dh = DataBaseHandler.getInstance(getActivity());
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
+
+        if(periods.size() > 0 && !currentPeriod.getNamePeriod().equals(periodsSpinner.getSelectedItem().toString())){
+            for(Period period: periods)
+                if(period.getNamePeriod().equals(periodsSpinner.getSelectedItem().toString()))
+                    currentPeriod = period;
+        }
+
+        String periodSelected = (String) periodsSpinner.getSelectedItem();
+        int periodId = periodControl.getPeriodIdByPeriodName(sharedPreferences.getString("NAME", "Default name"), periodSelected, dh);
+
+        if (subjectControl.getSubjectsByPeriod(periodId, dh).size() > 0) {
+            subjects.clear();
+            ArrayList<Subject> allSubjects = subjectControl.getSubjectsByPeriod(currentPeriod.getIdPeriod(), dh);
+            subjects.addAll(subjectsPerDay(allSubjects, weekDays.getSelectedItemPosition(), dh));
+            adapterFragmentSchedule.notifyDataSetChanged();
+        }
     }
 
     @Override
