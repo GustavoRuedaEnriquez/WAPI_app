@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.iteso.wapi.beans.Grade;
 import com.iteso.wapi.beans.Subject;
@@ -107,39 +108,37 @@ public class AdapterGrade extends RecyclerView.Adapter<AdapterGrade.MyViewHolder
         myViewHolder.nombre.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                grade = gradeList.get(myViewHolder.getAdapterPosition());
-                grade.setDescriptionGrade(myViewHolder.nombre.getText().toString());
-                grade.setPercentage(Float.valueOf(myViewHolder.porcentaje.getText().toString()));
-                grade.setGrade(Float.valueOf(myViewHolder.calificacion.getText().toString()));
-                gradeControl.updateGrade(grade, dh);
-                gradeList.set(myViewHolder.getAdapterPosition(),grade);
-                updateAvarageSubject();
+                updateGrade(myViewHolder);
             }
         });
         myViewHolder.porcentaje.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                grade = gradeList.get(myViewHolder.getAdapterPosition());
-                grade.setDescriptionGrade(myViewHolder.nombre.getText().toString());
-                grade.setPercentage(Float.valueOf(myViewHolder.porcentaje.getText().toString()));
-                grade.setGrade(Float.valueOf(myViewHolder.calificacion.getText().toString()));
-                gradeControl.updateGrade(grade, dh);
-                gradeList.set(myViewHolder.getAdapterPosition(),grade);
-                updateAvarageSubject();
+                updateGrade(myViewHolder);
             }
         });
         myViewHolder.calificacion.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                grade = gradeList.get(myViewHolder.getAdapterPosition());
-                grade.setDescriptionGrade(myViewHolder.nombre.getText().toString());
-                grade.setPercentage(Float.valueOf(myViewHolder.porcentaje.getText().toString()));
-                grade.setGrade(Float.valueOf(myViewHolder.calificacion.getText().toString()));
-                gradeControl.updateGrade(grade, dh);
-                gradeList.set(myViewHolder.getAdapterPosition(),grade);
-                updateAvarageSubject();
+                updateGrade(myViewHolder);
             }
         });
+    }
+
+    public void updateGrade(MyViewHolder myViewHolder){
+        if((Float.valueOf(myViewHolder.porcentaje.getText().toString()) >=0.0 & Float.valueOf(myViewHolder.porcentaje.getText().toString()) <=100.0)
+                & (Float.valueOf(myViewHolder.porcentaje.getText().toString()) >=0.0 & Float.valueOf(myViewHolder.porcentaje.getText().toString()) <=100.0)){
+            grade = gradeList.get(myViewHolder.getAdapterPosition());
+            grade.setDescriptionGrade(myViewHolder.nombre.getText().toString());
+            grade.setPercentage(Float.valueOf(myViewHolder.porcentaje.getText().toString()));
+            grade.setGrade(Float.valueOf(myViewHolder.calificacion.getText().toString()));
+            gradeControl.updateGrade(grade, dh);
+            gradeList.set(myViewHolder.getAdapterPosition(),grade);
+            updateAvarageSubject();
+        }
+        else{
+            Toast.makeText(getContext(), "Error en datos ingresados", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void updateAvarageSubject(){

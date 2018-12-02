@@ -9,14 +9,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.iteso.wapi.beans.Homework;
+import com.iteso.wapi.database.DataBaseHandler;
+import com.iteso.wapi.database.HomeworkControl;
 
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyViewHolder>{
 
     public List<Homework> homeworkList;
+    public HomeworkControl homeworkControl;
+    public DataBaseHandler dh;
     private Context context;
     private int fragment;
 
@@ -77,6 +84,8 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
     @Override
     public void onBindViewHolder(@NonNull final AdapterHomework.MyViewHolder myViewHolder, int position){
         final Homework homework = homeworkList.get(position);
+        homeworkControl = new HomeworkControl();
+        dh = DataBaseHandler.getInstance(getContext());
         Date deliveryDay = Calendar.getInstance().getTime();
         String dayString;
         //myViewHolder.nombre.setText(subjectList.get(myViewHolder.getAdapterPosition()).getNameSubject());
@@ -102,7 +111,7 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
                 dayString = "Saturday";
                 break;
         }
-        myViewHolder.materia.setText("Materiaa");
+        myViewHolder.materia.setText(homeworkControl.getHomeworksSubjectName(homework.getFk_subject(), dh));
         String dateToShow = dayString + " " +homework.getDeliveryDay()+"/"+homework.getDeliveryMonth();
         myViewHolder.fecha.setText(dateToShow);
         String hourToShow =homework.getDeliveryHour()+":"+homework.getDeliveryMin();

@@ -1,17 +1,20 @@
 package com.iteso.wapi.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import com.iteso.wapi.ActivityEditHomework;
+import com.iteso.wapi.ActivitySplashscreen;
 import com.iteso.wapi.AdapterHomework;
 import com.iteso.wapi.R;
 import com.iteso.wapi.beans.Homework;
@@ -21,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -44,6 +49,7 @@ public class FragmentHomework extends Fragment {
     ArrayList<Homework> homeworksWeek;
     ArrayList<Homework> homeworksNext;
     ArrayList<Homework> homeworks;
+    SharedPreferences sharedPreferences;
     HomeworkControl homeworkControl = new HomeworkControl();
     DataBaseHandler dh;
     RecyclerView recyclerView;
@@ -92,7 +98,7 @@ public class FragmentHomework extends Fragment {
         recyclerView = rootView.findViewById(R.id.fragment_tarea_recyclerView_semana_actual);
         recyclerViewProximas = rootView.findViewById(R.id.fragment_tarea_recyclerView_proximas_semanas);
         agregar = rootView.findViewById(R.id.fragment_tarea_agregar);
-        today = Calendar.getInstance().getTime();
+        today = new Date(Calendar.getInstance().getTime().getYear(),Calendar.getInstance().getTime().getMonth(),Calendar.getInstance().getTime().getDay());
         return rootView;
     }
 
@@ -102,7 +108,31 @@ public class FragmentHomework extends Fragment {
         Date date;
         long diff;
         int daysDiff;
+        sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
         dh = DataBaseHandler.getInstance(getContext());
+
+        agregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(rootView.getContext(), ActivityEditHomework.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Date date;
+        long diff;
+        int daysDiff;
+
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -111,13 +141,17 @@ public class FragmentHomework extends Fragment {
         LinearLayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
         recyclerViewProximas.setLayoutManager(mLayoutManager2);
 
-        homeworks = homeworkControl.getHomeworksByStudent("Sbriones", dh);
+        homeworks = homeworkControl.getHomeworksByStudent(sharedPreferences.getString("NAME", "UNKNOWN"), dh);
+        homeworksNext = new ArrayList<>();
+        homeworksWeek = new ArrayList<>();
 
         for(int x = 0; x<homeworks.size(); x++){
-            date = new Date(homeworks.get(x).getDeliveryYear(),homeworks.get(x).getDeliveryMonth(),homeworks.get(x).getDeliveryDay());
+            date = new Date(homeworks.get(x).getDeliveryYear()- 1900,homeworks.get(x).getDeliveryMonth()-1,homeworks.get(x).getDeliveryDay());
             if (today.compareTo(date)<0){
                 diff = date.getTime() - today.getTime();
                 daysDiff =(int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                Log.e("Date", Integer.toString(daysDiff));
+
                 if(daysDiff<=7){
                     homeworksWeek.add(homeworks.get(x));
                 }
@@ -136,19 +170,8 @@ public class FragmentHomework extends Fragment {
 
         adapterHomework = new AdapterHomework(4, getActivity(), homeworksNext);
         recyclerViewProximas.setAdapter(adapterHomework);
+        DividerItemDecoration dividerItemDecorationProximas = new DividerItemDecoration(recyclerViewProximas.getContext(), mLayoutManager.getOrientation());
+        recyclerViewProximas.addItemDecoration(dividerItemDecorationProximas);
 
-        agregar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(rootView.getContext(), ActivityEditHomework.class);
-                startActivity(intent);
-            }
-        });
-
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
     }
 }

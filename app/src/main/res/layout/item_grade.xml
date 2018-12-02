@@ -21,6 +21,7 @@
 
     <EditText
         android:id="@+id/item_calificacion_porcentaje"
+        android:inputType="numberDecimal"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/item_calificacion_nombre"
@@ -30,6 +31,7 @@
 
     <EditText
         android:id="@+id/item_calificacion_calif"
+        android:inputType="numberDecimal"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/item_calificacion_porcentaje"
