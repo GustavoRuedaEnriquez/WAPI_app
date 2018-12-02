@@ -56,12 +56,12 @@ public class FragmentSchedule extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        days.add("Lunes");
-        days.add("Martes");
-        days.add("Miércoles");
-        days.add("Jueves");
-        days.add("Viernes");
-        days.add("Sábado");
+        days.add(getResources().getString(R.string.fragment_schedule_monday));
+        days.add(getResources().getString(R.string.fragment_schedule_tuesday));
+        days.add(getResources().getString(R.string.fragment_schedule_wednesday));
+        days.add(getResources().getString(R.string.fragment_schedule_thursday));
+        days.add(getResources().getString(R.string.fragment_schedule_friday));
+        days.add(getResources().getString(R.string.fragment_schedule_saturday));
 
         ArrayList<Subject> subjects = new ArrayList<>();
 
@@ -144,32 +144,26 @@ public class FragmentSchedule extends Fragment {
                 if (subjects.size() > 0) {
                     switch (weekDays.getSelectedItemPosition()) {
                         case 0:
-                            Log.e("SCHEDULE", "0");
                             adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,0, dh), 0);
                             subjectsOfDay.setAdapter(adapterFragmentSchedule);
                             break;
                         case 1:
-                            Log.e("SCHEDULE", "1");
                             adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,1, dh), 1);
                             subjectsOfDay.setAdapter(adapterFragmentSchedule);
                             break;
                         case 2:
-                            Log.e("SCHEDULE", "2");
                             adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,2, dh), 2);
                             subjectsOfDay.setAdapter(adapterFragmentSchedule);
                             break;
                         case 3:
-                            Log.e("SCHEDULE", "3");
                             adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,3, dh), 3);
                             subjectsOfDay.setAdapter(adapterFragmentSchedule);
                             break;
                         case 4:
-                            Log.e("SCHEDULE", "4");
                             adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,4, dh), 4);
                             subjectsOfDay.setAdapter(adapterFragmentSchedule);
                             break;
                         case 5:
-                            Log.e("SCHEDULE", "5");
                             adapterFragmentSchedule = new AdapterFragmentSchedule(getActivity(), subjectsPerDay(subjects,5, dh), 5);
                             subjectsOfDay.setAdapter(adapterFragmentSchedule);
                             break;

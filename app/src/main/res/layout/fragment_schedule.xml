@@ -68,7 +68,7 @@
                     android:layout_weight=".4"
 
                     android:layout_marginLeft="10dp"
-                    android:text="Editar Horario" />
+                    android:text="@string/fragment_schedule_edit_schedule_btn" />
             </LinearLayout>
 
 

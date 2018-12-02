@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Editar información"
+            android:text="@string/activity_edit_info_title"
             android:layout_gravity="center"
             android:textSize="35dp"
             android:textColor="@color/colorPrimary"
@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre"
+            android:text="@string/fragment_configuration_username"
             android:textSize="19dp"
             android:textColor="@color/colorPrimaryDark"
             android:layout_marginLeft="@dimen/margin"/>
@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nueva contraseña"
+            android:text="@string/activity_edit_info_new_password"
             android:textSize="19dp"
             android:textColor="@color/colorPrimaryDark"
             android:layout_marginTop="20dp"
@@ -56,7 +56,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirmar contraseña"
+            android:text="@string/activity_edit_info_confirm_password"
             android:textSize="19dp"
             android:textColor="@color/colorPrimaryDark"
             android:layout_marginTop="20dp"
@@ -75,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/custom_light_Button"
-            android:text="Guardar"
+            android:text="@string/activity_edit_info_btn"
             android:textSize="30dp"
             android:layout_marginTop="80dp"
             android:layout_marginLeft="@dimen/margin"

@@ -115,8 +115,8 @@ public class FragmentConfiguration extends Fragment {
                 deleteAccount.setTextColor(Color.WHITE);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Light_Dialog_Alert);
 
-                builder.setMessage("¿Seguro que quiere borrar su cuenta?")
-                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                builder.setMessage(getResources().getString(R.string.fragment_configuration_message_disclaimer))
+                        .setPositiveButton(getResources().getString(R.string.fragment_configuration_yes), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 studentControl.deleteStudent(sharedPreferences.getString("NAME", "Default name"), dh);
@@ -125,7 +125,7 @@ public class FragmentConfiguration extends Fragment {
                                 getActivity().finish();
                             }
                         })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(getResources().getString(R.string.fragment_configuration_no), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //no hago nada
