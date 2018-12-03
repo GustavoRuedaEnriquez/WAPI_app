@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.iteso.wapi.beans.Subject;
+
 import java.util.List;
 
 public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHolder>{
@@ -97,4 +98,7 @@ public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHo
     public int getItemCount() {
         return subjectList.size();
     }
+
+
+
 }
