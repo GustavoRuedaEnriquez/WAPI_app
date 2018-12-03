@@ -237,12 +237,12 @@ public class FragmentSchedule extends Fragment {
         String periodSelected = (String) periodsSpinner.getSelectedItem();
         int periodId = periodControl.getPeriodIdByPeriodName(sharedPreferences.getString("NAME", "Default name"), periodSelected, dh);
 
+        subjects.clear();
         if (subjectControl.getSubjectsByPeriod(periodId, dh).size() > 0) {
-            subjects.clear();
             ArrayList<Subject> allSubjects = subjectControl.getSubjectsByPeriodAndDayOrdered(currentPeriod.getIdPeriod(), weekDays.getSelectedItemPosition(), dh);
             subjects.addAll(allSubjects);
-            adapterFragmentSchedule.notifyDataSetChanged();
         }
+        adapterFragmentSchedule.notifyDataSetChanged();
     }
 
 }
