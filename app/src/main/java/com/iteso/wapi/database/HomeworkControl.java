@@ -18,12 +18,9 @@ public class HomeworkControl {
 
 
     public void addHomework(Homework homework, DataBaseHandler dh){
-        int nextId = maxIdHomework(dh) + 1;
-
         SQLiteDatabase db = dh.getWritableDatabase();
         ContentValues values = new ContentValues();
-
-        values.put(DataBaseHandler.HOMEWORK_ID, nextId);
+        values.put(DataBaseHandler.HOMEWORK_ID, maxIdHomework(dh) + 1);
         values.put(DataBaseHandler.HOMEWORK_FK_SUBJECT, homework.getFk_subject());
         values.put(DataBaseHandler.HOMEWORK_DESCRIPTION, homework.getDescriptionHomework());
         values.put(DataBaseHandler.HOMEWORK_DAY, homework.getDeliveryDay());

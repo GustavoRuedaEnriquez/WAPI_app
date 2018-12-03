@@ -11,12 +11,9 @@ import java.util.ArrayList;
 public class ScheduleControl {
 
     public void addSchedule(Schedule schedule, DataBaseHandler dh){
-        int nextId = maxIdSchedule(dh) + 1;
-
         SQLiteDatabase db = dh.getWritableDatabase();
         ContentValues values = new ContentValues();
-
-        values.put(DataBaseHandler.SCHEDULE_ID, nextId);
+        values.put(DataBaseHandler.SCHEDULE_ID, maxIdSchedule(dh) + 1);
         values.put(DataBaseHandler.SCHEDULE_START_HOUR, schedule.getInitialTime());
         values.put(DataBaseHandler.SCHEDULE_END_HOUR, schedule.getFinalTime());
         values.put(DataBaseHandler.SCHEDULE_DAY, schedule.getDay());

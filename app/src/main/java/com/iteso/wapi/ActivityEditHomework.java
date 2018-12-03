@@ -19,6 +19,7 @@ import com.iteso.wapi.database.HomeworkControl;
 import com.iteso.wapi.database.SubjectControl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ActivityEditHomework extends AppCompatActivity {
 
@@ -63,13 +64,12 @@ public class ActivityEditHomework extends AppCompatActivity {
                     &(Integer.valueOf(min.getText().toString()) <=59 & Integer.valueOf(min.getText().toString())>=0)){
                         Homework homework = new Homework();
                         homework.setDescriptionHomework(description.getText().toString());
-                        homework.setFk_subject(1);
+                        homework.setFk_subject(subjects.get(spinner.getSelectedItemPosition()).getIdSubject());
                         homework.setDeliveryDay(Integer.valueOf(day.getText().toString()));
                         homework.setDeliveryMonth(Integer.valueOf(month.getText().toString()));
                         homework.setDeliveryYear(Integer.valueOf(year.getText().toString()));
                         homework.setDeliveryHour(Integer.valueOf(hour.getText().toString()));
                         homework.setDeliveryMin(Integer.valueOf(min.getText().toString()));
-
                         homeworkControl.addHomework(homework,dh);
                         onBackPressed();
 
