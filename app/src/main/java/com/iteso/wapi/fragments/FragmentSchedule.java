@@ -178,7 +178,7 @@ public class FragmentSchedule extends Fragment {
         subjectControl = new SubjectControl();
         scheduleControl = new ScheduleControl();
 
-        ArrayList<Period> periods = periodControl.getPeriodsByStudent(sharedPreferences.getString("NAME", "Default name"), dh);
+        periods = periodControl.getPeriodsByStudent(sharedPreferences.getString("NAME", "Default name"), dh);
         ArrayList<String> periodsName = new ArrayList<>();
         for (Period index : periods)
             periodsName.add(index.getNamePeriod());
@@ -195,18 +195,6 @@ public class FragmentSchedule extends Fragment {
         updateAdapter();
 
     }
-
-    /*public ArrayList<Subject> subjectsPerDay(ArrayList<Subject> subjects, int day, DataBaseHandler dh) {
-        ArrayList<Subject> subjectsPerDay = new ArrayList<>();
-        for (Subject index : subjects) {
-            ArrayList<Integer> days = scheduleControl.getDaysBySubject(index.getIdSubject(), dh);
-            for (Integer int_index : days) {
-                if (int_index == day)
-                    subjectsPerDay.add(index);
-            }
-        }
-        return subjectsPerDay;
-    }*/
 
     public void previousDay(Spinner spinner) {
         int position = spinner.getSelectedItemPosition();
@@ -226,7 +214,6 @@ public class FragmentSchedule extends Fragment {
 
     private void updateAdapter() {
         DataBaseHandler dh = DataBaseHandler.getInstance(getActivity());
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
 
         if (periods.size() > 0 && !currentPeriod.getNamePeriod().equals(periodsSpinner.getSelectedItem().toString())) {
             for (Period period : periods)
@@ -234,11 +221,8 @@ public class FragmentSchedule extends Fragment {
                     currentPeriod = period;
         }
 
-        String periodSelected = (String) periodsSpinner.getSelectedItem();
-        int periodId = periodControl.getPeriodIdByPeriodName(sharedPreferences.getString("NAME", "Default name"), periodSelected, dh);
-
         subjects.clear();
-        if (subjectControl.getSubjectsByPeriod(periodId, dh).size() > 0) {
+        if (subjectControl.getSubjectsByPeriod(currentPeriod.getIdPeriod(), dh).size() > 0) {
             ArrayList<Subject> allSubjects = subjectControl.getSubjectsByPeriodAndDayOrdered(currentPeriod.getIdPeriod(), weekDays.getSelectedItemPosition(), dh);
             subjects.addAll(allSubjects);
         }
