@@ -75,7 +75,7 @@ public class ActivityEditHomework extends AppCompatActivity {
 
                 }
                 else{
-                    Toast.makeText(ActivityEditHomework.this, "Error en datos de hora o fecha", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityEditHomework.this, getResources().getString(R.string.activity_edit_homework_toast), Toast.LENGTH_SHORT).show();
                 }
             }
         });

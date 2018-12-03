@@ -46,8 +46,8 @@ public class AdapterUserHomework extends RecyclerView.Adapter<AdapterUserHomewor
         Subject subject = subjectControl.getSubjectById(homework.getFk_subject(), dh);
 
         myViewHolder.subjectTV.setText(subject.getNameSubject());
-        myViewHolder.timeTV.setText(String.format("%d:%02d", homework.getDeliveryHour(), homework.getDeliveryMin()));
-        myViewHolder.descriptionTV.setText(homework.getDescriptionHomework());
+        myViewHolder.timeTV.setText(String.format(" %d:%02d", homework.getDeliveryHour(), homework.getDeliveryMin()));
+        myViewHolder.descriptionTV.setText(" " + homework.getDescriptionHomework());
     }
 
     @Override

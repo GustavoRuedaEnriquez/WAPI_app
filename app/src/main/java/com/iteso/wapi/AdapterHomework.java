@@ -93,30 +93,28 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
         Date deliveryDay = new Date(homework.getDeliveryYear()- 1900,homework.getDeliveryMonth()-1,homework.getDeliveryDay());
 
         String dayString;
-        //myViewHolder.nombre.setText(subjectList.get(myViewHolder.getAdapterPosition()).getNameSubject());
-        //myViewHolder.promedio.setText(Float.toString(subjectList.get(myViewHolder.getAdapterPosition()).getAvarage()));
         myViewHolder.descripcion.setText(homework.getDescriptionHomework());
         switch(deliveryDay.getDay()){
             case 0:
-                dayString = "Sunday";
+                dayString = getContext().getString(R.string.fragment_schedule_sunday);
                 break;
             case 1:
-                dayString = "Monday";
+                dayString = getContext().getString(R.string.fragment_schedule_monday);
                 break;
             case 2:
-                dayString = "Tuesday";
+                dayString = getContext().getString(R.string.fragment_schedule_tuesday);
                 break;
             case 3:
-                dayString = "Wendsday";
+                dayString = getContext().getString(R.string.fragment_schedule_wednesday);
                 break;
             case 4:
-                dayString = "Thursday";
+                dayString = getContext().getString(R.string.fragment_schedule_thursday);
                 break;
             case 5:
-                dayString = "Friday";
+                dayString = getContext().getString(R.string.fragment_schedule_friday);
                 break;
             default:
-                dayString = "Saturday";
+                dayString = getContext().getString(R.string.fragment_schedule_saturday);
                 break;
         }
         myViewHolder.materia.setText(homeworkControl.getHomeworksSubjectName(homework.getFk_subject(), dh));

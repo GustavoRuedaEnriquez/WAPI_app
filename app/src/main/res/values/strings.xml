@@ -15,7 +15,6 @@
         <item>Semestre 5</item>
     </string-array>
 
-
     <!-- Activity Login Strings -->
     <string name="activity_login_start">Iniciar</string>
     <string name="activity_login_username">Nombre de usuario</string>
@@ -29,13 +28,11 @@
     <string name="activity_register_terms">Acepto los términos y condiciones</string>
     <string name="activity_register_btn">Registrarse</string>
 
-    <!--Fragment user strings-->
-    <string name="fragment_user_homework">Tareas para hoy</string>
-    <string name="fragment_user_time_lbl">Fecha de entrega:\ </string>
-    <string name="fragment_user_description_lbl">Descripción:\ </string>
-
     <!--Fragment User Strings -->
-    <string name="fragment_user_greeting">Bienvenido</string>
+    <string name="fragment_user_greeting">Bienvenido </string>
+    <string name="fragment_user_homework">Tareas para hoy</string>
+    <string name="fragment_user_time_lbl">Hora de entrega:</string>
+    <string name="fragment_user_description_lbl">Descripción:</string>
 
     <!-- Fragment Schedule Strings -->
     <string name="fragment_schedule_monday">Lunes</string>
@@ -44,7 +41,13 @@
     <string name="fragment_schedule_thursday">Jueves</string>
     <string name="fragment_schedule_friday">Viernes</string>
     <string name="fragment_schedule_saturday">Sábado</string>
+    <string name="fragment_schedule_sunday">Domingo</string>
     <string name="fragment_schedule_edit_schedule_btn">Editar Horario</string>
+
+    <!-- Fragment Grades Strings -->
+    <string name="fragment_grades_title">Calificaciones</string>
+    <string name="fragment_grades_subtitle">Materias</string>
+    <string name="fragment_grades_average">Promedio:</string>
 
     <!-- Fragment Payment Strings -->
     <string name="fragment_payment_title">Título</string>
@@ -57,6 +60,11 @@
     <string name="fragment_payment_warning_toast">Se tienen que llenar todos los campos. (La hora es opcional).</string>
     <string name="fragment_payment_reminder_title">Recordatorio de pago: </string>
     <string name="fragment_payment_reminder_toast">Recordatorio creado.</string>
+
+    <!-- Fragment Homework Strings -->
+    <string name="fragment_homework_title">Tareas</string>
+    <string name="fragment_homework_this_week">Esta semana</string>
+    <string name="fragment_homework_next_weeks">Próximas semanas</string>
 
     <!-- Fragment Configuration Strings -->
     <string name="fragment_configuration_username">Nombre de usuario</string>
@@ -103,18 +111,46 @@
     <string name="activity_subject_incorrect_time_warn">Ingrese horas correctas</string>
     <string name="activity_subject_period_warn">Debes agregar periodos primero</string>
 
-    <!--Activity edit schedule strings-->
+    <!-- Activity Edit Period Strings -->
+    <string name="activity_edit_period_add_period">Añadir periodo</string>
+    <string name="activity_edit_period_add_name">Nombre del periodo</string>
+    <string name="activity_edit_period_btn">Guardar</string>
+
+    <!--Activity Edit Schedule Strings -->
     <string name="activity_edit_schedule_title">Editar Horario</string>
     <string name="activity_edit_schedule_add_period">Añadir periodo</string>
     <string name="activity_edit_schedule_add_subject">Añadir materia</string>
     <string name="activity_edit_schedule_go">Ir</string>
     <string name="activity_edit_schedule_delete">Eliminar periodo</string>
     <string name="activity_edit_schedule_delete_dialog_title">Eliminar periodo</string>
-    <string name="activity_edit_schedule_delete_dialog_ok">Si</string>
+    <string name="activity_edit_schedule_delete_dialog_ok">Sí</string>
     <string name="activity_edit_schedule_delete_dialog_cancel">Cancelar</string>
     <string name="activity_edit_schedule_delete_dialog_message">¿Seguro que desea eliminar este periodo?</string>
 
-    <!--Item edit schedule subject-->
+    <!--Activity Edit Grade Strings -->
+    <string name="activity_edit_grade_title">Editar Calificación</string>
+    <string name="activity_edit_grade_description">Descripción</string>
+    <string name="activity_edit_grade_description_placeholder">Ingrese descripción</string>
+    <string name="activity_edit_grade_percentage">Porcentaje</string>
+    <string name="activity_edit_grade_percentage_placeholder">Ingrese porcentaje</string>
+    <string name="activity_edit_grade_grade">Calificación</string>
+    <string name="activity_edit_grade_grade_placeholder">Ingrese calificación</string>
+    <string name="activity_edit_grade_btn">Agregar</string>
+
+    <!-- Activity Edit Homework Strings -->
+    <string name="activity_edit_homework_title">Editar Tarea</string>
+    <string name="activity_edit_homework_subject">Materia</string>
+    <string name="activity_edit_homework_date">Fecha de entrega</string>
+    <string name="activity_edit_homework_hour">Hora</string>
+    <string name="activity_edit_homework_description">Descripción</string>
+    <string name="activity_edit_homework_description_placeholder">Ingrese descripción de la tarea.</string>
+    <string name="activity_edit_homework_btn">Agregar</string>
+    <string name="activity_edit_homework_toast">Error en datos de hora o fecha.</string>
+
+    <!--Item Edit Schedule subject Strings -->
     <string name="item_edit_schedule_subject_time_lbl">Horario: </string>
     <string name="item_edit_schedule_subject_days_lbl">Días: </string>
+
+    <!--Item Homework Strings -->
+    <string name="item_homework_subject">Materia:</string>
 </resources>
