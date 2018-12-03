@@ -136,6 +136,9 @@
     <string name="activity_edit_grade_grade">Grade</string>
     <string name="activity_edit_grade_grade_placeholder">Enter grade</string>
     <string name="activity_edit_grade_btn">Add</string>
+    <string name="activity_edit_grade_per_error">Total on percentage error.</string>
+    <string name="activity_edit_grade_error">Incorrect data input.</string>
+    <string name="activity_edit_grade_missing_data">Missing data on fields.</string>
 
     <!-- Activity Edit Homework Strings -->
     <string name="activity_edit_homework_title">Edit Homework</string>
@@ -146,6 +149,7 @@
     <string name="activity_edit_homework_description_placeholder">Enter the homeworks description.</string>
     <string name="activity_edit_homework_btn">Add</string>
     <string name="activity_edit_homework_toast">Error in the date or hour.</string>
+    <string name="activity_edit_homework_missing_data">Missing data on fields.</string>
 
     <!--Item Edit Schedule subject Strings -->
     <string name="item_edit_schedule_subject_time_lbl">Schedule: </string>

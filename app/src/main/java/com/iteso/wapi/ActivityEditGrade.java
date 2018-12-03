@@ -69,37 +69,40 @@ public class ActivityEditGrade extends AppCompatActivity {
         addGrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if((Float.valueOf(editPorc.getText().toString()) >=0.0 & Float.valueOf(editPorc.getText().toString()) <=100.0)
-                        & (Float.valueOf(editGrade.getText().toString()) >=0.0 & Float.valueOf(editGrade.getText().toString()) <=100.0)){
-                    if(validatePercentage(Float.valueOf(editPorc.getText().toString()))){
-                        avarage = 0;
-                        grade = new Grade();
-                        grade.setGrade(Float.valueOf(editGrade.getText().toString()));
-                        grade.setPercentage(Float.valueOf(editPorc.getText().toString()));
-                        grade.setDescriptionGrade(editTitle.getText().toString());
-                        grade.setFk_subject(subject.getIdSubject());
-                        gradeControl.addGrade(grade,dh);
-                        editTitle.setText("");
-                        editPorc.setText("");
-                        editGrade.setText("");
+                if(editGrade.getText().length()>0 & editTitle.getText().length()>0 & editPorc.getText().length()>0) {
+                    if ((Float.valueOf(editPorc.getText().toString()) >= 0.0 & Float.valueOf(editPorc.getText().toString()) <= 100.0)
+                            & (Float.valueOf(editGrade.getText().toString()) >= 0.0 & Float.valueOf(editGrade.getText().toString()) <= 100.0)) {
+                        if (validatePercentage(Float.valueOf(editPorc.getText().toString()))) {
+                            avarage = 0;
+                            grade = new Grade();
+                            grade.setGrade(Float.valueOf(editGrade.getText().toString()));
+                            grade.setPercentage(Float.valueOf(editPorc.getText().toString()));
+                            grade.setDescriptionGrade(editTitle.getText().toString());
+                            grade.setFk_subject(subject.getIdSubject());
+                            gradeControl.addGrade(grade, dh);
+                            editTitle.setText("");
+                            editPorc.setText("");
+                            editGrade.setText("");
 
-                        calificaciones.clear();
-                        calificaciones = gradeControl.getGradesBySubject(subject.getIdSubject(),dh);
-                        adapterGrade = new AdapterGrade(2, ActivityEditGrade.this, calificaciones);
-                        recyclerView.setAdapter(adapterGrade);
+                            calificaciones.clear();
+                            calificaciones = gradeControl.getGradesBySubject(subject.getIdSubject(), dh);
+                            adapterGrade = new AdapterGrade(2, ActivityEditGrade.this, calificaciones);
+                            recyclerView.setAdapter(adapterGrade);
 
-                        for(int x =0; x<calificaciones.size();x++){
-                            avarage += (calificaciones.get(x).getGrade()*(calificaciones.get(x).getPercentage() / 100.0));
+                            for (int x = 0; x < calificaciones.size(); x++) {
+                                avarage += (calificaciones.get(x).getGrade() * (calificaciones.get(x).getPercentage() / 100.0));
+                            }
+                            subject.setAvarage(avarage);
+                            subjectControl.updateSubject(subject, dh);
+                        } else {
+                            Toast.makeText(ActivityEditGrade.this, getResources().getString(R.string.activity_edit_grade_per_error), Toast.LENGTH_SHORT).show();
                         }
-                        subject.setAvarage(avarage);
-                        subjectControl.updateSubject(subject, dh);
-                    }
-                    else{
-                        Toast.makeText(ActivityEditGrade.this, "Total de porcentajes erroneos", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(ActivityEditGrade.this, getResources().getString(R.string.activity_edit_grade_error), Toast.LENGTH_SHORT).show();
                     }
                 }
                 else{
-                    Toast.makeText(ActivityEditGrade.this, "Error en datos ingresados", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityEditGrade.this, getResources().getString(R.string.activity_edit_grade_missing_data), Toast.LENGTH_SHORT).show();
                 }
             }
         });

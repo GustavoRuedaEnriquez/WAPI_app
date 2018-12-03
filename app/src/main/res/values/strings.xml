@@ -136,6 +136,9 @@
     <string name="activity_edit_grade_grade">Calificación</string>
     <string name="activity_edit_grade_grade_placeholder">Ingrese calificación</string>
     <string name="activity_edit_grade_btn">Agregar</string>
+    <string name="activity_edit_grade_per_error">Total de porcentajes erróneos.</string>
+    <string name="activity_edit_grade_error">Error en datos ingresados.</string>
+    <string name="activity_edit_grade_missing_data">Faltan datos por llenar.</string>
 
     <!-- Activity Edit Homework Strings -->
     <string name="activity_edit_homework_title">Editar Tarea</string>
@@ -146,6 +149,7 @@
     <string name="activity_edit_homework_description_placeholder">Ingrese descripción de la tarea.</string>
     <string name="activity_edit_homework_btn">Agregar</string>
     <string name="activity_edit_homework_toast">Error en datos de hora o fecha.</string>
+    <string name="activity_edit_homework_missing_data">Faltan datos por llenas.</string>
 
     <!--Item Edit Schedule subject Strings -->
     <string name="item_edit_schedule_subject_time_lbl">Horario: </string>
