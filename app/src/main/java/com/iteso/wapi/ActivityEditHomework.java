@@ -58,24 +58,31 @@ public class ActivityEditHomework extends AppCompatActivity {
         addHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if((Integer.valueOf(day.getText().toString()) <= 31 & Integer.valueOf(day.getText().toString()) >= 0 )
-                    &(Integer.valueOf(month.getText().toString()) <=12 & Integer.valueOf(month.getText().toString())>=0)
-                    &(Integer.valueOf(hour.getText().toString()) <=23 & Integer.valueOf(hour.getText().toString())>=0)
-                    &(Integer.valueOf(min.getText().toString()) <=59 & Integer.valueOf(min.getText().toString())>=0)){
-                        Homework homework = new Homework();
-                        homework.setDescriptionHomework(description.getText().toString());
-                        homework.setFk_subject(subjects.get(spinner.getSelectedItemPosition()).getIdSubject());
-                        homework.setDeliveryDay(Integer.valueOf(day.getText().toString()));
-                        homework.setDeliveryMonth(Integer.valueOf(month.getText().toString()));
-                        homework.setDeliveryYear(Integer.valueOf(year.getText().toString()));
-                        homework.setDeliveryHour(Integer.valueOf(hour.getText().toString()));
-                        homework.setDeliveryMin(Integer.valueOf(min.getText().toString()));
-                        homeworkControl.addHomework(homework,dh);
-                        onBackPressed();
+                if((description.getText().length()>0 & day.getText().length()>0 & month.getText().length()>0
+                        & year.getText().length()>0 & hour.getText().length()>0 & min.getText()     .length()>0)){
+                    if((Integer.valueOf(day.getText().toString()) <= 31 & Integer.valueOf(day.getText().toString()) >= 0 )
+                        &(Integer.valueOf(month.getText().toString()) <=12 & Integer.valueOf(month.getText().toString())>=0)
+                        &(Integer.valueOf(hour.getText().toString()) <=23 & Integer.valueOf(hour.getText().toString())>=0)
+                        &(Integer.valueOf(min.getText().toString()) <=59 & Integer.valueOf(min.getText().toString())>=0)
+                        ){
+                            Homework homework = new Homework();
+                            homework.setDescriptionHomework(description.getText().toString());
+                            homework.setFk_subject(subjects.get(spinner.getSelectedItemPosition()).getIdSubject());
+                            homework.setDeliveryDay(Integer.valueOf(day.getText().toString()));
+                            homework.setDeliveryMonth(Integer.valueOf(month.getText().toString()));
+                            homework.setDeliveryYear(Integer.valueOf(year.getText().toString()));
+                            homework.setDeliveryHour(Integer.valueOf(hour.getText().toString()));
+                            homework.setDeliveryMin(Integer.valueOf(min.getText().toString()));
+                            homeworkControl.addHomework(homework,dh);
+                            onBackPressed();
 
+                    }
+                    else{
+                        Toast.makeText(ActivityEditHomework.this, getResources().getString(R.string.activity_edit_homework_toast), Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else{
-                    Toast.makeText(ActivityEditHomework.this, getResources().getString(R.string.activity_edit_homework_toast), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityEditHomework.this, getResources().getString(R.string.activity_edit_homework_missing_data), Toast.LENGTH_SHORT).show();
                 }
             }
         });

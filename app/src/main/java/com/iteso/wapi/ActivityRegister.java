@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-
 import com.iteso.wapi.beans.Student;
 import com.iteso.wapi.database.DataBaseHandler;
 import com.iteso.wapi.database.StudentControl;
@@ -18,7 +17,6 @@ import com.iteso.wapi.database.StudentControl;
 public class ActivityRegister extends AppCompatActivity {
 
     EditText username, password, school;
-    CheckBox terms;
     Button register;
 
     StudentControl studentControl = new StudentControl();
@@ -32,7 +30,6 @@ public class ActivityRegister extends AppCompatActivity {
 
         username = findViewById(R.id.activity_register_name);
         password = findViewById(R.id.activity_register_pass);
-        terms    = findViewById(R.id.activity_register_terms);
         register = findViewById(R.id.activity_register_register);
 
         register.setOnClickListener(new View.OnClickListener() {
