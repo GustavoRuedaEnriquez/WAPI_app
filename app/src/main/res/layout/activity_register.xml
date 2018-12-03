@@ -23,17 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/EditText_dark_style"
-        android:hint="@string/activity_register_password"/>
-
-    <CheckBox
-        android:id="@+id/activity_register_terms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_register_terms"
-        android:textColor="@color/colorPrimary"
-        android:shadowColor="@color/colorPrimary"
-        android:buttonTint="@color/colorPrimary"
-        />
+        android:hint="@string/activity_register_password"
+        android:inputType="textPassword"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
