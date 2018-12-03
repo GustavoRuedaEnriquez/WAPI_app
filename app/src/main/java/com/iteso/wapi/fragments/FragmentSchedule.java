@@ -51,7 +51,7 @@ public class FragmentSchedule extends Fragment {
     private ArrayList<Subject> subjects;
     private AdapterFragmentSchedule adapterFragmentSchedule;
     private ArrayList<String> days = new ArrayList<>();
-    private Period currentPeriod;
+    private Period currentPeriod = new Period();
     ArrayList<Period> periods;
 
     public FragmentSchedule() {
