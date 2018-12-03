@@ -8,17 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.iteso.wapi.beans.Homework;
 import com.iteso.wapi.database.DataBaseHandler;
 import com.iteso.wapi.database.HomeworkControl;
-
-import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyViewHolder>{
 
@@ -90,12 +84,16 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
         homework = homeworkList.get(position);
         homeworkControl = new HomeworkControl();
         dh = DataBaseHandler.getInstance(getContext());
-        Date deliveryDay = Calendar.getInstance().getTime();
+        Date deliveryDay = new Date(homework.getDeliveryYear()- 1900,homework.getDeliveryMonth()-1,homework.getDeliveryDay());
+
         String dayString;
         //myViewHolder.nombre.setText(subjectList.get(myViewHolder.getAdapterPosition()).getNameSubject());
         //myViewHolder.promedio.setText(Float.toString(subjectList.get(myViewHolder.getAdapterPosition()).getAvarage()));
         myViewHolder.descripcion.setText(homework.getDescriptionHomework());
         switch(deliveryDay.getDay()){
+            case 0:
+                dayString = "Sunday";
+                break;
             case 1:
                 dayString = "Monday";
                 break;
@@ -118,7 +116,11 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
         myViewHolder.materia.setText(homeworkControl.getHomeworksSubjectName(homework.getFk_subject(), dh));
         String dateToShow = dayString + " " +homework.getDeliveryDay()+"/"+homework.getDeliveryMonth();
         myViewHolder.fecha.setText(dateToShow);
-        String hourToShow =homework.getDeliveryHour()+":"+homework.getDeliveryMin();
+        String hourToShow =homework.getDeliveryHour()+":";
+        if(homework.getDeliveryMin()<10){
+            hourToShow += "0";
+        }
+        hourToShow += homework.getDeliveryMin();
         myViewHolder.hora.setText(hourToShow);
 
         myViewHolder.erase.setOnClickListener(new View.OnClickListener() {
