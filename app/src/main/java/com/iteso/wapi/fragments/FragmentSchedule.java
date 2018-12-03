@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+
 import com.iteso.wapi.ActivityEditSchedule;
 import com.iteso.wapi.ActivityLogin;
 import com.iteso.wapi.ActivitySplashscreen;
@@ -30,9 +31,11 @@ import com.iteso.wapi.database.DataBaseHandler;
 import com.iteso.wapi.database.PeriodControl;
 import com.iteso.wapi.database.ScheduleControl;
 import com.iteso.wapi.database.SubjectControl;
+
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import static android.content.Context.MODE_PRIVATE;
 
 
@@ -76,7 +79,7 @@ public class FragmentSchedule extends Fragment {
         for (Period index : periods)
             periodsName.add(index.getNamePeriod());
 
-        if(periods.size() > 0) {
+        if (periods.size() > 0) {
             currentPeriod = periods.get(0);
         }
 
@@ -152,7 +155,6 @@ public class FragmentSchedule extends Fragment {
         weekDays.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.e("SCHEDULE", "Entra");
                 updateAdapter();
             }
 
@@ -183,7 +185,15 @@ public class FragmentSchedule extends Fragment {
 
         periodsSpinner.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, periodsName));
 
+        if (periods.size() == 0) {
+            subjects.clear();
+            adapterFragmentSchedule.notifyDataSetChanged();
+            return;
+        }
+
+        currentPeriod = periods.get(0);
         updateAdapter();
+
     }
 
     /*public ArrayList<Subject> subjectsPerDay(ArrayList<Subject> subjects, int day, DataBaseHandler dh) {
@@ -218,9 +228,9 @@ public class FragmentSchedule extends Fragment {
         DataBaseHandler dh = DataBaseHandler.getInstance(getActivity());
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
 
-        if(periods.size() > 0 && !currentPeriod.getNamePeriod().equals(periodsSpinner.getSelectedItem().toString())){
-            for(Period period: periods)
-                if(period.getNamePeriod().equals(periodsSpinner.getSelectedItem().toString()))
+        if (periods.size() > 0 && !currentPeriod.getNamePeriod().equals(periodsSpinner.getSelectedItem().toString())) {
+            for (Period period : periods)
+                if (period.getNamePeriod().equals(periodsSpinner.getSelectedItem().toString()))
                     currentPeriod = period;
         }
 
@@ -234,16 +244,5 @@ public class FragmentSchedule extends Fragment {
             adapterFragmentSchedule.notifyDataSetChanged();
         }
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
 
 }
