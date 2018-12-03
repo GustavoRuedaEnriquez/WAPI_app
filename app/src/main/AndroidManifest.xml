@@ -9,28 +9,52 @@
         android:roundIcon="@mipmap/logo_wapi_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivitySplashscreen">
+        <activity
+            android:name=".ActivitySplashscreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityMain" />
-        <activity android:name=".ActivityMateria" />
-        <activity android:name=".ActivityLogin" />
-        <activity android:name=".ActivityRegister" />
-        <activity android:name=".ActivityEditHomework" />
-        <activity android:name=".ActivityEditGrade" />
+        <activity
+            android:name=".ActivityMain"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityMateria"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityLogin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityRegister"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityEditHomework"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityEditGrade"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityHome"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ActivityEditSubject" />
-        <activity android:name=".ActivityCreateSubject" />
-        <activity android:name=".ActivityEditSchedule" />
-        <activity android:name=".ActivityEditPeriod" />
-        <activity android:name=".ActivityEditInformation" />
+        <activity
+            android:name=".ActivityEditSubject"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityCreateSubject"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityEditSchedule"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityEditPeriod"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityEditInformation"
+            android:screenOrientation="portrait" />
 
     </application>
 
