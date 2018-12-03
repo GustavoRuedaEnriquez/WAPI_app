@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30dp"
-        android:text="Editar Tarea"
+        android:text="@string/activity_edit_homework_title"
         android:layout_gravity="center"
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15dp"
-        android:text="Materia"
+        android:text="@string/activity_edit_homework_subject"
         android:textColor="@color/colorPrimaryDark"
         />
 
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text="Fecha de entrega"
+        android:text="@string/activity_edit_homework_date"
         android:textColor="@color/colorPrimaryDark"
             />
 
@@ -54,6 +54,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="15dp"
+            style="@style/EditText_dark_style"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -69,6 +70,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="15dp"
+            style="@style/EditText_dark_style"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -84,6 +86,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="15dp"
+            style="@style/EditText_dark_style"
             />
     </LinearLayout>
 
@@ -93,7 +96,7 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:textColor="@color/colorPrimaryDark"
-            android:text="Hora"
+            android:text="@string/activity_edit_homework_hour"
             />
     <LinearLayout
         android:layout_width="match_parent"
@@ -106,6 +109,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="15dp"
+            style="@style/EditText_dark_style"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -121,6 +125,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="15dp"
+            style="@style/EditText_dark_style"
             />
     </LinearLayout>
 
@@ -129,16 +134,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryDark"
-        android:text="Descripción"
+        android:text="@string/activity_edit_homework_description"
         />
     <EditText
         android:id="@+id/activity_edit_homework_descr"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-
-        android:hint="Ingresa descripcion de ls tarea"
-
+        android:hint="@string/activity_edit_homework_description_placeholder"
         android:textSize="15dp"
+        style="@style/EditText_dark_style"
         />
 
     <Button
@@ -146,7 +150,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="Agregar"
+        android:text="@string/activity_edit_homework_btn"
         android:layout_gravity="center"
         style="@style/custom_light_Button"
         android:layout_margin="@dimen/margin"

@@ -34,21 +34,10 @@ import java.util.ArrayList;
 import static android.content.Context.MODE_PRIVATE;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentGrades.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentGrades#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentGrades extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -67,15 +56,6 @@ public class FragmentGrades extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentGrades.
-     */
-    // TODO: Rename and change types and number of parameters
     public static FragmentGrades newInstance(String param1, String param2) {
         FragmentGrades fragment = new FragmentGrades();
         Bundle args = new Bundle();
@@ -128,7 +108,7 @@ public class FragmentGrades extends Fragment {
                 subjects = subjectControl.getSubjectsByPeriod(periods.get(spinner.getSelectedItemPosition()).getIdPeriod(), dh);
                 adapterMateria = new AdapterMateria(2, getActivity(), subjects);
                 recyclerView.setAdapter(adapterMateria);
-                updateAvaragePeriod();
+                updateAveragePeriod();
             }
 
             @Override
@@ -141,37 +121,23 @@ public class FragmentGrades extends Fragment {
 
     }
 
-    public void updateAvaragePeriod(){
-        float avarage = 0;
+    public void updateAveragePeriod(){
+        float average = 0;
         String show;
         Subject auxSubject;
         for(int x = 0; x<subjects.size();x++){
             auxSubject = subjects.get(x);
-            avarage += (auxSubject.getAvarage());
+            average += (auxSubject.getAvarage());
         }
-        avarage = avarage / subjects.size();
-        show = "Promedio: " + avarage;
+        if(subjects.isEmpty())
+            average = 0;
+        else
+            average = average / subjects.size();
+        show = getResources().getString(R.string.fragment_grades_average) + " "  + average;
         avarageFinal.setText(show);
     }
 
-/*
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Subject materia = data.getParcelableExtra("Subject");
-        Iterator<Subject> iterator = subjects.iterator();
-        int position = 0;
-        while(iterator.hasNext()){
-            Subject item = iterator.next();
-            if(item.getIdSubject() == materia.getIdSubject()){
-                subjects.set(position, materia);
-                break;
-            }
-            position++;
-        }
-        adapterMateria.notifyDataSetChanged();
-    }
-*/
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -198,7 +164,7 @@ public class FragmentGrades extends Fragment {
         else{
             subjects = new ArrayList<>();
         }
-        updateAvaragePeriod();
+        updateAveragePeriod();
         adapterMateria = new AdapterMateria(2, getActivity(), subjects);
         recyclerView.setAdapter(adapterMateria);
     }

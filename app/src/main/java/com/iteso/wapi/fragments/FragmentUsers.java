@@ -42,7 +42,7 @@ public class FragmentUsers extends Fragment {
         View v = inflater.inflate(R.layout.fragment_users, container, false);
         greeting = v.findViewById(R.id.fragment_users_greeting);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
-        greeting.setText(String.format("Bienvenido %s", sharedPreferences.getString("NAME", "Default name")));
+        greeting.setText(String.format("%s %s", getResources().getString(R.string.fragment_user_greeting),sharedPreferences.getString("NAME", "Default name")));
 
         homeworkView = v.findViewById(R.id.fragment_users_homework);
         if(homeworkView == null)
