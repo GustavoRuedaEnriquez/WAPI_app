@@ -27,8 +27,10 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class FragmentUsers extends Fragment {
 
-   TextView greeting;
-   RecyclerView homeworkView;
+   private TextView greeting;
+   private RecyclerView homeworkView;
+   private ArrayList<Homework> homeworks;
+   private AdapterUserHomework adapterUserHomework;
 
     public FragmentUsers() {
         // Required empty public constructor
@@ -51,7 +53,7 @@ public class FragmentUsers extends Fragment {
         DataBaseHandler dh = DataBaseHandler.getInstance(getContext());
         HomeworkControl homeworkControl = new HomeworkControl();
 
-        ArrayList<Homework> homeworks = new ArrayList<>();
+        homeworks = new ArrayList<>();
         ArrayList<Homework> allHomework = homeworkControl.getHomeworksByStudent(sharedPreferences.getString("NAME", "Default name"), dh);
 
         Calendar today = Calendar.getInstance();
@@ -64,11 +66,22 @@ public class FragmentUsers extends Fragment {
         Collections.sort(homeworks);
 
         if(homeworks.size() > 0) {
-            AdapterUserHomework adapterUserHomework = new AdapterUserHomework(getContext(), homeworks);
+            adapterUserHomework = new AdapterUserHomework(getContext(), homeworks);
             homeworkView.setAdapter(adapterUserHomework);
         }
 
         return v;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(homeworks != null && adapterUserHomework != null){
+            Collections.sort(homeworks);
+            Collections.reverse(homeworks);
+            adapterUserHomework.notifyDataSetChanged();
+        }
+
+    }
 }
