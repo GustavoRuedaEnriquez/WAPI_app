@@ -121,12 +121,11 @@ public class FragmentHomework extends Fragment {
         recyclerViewProximas.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
         recyclerViewProximas.setLayoutManager(mLayoutManager2);
-
         homeworks = homeworkControl.getHomeworksByStudent(sharedPreferences.getString("NAME", "UNKNOWN"), dh);
         orderByDates();
         homeworksNext = new ArrayList<>();
         homeworksWeek = new ArrayList<>();
-
+      
         for(int x = 0; x<homeworks.size(); x++){
             date = new Date(homeworks.get(x).getDeliveryYear()- 1900,homeworks.get(x).getDeliveryMonth()-1,homeworks.get(x).getDeliveryDay());
             if (today.compareTo(date)<0){
@@ -149,9 +148,9 @@ public class FragmentHomework extends Fragment {
         recyclerView.addItemDecoration(dividerItemDecoration);
         adapterHomework = new AdapterHomework(4, getActivity(), homeworksNext);
         recyclerViewProximas.setAdapter(adapterHomework);
+
         DividerItemDecoration dividerItemDecorationProximas = new DividerItemDecoration(recyclerViewProximas.getContext(), mLayoutManager.getOrientation());
         recyclerViewProximas.addItemDecoration(dividerItemDecorationProximas);
-
     }
 
     public void orderByDates(){

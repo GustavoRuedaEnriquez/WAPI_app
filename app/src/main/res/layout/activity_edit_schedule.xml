@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin"
     android:orientation="vertical"
-    tools:context=".ActivityEditSchedule"
-    android:layout_margin="@dimen/margin">
+    tools:context=".ActivityEditSchedule">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,20 +59,20 @@
             <Spinner
                 android:id="@+id/activity_edit_schedule_periods"
                 android:layout_width="0dp"
-                android:layout_weight=".8"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:layout_weight=".8" />
 
             <Button
                 android:id="@+id/activity_edit_schedule_go"
                 style="@style/custom_light_Button"
                 android:layout_width="0dp"
-                android:layout_weight=".2"
                 android:layout_height="wrap_content"
-                android:text="@string/activity_edit_schedule_go"
-                android:textSize="@dimen/activity_edit_schedule_go"
                 android:layout_margin="@dimen/activity_edit_schedule_go_margin"
-                android:onClick="updatePeriod"/>
+                android:layout_weight=".2"
+                android:onClick="updatePeriod"
+                android:text="@string/activity_edit_schedule_go"
+                android:textSize="@dimen/activity_edit_schedule_go" />
 
         </LinearLayout>
 
@@ -82,6 +82,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical" />
+
+        <Button
+            android:id="@+id/activity_edit_schedule_delete"
+            style="@style/custom_red_light_Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/activity_edit_schedule_btn"
+            android:text="@string/activity_edit_schedule_delete"
+            android:layout_marginTop="@dimen/margin"/>
 
     </LinearLayout>
 

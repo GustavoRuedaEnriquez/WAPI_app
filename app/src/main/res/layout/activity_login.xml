@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin"
-        android:text="Iniciar"
+        android:text="@string/activity_login_start"
         android:textSize="@dimen/title_font_size"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"/>
@@ -24,19 +24,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
-
         style="@style/EditText_dark_style"
-
-        android:hint="Nombre de usuario"
+        android:hint="@string/activity_login_username"
         android:inputType="text"/>
 
     <EditText
         android:id="@+id/activity_login_password_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         style="@style/EditText_dark_style"
-
         android:hint="@string/activity_login_password"
         android:inputType="textPassword"/>
 
@@ -44,19 +40,16 @@
         android:id="@+id/activity_login_access_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         style="@style/custom_light_Button"
-
         android:text="@string/activity_login_access_btn"
         android:textSize="30dp"
-        android:layout_marginTop="100dp"
-    />
+        android:layout_marginTop="100dp"/>
 
     <TextView
         android:id="@+id/activity_login_register_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="¿No tienes cuenta aún? Crea una aquí."
+        android:text="@string/activity_login_register_btn"
         android:textColor="@color/colorPrimary"
         android:textSize="15dp"
         android:layout_marginTop="20dp"
