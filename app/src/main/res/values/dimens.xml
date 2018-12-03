@@ -6,6 +6,11 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="row_padding_vertical">10dp</dimen>
 
+    <!--Fragment user dimens-->
+    <dimen name="fragment_user_name">30sp</dimen>
+    <dimen name="fragment_user_name_margin">30sp</dimen>
+    <dimen name="fragment_user_homework">25sp</dimen>
+
     <!--Activities subject dimens-->
     <dimen name="activity_subject_btn_margin_top">40dp</dimen>
 

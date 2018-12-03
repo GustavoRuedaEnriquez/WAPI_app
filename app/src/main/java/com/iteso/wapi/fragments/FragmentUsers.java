@@ -1,56 +1,39 @@
 package com.iteso.wapi.fragments;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.iteso.wapi.ActivitySplashscreen;
+import com.iteso.wapi.AdapterUserHomework;
 import com.iteso.wapi.R;
+import com.iteso.wapi.beans.Homework;
+import com.iteso.wapi.database.DataBaseHandler;
+import com.iteso.wapi.database.HomeworkControl;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 
 import static android.content.Context.MODE_PRIVATE;
 
 
 public class FragmentUsers extends Fragment {
 
-   TextView greeting;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+   private TextView greeting;
+   private RecyclerView homeworkView;
+   private ArrayList<Homework> homeworks;
+   private AdapterUserHomework adapterUserHomework;
 
     public FragmentUsers() {
         // Required empty public constructor
-    }
-
-
-    public static FragmentUsers newInstance(String param1, String param2) {
-        FragmentUsers fragment = new FragmentUsers();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -59,17 +42,46 @@ public class FragmentUsers extends Fragment {
         View v = inflater.inflate(R.layout.fragment_users, container, false);
         greeting = v.findViewById(R.id.fragment_users_greeting);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
-        greeting.setText(getResources().getString(R.string.fragment_user_greeting) + " " + sharedPreferences.getString("NAME","Default name"));
+        greeting.setText(String.format("Bienvenido %s", sharedPreferences.getString("NAME", "Default name")));
+
+        homeworkView = v.findViewById(R.id.fragment_users_homework);
+        if(homeworkView == null)
+            Log.e("WAPI", "Es nulo");
+        homeworkView.setLayoutManager(new LinearLayoutManager(getContext()));
+        homeworkView.setHasFixedSize(true);
+
+        DataBaseHandler dh = DataBaseHandler.getInstance(getContext());
+        HomeworkControl homeworkControl = new HomeworkControl();
+
+        homeworks = new ArrayList<>();
+        ArrayList<Homework> allHomework = homeworkControl.getHomeworksByStudent(sharedPreferences.getString("NAME", "Default name"), dh);
+
+        Calendar today = Calendar.getInstance();
+
+        for(Homework homework: allHomework) {
+            if(homework.getDeliveryDay().equals(today.get(Calendar.DAY_OF_MONTH)))
+                homeworks.add(homework);
+        }
+
+        Collections.sort(homeworks);
+
+        if(homeworks.size() > 0) {
+            adapterUserHomework = new AdapterUserHomework(getContext(), homeworks);
+            homeworkView.setAdapter(adapterUserHomework);
+        }
+
         return v;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
+    public void onResume() {
+        super.onResume();
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        if(homeworks != null && adapterUserHomework != null){
+            Collections.sort(homeworks);
+            Collections.reverse(homeworks);
+            adapterUserHomework.notifyDataSetChanged();
+        }
+
     }
 }

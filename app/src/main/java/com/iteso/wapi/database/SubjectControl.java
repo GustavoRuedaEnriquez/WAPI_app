@@ -53,6 +53,26 @@ public class SubjectControl {
         return subjects;
     }
 
+    public Subject getSubjectById(int subjectId, DataBaseHandler dh){
+        SQLiteDatabase db = dh.getReadableDatabase();
+        String selectQuery = "SELECT " +
+                DataBaseHandler.SUBJECT_ID + ", " +
+                DataBaseHandler.SUBJECT_FK_PERIOD + ", " +
+                DataBaseHandler.SUBJECT_NAME + ", " +
+                DataBaseHandler.SUBJECT_AVERAGE +
+                " FROM " + DataBaseHandler.TABLE_SUBJECT +
+                " WHERE " + DataBaseHandler.SUBJECT_ID + " = " + subjectId;
+
+        Cursor cursor = db.rawQuery(selectQuery,null);
+        cursor.moveToNext();
+        Subject newSubject = new Subject();
+        newSubject.setIdSubject(cursor.getInt(0));
+        newSubject.setFk_period(cursor.getInt(1));
+        newSubject.setNameSubject(cursor.getString(2));
+
+        return newSubject;
+    }
+
     public ArrayList<Subject> getSubjectsByPeriod(int period, DataBaseHandler dh){
         ArrayList<Subject> subjects = new ArrayList<>();
         SQLiteDatabase db = dh.getReadableDatabase();

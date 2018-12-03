@@ -2,8 +2,9 @@ package com.iteso.wapi.beans;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
-public class Homework implements Parcelable {
+public class Homework implements Parcelable, Comparable<Homework> {
 
     private Integer idHomework;
     private Integer fk_subject;
@@ -146,4 +147,21 @@ public class Homework implements Parcelable {
             return new Homework[size];
         }
     };
+
+    @Override
+    public int compareTo(@NonNull Homework o) {
+        if(!this.deliveryDay.equals(o.deliveryYear))
+            return this.deliveryYear.compareTo(o.deliveryYear);
+
+        if(!this.deliveryMonth.equals(o.deliveryMonth))
+            return this.deliveryMonth.compareTo(o.deliveryMonth);
+
+        if(!this.deliveryDay.equals(o.deliveryDay))
+            return this.deliveryDay.compareTo(o.deliveryDay);
+
+        if(!this.deliveryHour.equals(o.deliveryHour))
+            return this.deliveryHour.compareTo(o.deliveryHour);
+
+        return this.deliveryMin.compareTo(o.deliveryMin);
+    }
 }
