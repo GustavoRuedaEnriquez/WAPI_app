@@ -14,8 +14,6 @@ public class PeriodControl {
 
     public void addPeriod(Period period, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
-        Log.i("INFO     dbh", dh.toString());
-        Log.i("INFO     db ", db.toString());
         ContentValues values = new ContentValues();
         values.put(DataBaseHandler.PERIOD_ID, maxIdPeriod(dh) + 1);
         values.put(DataBaseHandler.PERIOD_NAME, period.getNamePeriod());
@@ -52,7 +50,7 @@ public class PeriodControl {
         return periods;
     }
 
-    public ArrayList<Period> getPeriodsByStudent(String fkStudentUsername, DataBaseHandler dh){
+    public ArrayList<Period> getPeriodsByStudent(String fkStudentUsername, DataBaseHandler dh) {
         ArrayList<Period> periods = new ArrayList<>();
         SQLiteDatabase db = dh.getReadableDatabase();
         String selectQuery = "SELECT " + DataBaseHandler.PERIOD_ID + ", "
@@ -77,10 +75,11 @@ public class PeriodControl {
         return periods;
     }
 
-    public void updatePeriod(int periodId,  String updatedPeriodName, DataBaseHandler dh){
+    public void updatePeriod(int periodId,  Period updatedPeriod, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
         String updateQuery = "UPDATE " + DataBaseHandler.TABLE_PERIOD
-                + " SET " + DataBaseHandler.PERIOD_NAME + " = " + updatedPeriodName
+                + " SET " + DataBaseHandler.PERIOD_NAME + " = '" + updatedPeriod.getNamePeriod() + "',"
+                + DataBaseHandler.PERIOD_FK_STUDENT + " = '" + updatedPeriod.getUserName() + "'"
                 + " WHERE " + DataBaseHandler.PERIOD_ID + " = " + periodId;
         db.execSQL(updateQuery);
         try{
@@ -120,6 +119,28 @@ public class PeriodControl {
 
         }
         return result;
+    }
+
+    public void updateFKUsername(String fkUsername, String fkUsernameNew, DataBaseHandler dh){
+        SQLiteDatabase db = dh.getWritableDatabase();
+        ArrayList<Period> payments = this.getPeriodsByStudent(fkUsername, dh);
+        for(Period index: payments){
+            index.setUserName(fkUsernameNew);
+            this.updatePeriod(index.getIdPeriod(),index,dh);
+        }
+    }
+
+    public int getPeriodIdByPeriodName(String fkStudentUsername, String periodName, DataBaseHandler dh){
+        int id = 0;
+        SQLiteDatabase db = dh.getReadableDatabase();
+        String selectQuery = "SELECT " + DataBaseHandler.PERIOD_ID
+                + " FROM " + DataBaseHandler.TABLE_PERIOD
+                + " WHERE " + DataBaseHandler.PERIOD_FK_STUDENT + " = '" + fkStudentUsername + "' AND " + DataBaseHandler.PERIOD_NAME + " = '" + periodName + "'";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        while(cursor.moveToNext()){
+            id = cursor.getInt(0);
+        }
+        return id;
     }
 
 }

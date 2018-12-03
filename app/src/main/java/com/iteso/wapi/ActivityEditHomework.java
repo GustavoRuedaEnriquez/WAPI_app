@@ -1,39 +1,82 @@
 package com.iteso.wapi;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.iteso.wapi.beans.Homework;
+import com.iteso.wapi.beans.Subject;
+import com.iteso.wapi.database.DataBaseHandler;
+import com.iteso.wapi.database.HomeworkControl;
+import com.iteso.wapi.database.SubjectControl;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ActivityEditHomework extends AppCompatActivity {
 
     Spinner spinner;
-    EditText descripcion, fecha, hora;
-    ImageButton back;
+    EditText description, day, month, year, hour, min;
+    Button addHomework;
+    HomeworkControl homeworkControl = new HomeworkControl();
+    DataBaseHandler dh;
+    SubjectControl subjectControl = new SubjectControl();
+    ArrayList<Subject> subjects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_homework);
         spinner = findViewById(R.id.activity_edit_homework_materias);
-        descripcion = findViewById(R.id.activity_edit_homework_descr);
-        fecha = findViewById(R.id.activity_edit_homework_fecha);
-        hora = findViewById(R.id.activity_editar_tarea_hora);
-        back = findViewById(R.id.activity_edit_homework_back);
+        description = findViewById(R.id.activity_edit_homework_descr);
+        day = findViewById(R.id.activity_edit_homework_day);
+        month = findViewById(R.id.activity_edit_homework_month);
+        year = findViewById(R.id.activity_edit_homework_year);
+        hour = findViewById(R.id.activity_edit_homework_hour);
+        min = findViewById(R.id.activity_edit_homework_min);
+        addHomework = findViewById(R.id.activity_edit_homework_agregar);
 
-        ArrayAdapter<CharSequence> adapterPeriodo = ArrayAdapter.createFromResource(this,
-                R.array.periodo, android.R.layout.simple_spinner_item);
-        adapterPeriodo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dh = DataBaseHandler.getInstance(this);
+        SharedPreferences sharedPreferences = getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
+        subjects = subjectControl.getSubjectsByStudent(sharedPreferences.getString("NAME", "UNKNOWN"),dh);
+        ArrayList<String> nameSubjects = new ArrayList<>();
+        for (int x = 0; x < subjects.size() ; x++){
+            nameSubjects.add(subjects.get(x).getNameSubject());
+        }
 
-        spinner.setAdapter(adapterPeriodo);
-        back.setOnClickListener(new View.OnClickListener() {
+        spinner.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, nameSubjects.toArray()));
+
+        addHomework.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                onBackPressed();
+            public void onClick(View view) {
+                if((Integer.valueOf(day.getText().toString()) <= 31 & Integer.valueOf(day.getText().toString()) >= 0 )
+                    &(Integer.valueOf(month.getText().toString()) <=12 & Integer.valueOf(month.getText().toString())>=0)
+                    &(Integer.valueOf(hour.getText().toString()) <=23 & Integer.valueOf(hour.getText().toString())>=0)
+                    &(Integer.valueOf(min.getText().toString()) <=59 & Integer.valueOf(min.getText().toString())>=0)){
+                        Homework homework = new Homework();
+                        homework.setDescriptionHomework(description.getText().toString());
+                        homework.setFk_subject(subjects.get(spinner.getSelectedItemPosition()).getIdSubject());
+                        homework.setDeliveryDay(Integer.valueOf(day.getText().toString()));
+                        homework.setDeliveryMonth(Integer.valueOf(month.getText().toString()));
+                        homework.setDeliveryYear(Integer.valueOf(year.getText().toString()));
+                        homework.setDeliveryHour(Integer.valueOf(hour.getText().toString()));
+                        homework.setDeliveryMin(Integer.valueOf(min.getText().toString()));
+                        homeworkControl.addHomework(homework,dh);
+                        onBackPressed();
+
+                }
+                else{
+                    Toast.makeText(ActivityEditHomework.this, getResources().getString(R.string.activity_edit_homework_toast), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

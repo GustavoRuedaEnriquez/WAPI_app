@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/item_tarea_descripcion"
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_margin="5dp"
@@ -22,13 +22,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/item_tarea_descripcion"
-        android:text="Materia: "
+        android:text="@string/item_homework_subject"
         android:textSize="15dp"
         android:layout_marginLeft="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
     <TextView
         android:id="@+id/item_tarea_materia"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/item_tarea_descripcion"
         android:layout_toEndOf="@id/item_tarea_text_materia"
@@ -51,10 +51,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/item_tarea_descripcion"
-        android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@id/item_tarea_erase"
         android:textSize="15dp"
+        android:layout_marginRight="10dp"
         android:layout_marginLeft="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
+    <ImageView
+        android:id="@+id/item_tarea_erase"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/trash"
+        />
 
 </RelativeLayout>

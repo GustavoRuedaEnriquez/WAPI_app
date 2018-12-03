@@ -12,92 +12,71 @@
         android:padding="20dp"
         tools:context=".fragments.FragmentPayment">
 
+        <EditText
+            android:id="@+id/fragment_payment_name"
+            style="@style/EditText_dark_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/fragment_payment_title"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/fragment_payment_description"
+            style="@style/EditText_dark_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:hint="@string/fragment_payment_description"
+            android:inputType="text|textMultiLine" />
+
+        <EditText
+            android:id="@+id/fragment_payment_amount"
+            style="@style/EditText_dark_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/fragment_payment_amount"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_payment_date"
+            android:textSize="18dp"
+            android:textColor="@color/colorPrimaryDark"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".70"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/fragment_payment_name"
-                style="@style/EditText_light_style"
-                android:layout_width="match_parent"
+                android:id="@+id/fragment_payment_date"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/fragment_payment_name_hint"
-                android:inputType="textPersonName"
-                tools:ignore="Autofill" />
+                android:hint="@string/fragment_payment_date_placeholder"
+                android:maxLength="10"
+                style="@style/EditText_dark_style"/>
 
             <EditText
-                android:id="@+id/fragment_payment_card_number"
-                style="@style/EditText_light_style"
-                android:layout_width="match_parent"
+                android:id="@+id/fragment_payment_hour"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/fragment_payment_card_hint"
-                android:inputType="number"
-                tools:ignore="Autofill" />
-
-            <EditText
-                android:id="@+id/fragment_payment_email"
-                style="@style/EditText_light_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/fragment_payment_email_hint"
-                android:inputType="textEmailAddress"
-                tools:ignore="Autofill" />
-
-            <EditText
-                android:id="@+id/fragment_payment_pay"
-                style="@style/EditText_light_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/fragment_payment_pay_hint"
-                android:inputType="numberDecimal"
-                tools:ignore="Autofill" />
-
-            <RadioGroup
-                android:id="@+id/fragment_payment_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/fragment_payment_pay_visa"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:buttonTint="@color/colorPrimary"
-                    android:checked="true"
-                    android:text="@string/fragment_payment_pay_visa" />
-
-                <RadioButton
-                    android:id="@+id/fragment_payment_pay_mastercard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:buttonTint="@color/colorPrimary"
-                    android:text="@string/fragment_payment_pay_mastercard" />
-
-            </RadioGroup>
+                android:layout_marginLeft="@dimen/margin"
+                android:hint="@string/fragment_payment_hour_placeholder"
+                android:maxLength="10"
+                style="@style/EditText_dark_style"
+                />
         </LinearLayout>
 
-        <LinearLayout
+        <Button
+            android:id="@+id/fragment_payment_pay_button"
+            style="@style/custom_light_Button"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".30"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/fragment_payment_pay_button"
-                style="@style/custom_light_Button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/margin"
-                android:text="@string/fragment_payment_button_text"
-                android:textSize="30sp" />
-
-        </LinearLayout>
-
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:text="@string/fragment_payment_btn" />
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

@@ -50,8 +50,11 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     public static final String HOMEWORK_ID          = "Homework_Id";
     public static final String HOMEWORK_FK_SUBJECT  = "Homework_FK_Subject";
     public static final String HOMEWORK_DESCRIPTION = "Homework_Description";
-    public static final String HOMEWORK_DATE        = "Homework_Date";
+    public static final String HOMEWORK_DAY         = "Homework_Day";
+    public static final String HOMEWORK_MONTH       = "Homework_Month";
+    public static final String HOMEWORK_YEAR        = "Homework_Year";
     public static final String HOMEWORK_HOUR        = "Homework_Hour";
+    public static final String HOMEWORK_MIN         = "Homework_Min";
 
     //Payment Table
     public static final String TABLE_PAYMENT       = "Payment";
@@ -59,7 +62,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     public static final String PAYMENT_NAME        = "Payment_Name";
     public static final String PAYMENT_DESCRIPTION = "Payment_Description";
     public static final String PAYMENT_AMOUNT      = "Payment_Amount";
-    public static final String PAYMENT_DATE        = "Payment_Date";
+    public static final String PAYMENT_TIMESTAMP   = "Payment_Timestamp";
     public static final String PAYMENT_FK_STUDENT  = "Payment_FK_Student";
 
     private DataBaseHandler(Context context){
@@ -98,7 +101,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
 
         String tableGrade = "CREATE TABLE " + TABLE_GRADE + " ("
                             + GRADE_ID + " INTEGER PRIMARY KEY, "
-                            + GRADE_FK_SUBJECT + "INTEGER, "
+                            + GRADE_FK_SUBJECT + " INTEGER, "
                             + GRADE_DESCRIPTION + " TEXT, "
                             + GRADE_PERCENTAGE + " REAL, "
                             + GRADE_VALUE + " REAL)";
@@ -107,15 +110,18 @@ public class DataBaseHandler extends SQLiteOpenHelper{
                             + HOMEWORK_ID + " INTEGER PRIMARY KEY, "
                             + HOMEWORK_FK_SUBJECT + " INTEGER, "
                             + HOMEWORK_DESCRIPTION + " TEXT, "
-                            + HOMEWORK_DATE + " INTEGER, "
-                            + HOMEWORK_HOUR + " INTEGER)";
+                            + HOMEWORK_DAY + " INTEGER, "
+                            + HOMEWORK_MONTH + " INTEGER, "
+                            + HOMEWORK_YEAR + " INTEGER, "
+                            + HOMEWORK_HOUR + " INTEGER, "
+                            + HOMEWORK_MIN + " INTEGER)";
 
         String tablePayment = "CREATE TABLE " + TABLE_PAYMENT + " ("
                             + PAYMENT_ID + " INTEGER PRIMARY KEY, "
                             + PAYMENT_NAME + " TEXT, "
                             + PAYMENT_DESCRIPTION + " TEXT, "
                             + PAYMENT_AMOUNT + " REAL, "
-                            + PAYMENT_DATE + " INTEGER, "
+                            + PAYMENT_TIMESTAMP + " TEXT,"
                             + PAYMENT_FK_STUDENT + " TEXT)";
 
         db.execSQL(tableStudent);

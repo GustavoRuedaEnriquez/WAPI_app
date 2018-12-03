@@ -17,6 +17,7 @@ public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHo
 
     public List<Subject> subjectList;
     private Context context;
+    Subject subject;
     private int fragment;
 
     class MyViewHolder extends RecyclerView.ViewHolder{
@@ -75,7 +76,8 @@ public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int position){
-        Subject subject = subjectList.get(position);
+        subject = subjectList.get(position);
+        final int num = position;
         //myViewHolder.nombre.setText(subjectList.get(myViewHolder.getAdapterPosition()).getNameSubject());
         //myViewHolder.promedio.setText(Float.toString(subjectList.get(myViewHolder.getAdapterPosition()).getAvarage()));
         myViewHolder.nombre.setText(subject.getNameSubject());
@@ -85,7 +87,7 @@ public class AdapterMateria extends RecyclerView.Adapter<AdapterMateria.MyViewHo
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ActivityEditGrade.class);
-                intent.putExtra("Subject", subjectList.get(myViewHolder.getAdapterPosition()));
+                intent.putExtra("Subject", subjectList.get(num));
                 intent.putExtra("Fragment", fragment);
                 ((ActivityHome) context).startActivityForResult(intent, 999);
             }

@@ -6,20 +6,32 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iteso.wapi.beans.Homework;
+import com.iteso.wapi.database.DataBaseHandler;
+import com.iteso.wapi.database.HomeworkControl;
 
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyViewHolder>{
 
     public List<Homework> homeworkList;
+    public HomeworkControl homeworkControl;
+    public Homework homework;
+    public DataBaseHandler dh;
     private Context context;
     private int fragment;
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView descripcion, materia, fecha, hora;
+        ImageView erase;
 
         MyViewHolder(View view){
             super(view);
@@ -27,6 +39,7 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
             materia = view.findViewById(R.id.item_tarea_materia);
             fecha = view.findViewById(R.id.item_tarea_fecha);
             hora = view.findViewById(R.id.item_tarea_hora);
+            erase = view.findViewById(R.id.item_tarea_erase);
         }
     }
 
@@ -74,14 +87,55 @@ public class AdapterHomework extends RecyclerView.Adapter<AdapterHomework.MyView
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterHomework.MyViewHolder myViewHolder, int position){
-        final Homework homework = homeworkList.get(position);
-        //myViewHolder.nombre.setText(subjectList.get(myViewHolder.getAdapterPosition()).getNameSubject());
-        //myViewHolder.promedio.setText(Float.toString(subjectList.get(myViewHolder.getAdapterPosition()).getAvarage()));
-        myViewHolder.descripcion.setText(homework.getDescriptionHomework());
-        myViewHolder.materia.setText("Subject");
-        myViewHolder.fecha.setText(homework.getDeliveryDate());
-        myViewHolder.hora.setText(homework.getDeliveryTime());
+        homework = homeworkList.get(position);
+        homeworkControl = new HomeworkControl();
+        dh = DataBaseHandler.getInstance(getContext());
+        Date deliveryDay = new Date(homework.getDeliveryYear()- 1900,homework.getDeliveryMonth()-1,homework.getDeliveryDay());
 
+        String dayString;
+        myViewHolder.descripcion.setText(homework.getDescriptionHomework());
+        switch(deliveryDay.getDay()){
+            case 0:
+                dayString = getContext().getString(R.string.fragment_schedule_sunday);
+                break;
+            case 1:
+                dayString = getContext().getString(R.string.fragment_schedule_monday);
+                break;
+            case 2:
+                dayString = getContext().getString(R.string.fragment_schedule_tuesday);
+                break;
+            case 3:
+                dayString = getContext().getString(R.string.fragment_schedule_wednesday);
+                break;
+            case 4:
+                dayString = getContext().getString(R.string.fragment_schedule_thursday);
+                break;
+            case 5:
+                dayString = getContext().getString(R.string.fragment_schedule_friday);
+                break;
+            default:
+                dayString = getContext().getString(R.string.fragment_schedule_saturday);
+                break;
+        }
+        myViewHolder.materia.setText(homeworkControl.getHomeworksSubjectName(homework.getFk_subject(), dh));
+        String dateToShow = dayString + " " +homework.getDeliveryDay()+"/"+homework.getDeliveryMonth();
+        myViewHolder.fecha.setText(dateToShow);
+        String hourToShow =homework.getDeliveryHour()+":";
+        if(homework.getDeliveryMin()<10){
+            hourToShow += "0";
+        }
+        hourToShow += homework.getDeliveryMin();
+        myViewHolder.hora.setText(hourToShow);
+
+        myViewHolder.erase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homework = homeworkList.get(myViewHolder.getAdapterPosition());
+                homeworkControl.deleteHomework(homework.getIdHomework(),dh);
+                homeworkList.remove(myViewHolder.getAdapterPosition());
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override

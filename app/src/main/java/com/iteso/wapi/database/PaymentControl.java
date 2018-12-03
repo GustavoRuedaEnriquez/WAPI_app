@@ -3,6 +3,8 @@ package com.iteso.wapi.database;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import com.iteso.wapi.beans.Payment;
 import java.util.ArrayList;
 
@@ -11,11 +13,11 @@ public class PaymentControl {
     public void addPayment(Payment payment, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DataBaseHandler.PAYMENT_ID, maxIdPayment(dh));
+        values.put(DataBaseHandler.PAYMENT_ID, maxIdPayment(dh) +1);
         values.put(DataBaseHandler.PAYMENT_NAME, payment.getName());
         values.put(DataBaseHandler.PAYMENT_DESCRIPTION, payment.getDescription());
         values.put(DataBaseHandler.PAYMENT_AMOUNT, payment.getAmount());
-        values.put(DataBaseHandler.PAYMENT_DATE, payment.getDate());
+        values.put(DataBaseHandler.PAYMENT_TIMESTAMP, payment.getTimestamp());
         values.put(DataBaseHandler.PAYMENT_FK_STUDENT, payment.getStudentUsername());
         db.insert(DataBaseHandler.TABLE_PAYMENT, null, values);
         try{
@@ -32,7 +34,7 @@ public class PaymentControl {
                 + DataBaseHandler.PAYMENT_NAME + ", "
                 + DataBaseHandler.PAYMENT_DESCRIPTION + ", "
                 + DataBaseHandler.PAYMENT_AMOUNT + ", "
-                + DataBaseHandler.PAYMENT_DATE + ", "
+                + DataBaseHandler.PAYMENT_TIMESTAMP + ", "
                 + DataBaseHandler.PAYMENT_FK_STUDENT
                 + " FROM " + DataBaseHandler.TABLE_PAYMENT;
         Cursor cursor = db.rawQuery(selectQuery,null);
@@ -42,11 +44,12 @@ public class PaymentControl {
             payment.setName(cursor.getString(1));
             payment.setDescription(cursor.getString(2));
             payment.setAmount(cursor.getDouble(3));
-            payment.setDate(cursor.getInt(4));
+            payment.setTimestamp(cursor.getString(4));
             payment.setStudentUsername(cursor.getString(5));
             payments.add(payment);
         }
-        try{// cursor.close();
+        try{
+            // cursor.close();
           //  db.close();
         }catch(Exception e){
 
@@ -61,10 +64,10 @@ public class PaymentControl {
                 + DataBaseHandler.PAYMENT_NAME + ", "
                 + DataBaseHandler.PAYMENT_DESCRIPTION + ", "
                 + DataBaseHandler.PAYMENT_AMOUNT + ", "
-                + DataBaseHandler.PAYMENT_DATE + ", "
+                + DataBaseHandler.PAYMENT_TIMESTAMP + ", "
                 + DataBaseHandler.PAYMENT_FK_STUDENT
                 + " FROM " + DataBaseHandler.TABLE_PAYMENT
-                + " WHERE " + DataBaseHandler.PAYMENT_ID + " = " + fkStudentUsername;
+                + " WHERE " + DataBaseHandler.PAYMENT_FK_STUDENT+ " = '" + fkStudentUsername + "'";
         Cursor cursor = db.rawQuery(selectQuery,null);
         while(cursor.moveToNext()){
             Payment payment = new Payment();
@@ -72,7 +75,7 @@ public class PaymentControl {
             payment.setName(cursor.getString(1));
             payment.setDescription(cursor.getString(2));
             payment.setAmount(cursor.getDouble(3));
-            payment.setDate(cursor.getInt(4));
+            payment.setTimestamp(cursor.getString(4));
             payment.setStudentUsername(cursor.getString(5));
             payments.add(payment);
         }
@@ -88,11 +91,11 @@ public class PaymentControl {
     public void updatePayment(int paymentId,  Payment updatedPayment, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
         String updateQuery = "UPDATE " + DataBaseHandler.TABLE_PAYMENT
-                            + " SET " + DataBaseHandler.PAYMENT_NAME + " = " + updatedPayment.getName() + ", "
-                            + DataBaseHandler.PAYMENT_DESCRIPTION + " = " + updatedPayment.getDescription() + ", "
+                            + " SET " + DataBaseHandler.PAYMENT_NAME + " = '" + updatedPayment.getName() + "', "
+                            + DataBaseHandler.PAYMENT_DESCRIPTION + " = '" + updatedPayment.getDescription() + "', "
                             + DataBaseHandler.PAYMENT_AMOUNT + " = " + updatedPayment.getAmount() + ", "
-                            + DataBaseHandler.PAYMENT_DATE + " = " + updatedPayment.getDate() + ", "
-                            + DataBaseHandler.PAYMENT_FK_STUDENT + " = " + updatedPayment.getStudentUsername()
+                            + DataBaseHandler.PAYMENT_TIMESTAMP + " = " + updatedPayment.getTimestamp() + ", "
+                            + DataBaseHandler.PAYMENT_FK_STUDENT + " = '" + updatedPayment.getStudentUsername() + "'"
                             + " WHERE " + DataBaseHandler.PAYMENT_ID + " = " + paymentId;
         db.execSQL(updateQuery);
         try{
@@ -106,7 +109,7 @@ public class PaymentControl {
         SQLiteDatabase db = dh.getWritableDatabase();
         String deleteQuery = "DELETE FROM "
                 + DataBaseHandler.TABLE_PAYMENT
-                + " WHERE " + DataBaseHandler.PAYMENT_ID + " = " + paymentId;
+                + " WHERE " + DataBaseHandler.PAYMENT_ID + " = '" + paymentId + "'";
         db.execSQL(deleteQuery);
         try{
            // db.close();
@@ -132,6 +135,15 @@ public class PaymentControl {
 
         }
         return result;
+    }
+
+    public void updateFKUsername(String fkUsername, String fkUsernameNew, DataBaseHandler dh){
+        SQLiteDatabase db = dh.getWritableDatabase();
+        ArrayList<Payment> payments = this.getPaymentsByStudent(fkUsername, dh);
+        for(Payment index: payments){
+            index.setStudentUsername(fkUsernameNew);
+            this.updatePayment(index.getPaymentId(),index,dh);
+        }
     }
 
 }

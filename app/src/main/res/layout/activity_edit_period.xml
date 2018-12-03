@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Añadir Periodo"
+        android:text="@string/activity_edit_period_add_period"
         android:layout_gravity="center"
         android:layout_margin="@dimen/margin"
         android:textSize="35dp"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin"
         style="@style/EditText_dark_style"
-        android:hint="Nombre del periodo."/>
+        android:hint="@string/activity_edit_period_add_name"/>
 
     <Button
         android:id="@+id/edit_period_save_btn"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin"
         style="@style/custom_light_Button"
-        android:text="Guardar"
+        android:text="@string/activity_edit_period_btn"
         android:textSize="30dp"/>
 
 

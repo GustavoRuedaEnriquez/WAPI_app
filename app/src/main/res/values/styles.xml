@@ -32,4 +32,10 @@
         <item name="android:background">@drawable/custom_blue_light_btn</item>
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
+
+    <style name="custom_red_light_Button" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/custom_red_light_btn</item>
+        <item name="android:textColor">#FF0000</item>
+    </style>
+
 </resources>

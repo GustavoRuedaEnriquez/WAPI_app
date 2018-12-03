@@ -1,35 +1,36 @@
 package com.iteso.wapi.fragments;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
+import com.iteso.wapi.ActivityEditInformation;
 import com.iteso.wapi.ActivityLogin;
 import com.iteso.wapi.ActivitySplashscreen;
 import com.iteso.wapi.R;
-
+import com.iteso.wapi.database.DataBaseHandler;
+import com.iteso.wapi.database.StudentControl;
 import static android.content.Context.MODE_PRIVATE;
 
 
 public class FragmentConfiguration extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
 
-    Button logout;
-    EditText name_et, password_et;
+    private Button logout, deleteAccount, edit;
+    private EditText name_et, password_et;
+    private StudentControl studentControl = new StudentControl();
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -60,14 +61,33 @@ public class FragmentConfiguration extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        final DataBaseHandler dh = DataBaseHandler.getInstance(getActivity());
+        final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
+
         View v = inflater.inflate(R.layout.fragment_configuration, container, false);
         logout = v.findViewById(R.id.fragment_configuration_log_out_btn);
         name_et = v.findViewById(R.id.fragment_configuration_change_name_et);
         password_et = v.findViewById(R.id.fragment_configuration_change_password_et);
+        deleteAccount = v.findViewById(R.id.fragment_configuration_erase_account_btn);
+        edit = v.findViewById(R.id.fragment_configuration_edit_btn);
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
-        name_et.setText(sharedPreferences.getString("NAME","Default name"));
-        password_et.setText(sharedPreferences.getString("PWD","Default password"));
+
+        name_et.setText(sharedPreferences.getString("NAME", "Default name"));
+        password_et.setText(sharedPreferences.getString("PWD", "Default password"));
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edit.setBackground(getResources().getDrawable(R.drawable.custom_selected_blue_light_btn));
+                edit.setTextColor(Color.WHITE);
+                Intent editIntent = new Intent(getActivity(), ActivityEditInformation.class);
+                startActivity(editIntent);
+
+                updateInformation();
+                edit.setBackground(getResources().getDrawable(R.drawable.custom_blue_light_btn));
+                edit.setTextColor(getResources().getColor(R.color.colorPrimary));
+            }
+        });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +107,30 @@ public class FragmentConfiguration extends Fragment {
             }
         });
 
+        deleteAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteAccount.setBackground(getResources().getDrawable(R.drawable.custom_selected_red_light_btn));
+                deleteAccount.setTextColor(Color.WHITE);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Light_Dialog_Alert);
+
+                builder.setMessage(getResources().getString(R.string.fragment_configuration_message_disclaimer))
+                        .setPositiveButton(getResources().getString(R.string.fragment_configuration_yes), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                studentControl.deleteStudent(sharedPreferences.getString("NAME", "Default name"), dh);
+                                Intent logOutIntent = new Intent(getActivity(), ActivityLogin.class);
+                                startActivity(logOutIntent);
+                                getActivity().finish();
+                            }
+                        })
+
+                        .setNegativeButton(getResources().getString(R.string.fragment_configuration_no), null).show();
+              
+                deleteAccount.setBackground(getResources().getDrawable(R.drawable.custom_red_light_btn));
+                deleteAccount.setTextColor(Color.RED);
+            }
+        });
         return v;
     }
 
@@ -99,5 +143,18 @@ public class FragmentConfiguration extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateInformation();
+    }
+
+    private void updateInformation() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ActivitySplashscreen.MY_PREFERENCES, MODE_PRIVATE);
+
+        name_et.setText(sharedPreferences.getString("NAME", "Default name"));
+        password_et.setText(sharedPreferences.getString("PWD", "Default password"));
     }
 }

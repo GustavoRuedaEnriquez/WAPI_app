@@ -88,11 +88,12 @@ public class GradeControl {
         return grades;
     }
 
+
     public void updateGrade(Grade updatedGrade, DataBaseHandler dh){
         SQLiteDatabase db = dh.getWritableDatabase();
         String updateQuery = "UPDATE " + DataBaseHandler.TABLE_GRADE
                 + " SET " + DataBaseHandler.GRADE_FK_SUBJECT + " = " + updatedGrade.getFk_subject()
-                + " , " + DataBaseHandler.GRADE_DESCRIPTION + " = " + updatedGrade.getDescriptionGrade()
+                + " , " + DataBaseHandler.GRADE_DESCRIPTION + " = '" + updatedGrade.getDescriptionGrade()+"' "
                 + " , " + DataBaseHandler.GRADE_PERCENTAGE + " = " + updatedGrade.getPercentage()
                 + " , " + DataBaseHandler.GRADE_VALUE + " = " + updatedGrade.getGrade()
                 + " WHERE " + DataBaseHandler.GRADE_ID + " = " + updatedGrade.getIdGrade();

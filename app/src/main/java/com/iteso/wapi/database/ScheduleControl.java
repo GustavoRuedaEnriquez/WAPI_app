@@ -11,12 +11,9 @@ import java.util.ArrayList;
 public class ScheduleControl {
 
     public void addSchedule(Schedule schedule, DataBaseHandler dh){
-        int nextId = maxIdSchedule(dh) + 1;
-
         SQLiteDatabase db = dh.getWritableDatabase();
         ContentValues values = new ContentValues();
-
-        values.put(DataBaseHandler.SCHEDULE_ID, nextId);
+        values.put(DataBaseHandler.SCHEDULE_ID, maxIdSchedule(dh) + 1);
         values.put(DataBaseHandler.SCHEDULE_START_HOUR, schedule.getInitialTime());
         values.put(DataBaseHandler.SCHEDULE_END_HOUR, schedule.getFinalTime());
         values.put(DataBaseHandler.SCHEDULE_DAY, schedule.getDay());
@@ -67,8 +64,8 @@ public class ScheduleControl {
                 DataBaseHandler.SCHEDULE_START_HOUR + ", " +
                 DataBaseHandler.SCHEDULE_END_HOUR + ", " +
                 DataBaseHandler.SCHEDULE_FK_SUBJECT +
-                " FROM " + DataBaseHandler.TABLE_SUBJECT +
-                " WHERE " + DataBaseHandler.SCHEDULE_FK_SUBJECT + " = " + subject;
+                " FROM " + DataBaseHandler.TABLE_SCHEDULE +
+                " WHERE " + DataBaseHandler.SCHEDULE_FK_SUBJECT + " = '" + subject + "'";
         Cursor cursor = db.rawQuery(selectQuery,null);
         while(cursor.moveToNext()){
             Schedule schedule = new Schedule();
@@ -95,7 +92,7 @@ public class ScheduleControl {
                 + " , " + DataBaseHandler.SCHEDULE_START_HOUR + " = " + updatedSchedule.getInitialTime()
                 + " , " + DataBaseHandler.SCHEDULE_END_HOUR + " = " + updatedSchedule.getFinalTime()
                 + " , " + DataBaseHandler.SCHEDULE_FK_SUBJECT + " = " + updatedSchedule.getFk_subject()
-                + " WHERE " + DataBaseHandler.SCHEDULE_ID + " = " + updatedSchedule.getIdSchedule();
+                + " WHERE " + DataBaseHandler.SCHEDULE_ID + " = '" + updatedSchedule.getIdSchedule() + "'";
         db.execSQL(updateQuery);
         try{
            // db.close();
@@ -108,7 +105,7 @@ public class ScheduleControl {
         SQLiteDatabase db = dh.getWritableDatabase();
         String deleteQuery = "DELETE FROM "
                 + DataBaseHandler.TABLE_SCHEDULE
-                + " WHERE " + DataBaseHandler.SCHEDULE_ID + " = " + id_schedule;
+                + " WHERE " + DataBaseHandler.SCHEDULE_ID + " = '" + id_schedule + "'";
         db.execSQL(deleteQuery);
         try{
            // db.close();
@@ -121,7 +118,7 @@ public class ScheduleControl {
         SQLiteDatabase db = dh.getReadableDatabase();
         int result = 0;
 
-        String select = "Select MAX("+DataBaseHandler.SCHEDULE_ID+") " + " From "+DataBaseHandler.TABLE_SCHEDULE+
+        String select = "SELECT MAX("+DataBaseHandler.SCHEDULE_ID+") " + " From "+DataBaseHandler.TABLE_SCHEDULE+
                 " GROUP BY "+DataBaseHandler.SCHEDULE_ID;
 
         Cursor cursor = db.rawQuery(select, null);
@@ -135,6 +132,20 @@ public class ScheduleControl {
 
         }
         return result;
+    }
+
+    public ArrayList<Integer> getDaysBySubject(int fkSubject, DataBaseHandler dh){
+        SQLiteDatabase db = dh.getReadableDatabase();
+        ArrayList<Integer> days = new ArrayList<>();
+        String selectQuery = "SELECT " +
+                DataBaseHandler.SCHEDULE_DAY +
+                " FROM " + DataBaseHandler.TABLE_SCHEDULE +
+                " WHERE " + DataBaseHandler.SCHEDULE_FK_SUBJECT + " = '" + fkSubject + "'";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        while(cursor.moveToNext()){
+            days.add(cursor.getInt(0));
+        }
+        return  days;
     }
 
 }

@@ -8,20 +8,11 @@
     android:orientation="vertical"
     android:padding="30dp">
 
-    <ImageButton
-        android:id="@+id/activity_edit_homework_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/EditText_dark_style"
-        android:src="@android:drawable/ic_media_rew"
-        android:foregroundTint="#FFFFFF"
-        android:tint="@color/colorPrimary"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30dp"
-        android:text="Editar Tarea"
+        android:text="@string/activity_edit_homework_title"
         android:layout_gravity="center"
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"
@@ -32,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15dp"
-        android:text="Materia"
+        android:text="@string/activity_edit_homework_subject"
         android:textColor="@color/colorPrimaryDark"
         />
 
@@ -48,53 +39,110 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text="Fecha de entrega"
+        android:text="@string/activity_edit_homework_date"
         android:textColor="@color/colorPrimaryDark"
             />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <EditText
-            android:id="@+id/activity_edit_homework_fecha"
-            android:layout_width="match_parent"
+            android:id="@+id/activity_edit_homework_day"
+            android:inputType="number"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
-
-            android:hint="Ingresa porcentaje"
             android:textColor="@color/colorPrimaryDark"
-
+            android:textSize="15dp"
+            style="@style/EditText_dark_style"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="/"
             android:textSize="15dp"
             />
+        <EditText
+            android:id="@+id/activity_edit_homework_month"
+            android:inputType="number"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15dp"
+            style="@style/EditText_dark_style"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="/"
+            android:textSize="15dp"
+            />
+        <EditText
+            android:id="@+id/activity_edit_homework_year"
+            android:inputType="number"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15dp"
+            style="@style/EditText_dark_style"
+            />
+    </LinearLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:textColor="@color/colorPrimaryDark"
-            android:text="Hora"
+            android:text="@string/activity_edit_homework_hour"
             />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <EditText
-            android:id="@+id/activity_editar_tarea_hora"
-            android:layout_width="match_parent"
+            android:id="@+id/activity_edit_homework_hour"
+            android:inputType="number"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
-
             android:textColor="@color/colorPrimaryDark"
-            android:hint="Ingresa la hora de entrega."
-
+            android:textSize="15dp"
+            style="@style/EditText_dark_style"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text=":"
             android:textSize="15dp"
             />
+        <EditText
+            android:id="@+id/activity_edit_homework_min"
+            android:inputType="number"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15dp"
+            style="@style/EditText_dark_style"
+            />
+    </LinearLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryDark"
-        android:text="Descripción"
+        android:text="@string/activity_edit_homework_description"
         />
     <EditText
         android:id="@+id/activity_edit_homework_descr"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-
-        android:hint="Ingresa descripcion de ls tarea"
-
+        android:hint="@string/activity_edit_homework_description_placeholder"
         android:textSize="15dp"
+        style="@style/EditText_dark_style"
         />
 
     <Button
@@ -102,7 +150,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="Agregar"
+        android:text="@string/activity_edit_homework_btn"
         android:layout_gravity="center"
         style="@style/custom_light_Button"
         android:layout_margin="@dimen/margin"

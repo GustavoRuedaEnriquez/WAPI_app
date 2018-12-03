@@ -12,8 +12,6 @@ public class ActivitySplashscreen extends AppCompatActivity {
 
     public static final String MY_PREFERENCES = "com.iteso.wapi.PREFERENCES";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
