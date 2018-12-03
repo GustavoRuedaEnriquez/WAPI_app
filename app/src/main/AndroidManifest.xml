@@ -24,6 +24,7 @@
         <activity android:name=".ActivityEditGrade" />
         <activity
             android:name=".ActivityHome"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ActivityEditSubject" />
         <activity android:name=".ActivityCreateSubject" />
